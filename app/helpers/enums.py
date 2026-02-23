@@ -7,6 +7,7 @@ class ActionType(str, Enum):
     mute = "timeout"
     warn = "warning"
 
+
 class AppealStatus(str, Enum):
     pending = "pending"
     approved = "approved"
