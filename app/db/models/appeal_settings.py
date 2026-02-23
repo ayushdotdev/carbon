@@ -36,6 +36,6 @@ class AppealSettings(Base):
 
     guilds = relationship("Guilds", back_populates="appeal_settings")
 
-    __table_args__ = CheckConstraint(
-        "schema_version > 0", name="ck_appeal_schema_version"
+    __table_args__ = (
+        CheckConstraint("schema_version > 1", name="ck_schema_version_is_positive"),
     )

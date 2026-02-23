@@ -28,4 +28,4 @@ class AppealLog(Base):
         TIMESTAMP(timezone=True), nullable=False, server_default=func.now()
     )
 
-    __table_args__ = Index("ix_appeal_logs_guild_id", "guild_id")
+    __table_args__ = (Index("ix_appeal_logs_guild_id", "guild_id"),)
