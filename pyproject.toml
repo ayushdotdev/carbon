@@ -1,6 +1,6 @@
 [project]
 name = "carbon"
-version = "0.1.0"
+version = "1.0.01"
 description = ""
 authors = [
     {name = "Ayush Kumar",email = "ayush438500@gmail.com"}
@@ -21,3 +21,10 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "polib (>=1.2.0,<2.0.0)",
+    "pyright (>=1.1.408,<2.0.0)",
+    "ruff (>=0.14.0,<0.15.0)",
+]
