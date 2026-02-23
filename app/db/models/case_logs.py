@@ -19,8 +19,9 @@ from app.helpers.enums import ActionType
 class CaseLog(Base):
     __tablename__ = "case_logs"
 
+    case_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     guild_id: Mapped[int] = mapped_column(
-        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE"), primary_key=True
+        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE")
     )
     target_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
     moderator_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
