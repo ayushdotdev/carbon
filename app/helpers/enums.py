@@ -6,3 +6,8 @@ class ActionType(str, Enum):
     kick = "kick"
     mute = "timeout"
     warn = "warning"
+
+class AppealStatus(str, Enum):
+    pending = "pending"
+    approved = "approved"
+    declined = "declined"
