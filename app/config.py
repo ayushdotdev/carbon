@@ -11,4 +11,4 @@ class Settings(BaseSettings):
         case_sensitive= False,
     )
 
-settings = Settings() # # pyright: ignore[reportCallIssue]
+settings = Settings() # pyright: ignore[reportCallIssue]
