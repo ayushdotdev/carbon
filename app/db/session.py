@@ -3,12 +3,11 @@ from app.config import settings
 
 engine = create_async_engine(
     url=settings.db_url,
-    echo = False,
+    echo=False,
 )
 
 sessions = async_sessionmaker(
-    bind= engine,
-    expire_on_commit= False,
-    class_= AsyncSession,
+    bind=engine,
+    expire_on_commit=False,
+    class_=AsyncSession,
 )
-
