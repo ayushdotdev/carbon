@@ -15,6 +15,7 @@ class Guilds(Base):
     premium_expires_at: Mapped[Optional[datetime]] = mapped_column(
         TIMESTAMP(timezone=True)
     )
+    language: Mapped[str] = mapped_column(String(5), default="en", nullable=False)
     joined_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True), nullable=False
     )
