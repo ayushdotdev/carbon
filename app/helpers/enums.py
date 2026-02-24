@@ -12,3 +12,8 @@ class AppealStatus(str, Enum):
     pending = "pending"
     approved = "approved"
     declined = "declined"
+
+
+class LocaleType(str, Enum):
+    user = "user"
+    guild = "guild"
