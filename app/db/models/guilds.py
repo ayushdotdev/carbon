@@ -12,13 +12,9 @@ class Guilds(Base):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     prefix: Mapped[str] = mapped_column(String, default="!", nullable=False)
     is_premium: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    premium_expires_at: Mapped[Optional[datetime]] = mapped_column(
-        TIMESTAMP(timezone=True)
-    )
+    premium_expires_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP(timezone=True))
     language: Mapped[str] = mapped_column(String(5), default="en", nullable=False)
-    joined_at: Mapped[datetime] = mapped_column(
-        TIMESTAMP(timezone=True), nullable=False
-    )
+    joined_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False)
     updated_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True),
         server_default=func.now(),

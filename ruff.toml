@@ -1,0 +1,60 @@
+# ruff.toml
+
+target-version = "py312"
+line-length = 88
+
+# Exclude common junk
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "migrations",
+]
+
+[lint]
+
+# Enable a serious but sane rule set
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "C4",  # flake8-comprehensions
+    "DTZ", # datetime timezone issues
+    "SIM", # simplify
+    "RET", # return-related issues
+    "RUF", # ruff-specific rules
+]
+
+# Ignore rules that are either noisy or stylistic preference
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "B008",   # function calls in defaults (common in FastAPI / Pydantic)
+    "N818",   # exception naming style (sometimes intentionally short)
+]
+
+# Allow unused variables if prefixed with _
+dummy-variable-rgx = "^_+$|^_[a-zA-Z0-9_]*$"
+
+[lint.per-file-ignores]
+# Allow __init__ exports
+"__init__.py" = ["F401"]
+
+[format]
+# Use Ruff formatter
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+skip-magic-trailing-comma = false
+
+[lint.isort]
+combine-as-imports = true
+force-single-line = false
+known-first-party = ["carbon"]
