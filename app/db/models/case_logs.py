@@ -20,7 +20,9 @@ class CaseLog(Base):
     __tablename__ = "case_logs"
 
     case_id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guilds.id", ondelete="CASCADE"))
+    guild_id: Mapped[int] = mapped_column(
+        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE")
+    )
     target_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
     moderator_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
     action_type: Mapped[ActionType] = mapped_column(Enum(ActionType), nullable=False)
