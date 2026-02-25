@@ -15,9 +15,7 @@ class ModSettings(Base):
     )
     is_dm_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     log_channel_id: Mapped[Optional[int]] = mapped_column(BigInteger)
-    reason_aliases: Mapped[list[dict]] = mapped_column(
-        JSONB, nullable=False, default=list
-    )
+    reason_aliases: Mapped[list[dict]] = mapped_column(JSONB, nullable=False, default=list)
     created_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True), server_default=func.now(), nullable=False
     )

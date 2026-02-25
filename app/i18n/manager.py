@@ -14,17 +14,11 @@ class I18nManager:
 
     def _load(self, locale: str):
         try:
-            return gettext.translation(
-                self.domain, localedir=self.locale_dir, languages=[locale]
-            )
+            return gettext.translation(self.domain, localedir=self.locale_dir, languages=[locale])
         except FileNotFoundError:
-            return gettext.translation(
-                self.domain, localedir=self.locale_dir, languages=["en"]
-            )
+            return gettext.translation(self.domain, localedir=self.locale_dir, languages=["en"])
 
-    def _resolve_locale(
-        self, locale: discord.Locale | None, locale_type: LocaleType
-    ) -> str:
+    def _resolve_locale(self, locale: discord.Locale | None, locale_type: LocaleType) -> str:
         if locale:
             return locale.value
 
