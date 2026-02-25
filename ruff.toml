@@ -1,7 +1,7 @@
 # ruff.toml
 
 target-version = "py312"
-line-length = 100
+line-length = 88
 
 # Exclude common junk
 exclude = [
