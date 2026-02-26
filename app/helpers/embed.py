@@ -4,7 +4,7 @@ from app.helpers.enums import LocaleType
 from app.i18n.manager import I18nManager
 
 
-class TranslatableEmbed(discord.Embed):
+class Embed(discord.Embed):
     def __init__(
         self,
         *,
@@ -18,7 +18,7 @@ class TranslatableEmbed(discord.Embed):
         self.locale = locale
         self.locale_type = locale_type
 
-    def set_title(self, msgid: str, **params: Any) -> Self:
+    def set_title_i18n(self, msgid: str, **params: Any) -> Self:
         self.title = self.i18n.gettext(
             msgid,
             locale_type=self.locale_type,
@@ -27,7 +27,7 @@ class TranslatableEmbed(discord.Embed):
         )
         return self
 
-    def set_desc(self, msgid: str, **params: Any) -> Self:
+    def set_description_i18n(self, msgid: str, **params: Any) -> Self:
         self.description = self.i18n.gettext(
             msgid,
             locale_type=self.locale_type,
@@ -36,7 +36,7 @@ class TranslatableEmbed(discord.Embed):
         )
         return self
 
-    def add_new_field(
+    def add_field_i18n(
         self, name_id: str, value_id: str, *, inline: bool = True, **params: Any
     ) -> Self:
         name = self.i18n.gettext(
@@ -46,4 +46,13 @@ class TranslatableEmbed(discord.Embed):
             value_id, locale_type=self.locale_type, locale=self.locale, **params
         )
         super().add_field(name=name, value=value, inline=inline)
+        return self
+
+    def set_footer_i18n(
+        self, text_id: str, *, icon_url: str | None = None, **params: Any
+    ) -> Self:
+        text = self.i18n.gettext(
+            text_id, locale_type=self.locale_type, locale=self.locale, **params
+        )
+        super().set_footer(text=text, icon_url=icon_url)
         return self
