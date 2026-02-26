@@ -27,11 +27,23 @@ class TranslatableEmbed(discord.Embed):
         )
         return self
 
-    def set_description(self, msgid: str, **params: Any) -> Self:
+    def set_desc(self, msgid: str, **params: Any) -> Self:
         self.description = self.i18n.gettext(
             msgid,
             locale_type=self.locale_type,
             locale=self.locale,
             **params,
         )
+        return self
+
+    def add_new_field(
+        self, name_id: str, value_id: str, *, inline: bool = True, **params: Any
+    ) -> Self:
+        name = self.i18n.gettext(
+            name_id, locale_type=self.locale_type, locale=self.locale, **params
+        )
+        value = self.i18n.gettext(
+            value_id, locale_type=self.locale_type, locale=self.locale, **params
+        )
+        super().add_field(name=name, value=value, inline=inline)
         return self
