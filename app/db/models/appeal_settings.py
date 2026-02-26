@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+
 from sqlalchemy import (
     TIMESTAMP,
     BigInteger,
@@ -11,6 +11,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
+
 from app.db.base import Base
 
 
@@ -21,7 +22,7 @@ class AppealSettings(Base):
         BigInteger, ForeignKey("guilds.id", ondelete="CASCADE"), primary_key=True
     )
     is_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
-    log_channel_id: Mapped[Optional[int]] = mapped_column(BigInteger)
+    log_channel_id: Mapped[int | None] = mapped_column(BigInteger)
     questions: Mapped[list[dict]] = mapped_column(JSONB, nullable=False, default=list)
     schema_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     created_at: Mapped[datetime] = mapped_column(

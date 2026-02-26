@@ -1,6 +1,7 @@
 from typing import Any
-from discord import app_commands
+
 import discord
+from discord import app_commands
 
 
 class Translator(app_commands.Translator):
