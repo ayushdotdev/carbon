@@ -35,3 +35,15 @@ class EmbedFactory:
         return self._build(
             msgid, color=SUCCESS_CLR, local_type=locale_type, locale=locale, **params
         )
+
+    def error_embed(
+        self,
+        msgid: str,
+        *,
+        locale_type: LocaleType = LocaleType.user,
+        locale: discord.Locale | None = None,
+        **params: Any,
+    ) -> Embed:
+        return self._build(
+            msgid, color=ERROR_CLR, local_type=locale_type, locale=locale, **params
+        )
