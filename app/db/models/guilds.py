@@ -1,9 +1,10 @@
-from typing import Optional
+from datetime import datetime
+
 from sqlalchemy import TIMESTAMP, BigInteger, Boolean, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
+
 from app.db.base import Base
-from datetime import datetime
 
 
 class Guilds(Base):
@@ -12,7 +13,7 @@ class Guilds(Base):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     prefix: Mapped[str] = mapped_column(String, default="!", nullable=False)
     is_premium: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    premium_expires_at: Mapped[Optional[datetime]] = mapped_column(
+    premium_expires_at: Mapped[datetime | None] = mapped_column(
         TIMESTAMP(timezone=True)
     )
     language: Mapped[str] = mapped_column(String(5), default="en", nullable=False)
