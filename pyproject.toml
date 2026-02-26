@@ -1,7 +1,7 @@
 [project]
 name = "carbon"
 version = "1.0.01"
-description = ""
+description = "Handle your discord server. Effortlessly."
 authors = [
     {name = "Ayush Kumar",email = "ayush438500@gmail.com"}
 ]
