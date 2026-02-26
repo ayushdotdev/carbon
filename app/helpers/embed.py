@@ -56,3 +56,17 @@ class Embed(discord.Embed):
         )
         super().set_footer(text=text, icon_url=icon_url)
         return self
+
+    def set_author_i18n(
+        self,
+        name_id: str,
+        *,
+        url: str | None = None,
+        icon_url: str | None = None,
+        **params: Any,
+    ) -> Self:
+        name = self.i18n.gettext(
+            name_id, locale_type=self.locale_type, locale=self.locale, **params
+        )
+        super().set_author(name=name, url=url, icon_url=icon_url)
+        return self
