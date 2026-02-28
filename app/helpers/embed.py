@@ -1,5 +1,7 @@
 from typing import Any, Self
+
 import discord
+
 from app.helpers.enums import LocaleType
 from app.i18n.manager import I18nManager
 

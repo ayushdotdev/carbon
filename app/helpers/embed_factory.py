@@ -1,9 +1,11 @@
 from typing import Any
+
 import discord
+
+from app.helpers.constants import DEFAULT_CLR, ERROR_CLR, SUCCESS_CLR
+from app.helpers.embed import Embed
 from app.helpers.enums import LocaleType
 from app.i18n.manager import I18nManager
-from app.helpers.constants import SUCCESS_CLR, DEFAULT_CLR, ERROR_CLR, INFO_CLR
-from app.helpers.embed import Embed
 
 
 class EmbedFactory:
