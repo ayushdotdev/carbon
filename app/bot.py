@@ -35,35 +35,36 @@ class Carbon(commands.Bot):
             **kwargs,
         )
 
-        async def setup_hook(self) -> None:
-            self.logger.info("Running setup.....")
-            await self.setup_modules()
-            await self.init_i18n()
-            self.logger.info("Setup completed, starting bot")
+    async def setup_hook(self) -> None:
+        self.logger.info("Running setup.....")
+        await self.setup_modules()
+        await self.init_i18n()
+        self.logger.info("Setup completed, starting bot")
 
-        async def init_i18n(self) -> None:
-            await self.tree.set_translator(Translator(self.i18n))
-            self.logger.info("I18n Setup completed")
+    async def init_i18n(self) -> None:
+        await self.tree.set_translator(Translator(self.i18n))
+        self.logger.info("I18n Setup completed")
 
-        async def start(self, reconnect: bool = True) -> None:
-            self.logger.info("Launching Carbon")
-            await super().start(token=settings.bot_token, reconnect=reconnect)
+    async def start(self, token: str | None = None, *, reconnect: bool = True) -> None:
+        token = settings.bot_token
+        self.logger.info("Launching Carbon")
+        await super().start(token=token, reconnect=reconnect)
 
-        async def close(self) -> None:
-            await super().close()
-            await engine.dispose()
+    async def close(self) -> None:
+        await super().close()
+        await engine.dispose()
 
-        async def setup_modules(self) -> None:
-            groups = ["app/modules/listeners", "app/modules/commands"]
+    async def setup_modules(self) -> None:
+        groups = ["app/modules/listeners", "app/modules/commands"]
 
-            for group in groups:
-                for cog in os.listdir(group):
-                    if cog.endswith(".py") and cog != "__init__.py":
-                        path = cog[-3]
-                        extension = f"{cog.replace('/', '.')}.{path}"
+        for group in groups:
+            for cog in os.listdir(group):
+                if cog.endswith(".py") and cog != "__init__.py":
+                    path = cog[-3]
+                    extension = f"{cog.replace('/', '.')}.{path}"
 
-                        try:
-                            self.load_extension(extension)
-                            self.logger.info(f"Loaded extension: {path}")
-                        except Exception:
-                            self.logger.error(f"Failed to load {path}: {Exception}")
+                    try:
+                        await self.load_extension(extension)
+                        self.logger.info(f"Loaded extension: {path}")
+                    except Exception:
+                        self.logger.error(f"Failed to load {path}: {Exception}")
