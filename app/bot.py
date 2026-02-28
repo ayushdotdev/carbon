@@ -1,16 +1,14 @@
-import discord
-from discord.ext import commands
-
-import structlog
 import os
 
-from app.db.session import engine
+import discord
+import structlog
+from discord.ext import commands
 
 from app.config import settings
-
+from app.db.session import engine
 from app.helpers.custom_tree import CustomCommandTree
-from app.i18n.translator import Translator
 from app.i18n.manager import I18nManager
+from app.i18n.translator import Translator
 
 
 class Carbon(commands.Bot):
