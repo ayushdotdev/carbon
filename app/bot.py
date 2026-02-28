@@ -4,8 +4,9 @@ from discord.ext import commands
 import structlog
 import os
 
+from app.db.session import engine
 
-from app.config import Settings
+from app.config import settings
 
 from app.helpers.custom_tree import CustomCommandTree
 from app.i18n.translator import Translator
@@ -13,11 +14,9 @@ from app.i18n.manager import I18nManager
 
 
 class Carbon(commands.Bot):
-    def __init__(self, settings, *, debug: bool = False, **kwargs):
+    def __init__(self, *, debug: bool = False, **kwargs):
         self.i18n = I18nManager()
         self.tree: CustomCommandTree
-
-        self.settings = settings
 
         self.debug = debug
         self.logger = structlog.get_logger().bind(component="bot")
@@ -42,7 +41,11 @@ class Carbon(commands.Bot):
 
         async def start(self, reconnect: bool = True) -> None:
             self.logger.info("Launching Carbon")
-            await super().start(token=self.settings.bot_token, reconnect=reconnect)
+            await super().start(token=settings.bot_token, reconnect=reconnect)
+
+        async def close(self) -> None:
+            await super().close()
+            await engine.dispose()
 
         async def setup_modules(self) -> None:
             groups = ["app/modules/listeners", "app/modules/commands"]
