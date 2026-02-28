@@ -35,6 +35,12 @@ class Carbon(commands.Bot):
             **kwargs,
         )
 
+        async def setup_hook(self) -> None:
+            self.logger.info("Running setup.....")
+            await self.setup_modules()
+            await self.init_i18n()
+            self.logger.info("Setup completed, starting bot")
+
         async def init_i18n(self) -> None:
             await self.tree.set_translator(Translator(self.i18n))
             self.logger.info("I18n Setup completed")
