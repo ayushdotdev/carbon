@@ -37,8 +37,8 @@ class Carbon(commands.Bot):
 
     async def setup_hook(self) -> None:
         self.logger.info("Running setup.....")
-        await self.tree.sync()
         await self.setup_modules()
+        await self.tree.sync()
         await self.init_i18n()
         self.logger.info("Setup completed, starting bot")
 
@@ -61,11 +61,11 @@ class Carbon(commands.Bot):
         for group in groups:
             for cog in os.listdir(group):
                 if cog.endswith(".py") and cog != "__init__.py":
-                    path = cog[-3]
-                    extension = f"{cog.replace('/', '.')}.{path}"
+                    path = cog[:-3]
+                    extension = f"{group.replace('/', '.')}.{path}"
 
                     try:
                         await self.load_extension(extension)
                         self.logger.info(f"Loaded extension: {path}")
-                    except Exception:
-                        self.logger.error(f"Failed to load {path}: {Exception}")
+                    except Exception as e:
+                        self.logger.error(f"Failed to load {path}: {e}")
