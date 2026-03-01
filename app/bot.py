@@ -9,11 +9,13 @@ from app.db.session import engine
 from app.helpers.custom_tree import CustomCommandTree
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
+from app.helpers.embed_factory import EmbedFactory
 
 
 class Carbon(commands.Bot):
     def __init__(self, *, debug: bool = False, **kwargs):
         self.i18n = I18nManager()
+        self.embed_factory = EmbedFactory(self.i18n)
         self.tree: CustomCommandTree
 
         self.debug = debug
