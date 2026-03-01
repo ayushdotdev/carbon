@@ -9,11 +9,13 @@ from app.db.session import engine
 from app.helpers.custom_tree import CustomCommandTree
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
+from app.helpers.embed_factory import EmbedFactory
 
 
 class Carbon(commands.Bot):
     def __init__(self, *, debug: bool = False, **kwargs):
         self.i18n = I18nManager()
+        self.embed_factory = EmbedFactory(self.i18n)
         self.tree: CustomCommandTree
 
         self.debug = debug
@@ -36,6 +38,7 @@ class Carbon(commands.Bot):
     async def setup_hook(self) -> None:
         self.logger.info("Running setup.....")
         await self.setup_modules()
+        await self.tree.sync()
         await self.init_i18n()
         self.logger.info("Setup completed, starting bot")
 
@@ -58,11 +61,11 @@ class Carbon(commands.Bot):
         for group in groups:
             for cog in os.listdir(group):
                 if cog.endswith(".py") and cog != "__init__.py":
-                    path = cog[-3]
-                    extension = f"{cog.replace('/', '.')}.{path}"
+                    path = cog[:-3]
+                    extension = f"{group.replace('/', '.')}.{path}"
 
                     try:
                         await self.load_extension(extension)
                         self.logger.info(f"Loaded extension: {path}")
-                    except Exception:
-                        self.logger.error(f"Failed to load {path}: {Exception}")
+                    except Exception as e:
+                        self.logger.error(f"Failed to load {path}: {e}")

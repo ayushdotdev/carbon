@@ -7,14 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-25 22:12+0530\n"
+"POT-Creation-Date: 2026-03-01 21:34+0530\n"
 "PO-Revision-Date: 2026-02-25 22:12+0530\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: en\n"
 "Language-Team: en <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
+#: app/modules/commands/general.py:15
+msgid "Check the bot latency."
+msgstr "Check the bot latency."
+
+#: app/services/commands/general.py:23
+#, python-format
+msgid "Latency: %(latency)s ms."
+msgstr "Latency: %(latency)s ms."
