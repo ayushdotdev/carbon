@@ -13,6 +13,10 @@ class GuildEventCog(commands.Cog):
     async def on_guild_join(self, guild: discord.Guild):
         await self.service._guild_join(guild)
 
+    @commands.Cog.listener()
+    async def on_guild_remove(self, guild: discord.Guild):
+        await self.service._guild_leave(guild)
+
 
 async def setup(bot: Carbon):
     await bot.add_cog(GuildEventCog(bot))
