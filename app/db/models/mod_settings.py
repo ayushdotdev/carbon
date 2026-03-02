@@ -29,4 +29,4 @@ class ModSettings(Base):
         nullable=False,
     )
 
-    guilds = relationship("Guild", back_populates="mod_settings")
+    guild = relationship("Guild", back_populates="mod_settings")

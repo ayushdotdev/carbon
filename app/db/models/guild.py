@@ -1,7 +1,7 @@
 from datetime import datetime
-import pendulum
 
-from sqlalchemy import TIMESTAMP, BigInteger, Boolean, String, select
+import pendulum
+from sqlalchemy import TIMESTAMP, BigInteger, Boolean, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -64,10 +64,21 @@ class Guild(Base):
             guild = result.scalar_one()
             return guild
 
-        if guild.mod_settings is None:
-            guild.mod_settings = ModSettings()
-        if guild.appeal_settings is None:
-            guild.appeal_settings = AppealSettings()
+        result = await session.execute(
+            select(ModSettings).where(ModSettings.guild_id == guild.id)
+        )
+        mod = result.scalar_one_or_none()
+
+        if mod is None:
+            session.add(ModSettings(guild_id=guild.id))
+
+        result = await session.execute(
+            select(AppealSettings).where(ModSettings.guild_id == guild.id)
+        )
+        apl = result.scalar_one_or_none()
+
+        if apl is None:
+            session.add(AppealSettings(guild_id=guild.id))
 
         await session.flush()
         return guild

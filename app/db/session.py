@@ -7,7 +7,7 @@ engine = create_async_engine(
     echo=False,
 )
 
-sessions = async_sessionmaker(
+session_maker = async_sessionmaker(
     bind=engine,
     expire_on_commit=False,
     class_=AsyncSession,
