@@ -1,6 +1,8 @@
+from __future__ import annotations
 from datetime import datetime
 
 import pendulum
+
 from sqlalchemy import TIMESTAMP, BigInteger, Boolean, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -45,7 +47,7 @@ class Guild(Base):
     )
 
     @classmethod
-    async def get_or_create(cls, session: AsyncSession, guild_id: int) -> "Guild":
+    async def get_or_create(cls, session: AsyncSession, guild_id: int) -> Guild:
         result = await session.execute(select(cls).where(cls.id == guild_id))
         guild = result.scalar_one_or_none()
 
@@ -73,12 +75,26 @@ class Guild(Base):
             session.add(ModSettings(guild_id=guild.id))
 
         result = await session.execute(
-            select(AppealSettings).where(ModSettings.guild_id == guild.id)
+            select(AppealSettings).where(AppealSettings.guild_id == guild.id)
         )
         apl = result.scalar_one_or_none()
 
         if apl is None:
             session.add(AppealSettings(guild_id=guild.id))
 
+        await session.flush()
+        return guild
+
+    @classmethod
+    async def del_guild(cls, session: AsyncSession, guild_id: int) -> Guild | None:
+        result = await session.execute(select(cls).where(cls.id == guild_id))
+        guild = result.scalar_one_or_none()
+
+        if guild is None:
+            return None
+        elif guild.is_premium:
+            return guild
+
+        await session.delete(guild)
         await session.flush()
         return guild
