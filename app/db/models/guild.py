@@ -73,7 +73,7 @@ class Guild(Base):
             session.add(ModSettings(guild_id=guild.id))
 
         result = await session.execute(
-            select(AppealSettings).where(ModSettings.guild_id == guild.id)
+            select(AppealSettings).where(AppealSettings.guild_id == guild.id)
         )
         apl = result.scalar_one_or_none()
 
