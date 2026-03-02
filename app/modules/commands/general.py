@@ -1,9 +1,10 @@
-from discord.ext import commands
-from discord import app_commands, Interaction
+from discord import Interaction, app_commands
 from discord.app_commands import locale_str
-from app.services.commands.general import GeneralService
+from discord.ext import commands
+
 from app.bot import Carbon
 from app.i18n.marker import _
+from app.services.commands.general import GeneralService
 
 
 class General(commands.Cog):
