@@ -38,8 +38,8 @@ class Carbon(commands.Bot):
     async def setup_hook(self) -> None:
         self.logger.info("Running setup.....")
         await self.setup_modules()
-        await self.tree.sync()
         await self.init_i18n()
+        await self.tree.sync()
         self.logger.info("Setup completed, starting bot")
 
     async def init_i18n(self) -> None:

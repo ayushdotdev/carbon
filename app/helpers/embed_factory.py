@@ -14,7 +14,7 @@ class EmbedFactory:
 
     def _build(
         self,
-        msgid: str,
+        msgid: str | None = None,
         *,
         color: int = DEFAULT_CLR,
         local_type: LocaleType = LocaleType.user,
@@ -23,7 +23,9 @@ class EmbedFactory:
     ) -> Embed:
         embed = Embed(
             i18n=self.i18n, locale=locale, locale_type=local_type, color=color
-        ).set_description_i18n(msgid=msgid, **params)
+        )
+        if msgid:
+            embed.set_description_i18n(msgid, **params)
         return embed
 
     def success_embed(
@@ -34,9 +36,10 @@ class EmbedFactory:
         locale: discord.Locale | None = None,
         **params: Any,
     ) -> Embed:
-        return self._build(
+        embed = self._build(
             msgid, color=SUCCESS_CLR, local_type=locale_type, locale=locale, **params
         )
+        return embed
 
     def error_embed(
         self,

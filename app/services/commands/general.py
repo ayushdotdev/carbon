@@ -19,8 +19,8 @@ class GeneralService:
 
         latency = round(self.bot.latency * 1000)
 
-        embed = self.bot.embed_factory._build(
-            _("Latency: %(latency)s ms."), latency=latency
+        embed = self.bot.embed_factory._build().add_field_i18n(
+            _("Latency"), _("%(latency)s ms"), latency=latency
         )
 
         return embed
