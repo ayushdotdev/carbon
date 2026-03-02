@@ -7,8 +7,8 @@ from sqlalchemy.sql import func
 from app.db.base import Base
 
 
-class Guilds(Base):
-    __tablename__ = "guilds"
+class Guild(Base):
+    __tablename__ = "guild"
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     prefix: Mapped[str] = mapped_column(String, default="!", nullable=False)
@@ -29,13 +29,13 @@ class Guilds(Base):
 
     mod_settings = relationship(
         "ModSettings",
-        back_populates="guilds",
+        back_populates="guild",
         cascade="all, delete-orphan",
         uselist=False,
     )
     appeal_settings = relationship(
         "AppealSettings",
-        back_populates="guilds",
+        back_populates="guild",
         cascade="all, delete-orphan",
         uselist=False,
     )

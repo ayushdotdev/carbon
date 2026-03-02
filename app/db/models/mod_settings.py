@@ -12,7 +12,7 @@ class ModSettings(Base):
     __tablename__ = "mod_settings"
 
     guild_id: Mapped[int] = mapped_column(
-        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE"), primary_key=True
+        BigInteger, ForeignKey("guild.id", ondelete="CASCADE"), primary_key=True
     )
     is_dm_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     log_channel_id: Mapped[int | None] = mapped_column(BigInteger)
@@ -29,4 +29,4 @@ class ModSettings(Base):
         nullable=False,
     )
 
-    guilds = relationship("Guilds", back_populates="mod_settings")
+    guilds = relationship("Guild", back_populates="mod_settings")

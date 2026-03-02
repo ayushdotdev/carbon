@@ -19,7 +19,7 @@ class AppealSettings(Base):
     __tablename__ = "appeal_settings"
 
     guild_id: Mapped[int] = mapped_column(
-        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE"), primary_key=True
+        BigInteger, ForeignKey("guild.id", ondelete="CASCADE"), primary_key=True
     )
     is_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     log_channel_id: Mapped[int | None] = mapped_column(BigInteger)
@@ -35,7 +35,7 @@ class AppealSettings(Base):
         onupdate=func.now(),
     )
 
-    guilds = relationship("Guilds", back_populates="appeal_settings")
+    guilds = relationship("Guild", back_populates="appeal_settings")
 
     __table_args__ = (
         CheckConstraint("schema_version > 1", name="ck_schema_version_is_positive"),

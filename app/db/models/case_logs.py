@@ -22,7 +22,7 @@ class CaseLog(Base):
 
     case_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     guild_id: Mapped[int] = mapped_column(
-        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE")
+        BigInteger, ForeignKey("guild.id", ondelete="CASCADE")
     )
     target_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
     moderator_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
