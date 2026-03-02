@@ -19,12 +19,12 @@ class AppealSettings(Base):
     __tablename__ = "appeal_settings"
 
     guild_id: Mapped[int] = mapped_column(
-        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE"), primary_key=True
+        BigInteger, ForeignKey("guild.id", ondelete="CASCADE"), primary_key=True
     )
     is_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     log_channel_id: Mapped[int | None] = mapped_column(BigInteger)
     questions: Mapped[list[dict]] = mapped_column(JSONB, nullable=False, default=list)
-    schema_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    schema_version: Mapped[int] = mapped_column(Integer, nullable=False, default=2)
     created_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True), nullable=False, server_default=func.now()
     )
@@ -35,8 +35,8 @@ class AppealSettings(Base):
         onupdate=func.now(),
     )
 
-    guilds = relationship("Guilds", back_populates="appeal_settings")
+    guild = relationship("Guild", back_populates="appeal_settings")
 
     __table_args__ = (
-        CheckConstraint("schema_version > 1", name="ck_schema_version_is_positive"),
+        CheckConstraint("schema_version > 0", name="ck_schema_version_is_positive"),
     )

@@ -5,7 +5,8 @@ import structlog
 from discord.ext import commands
 
 from app.config import settings
-from app.db.session import engine
+from app.db.models.guild import Guild
+from app.db.session import engine, session_maker
 from app.helpers.custom_tree import CustomCommandTree
 from app.helpers.embed_factory import EmbedFactory
 from app.i18n.manager import I18nManager
@@ -39,7 +40,6 @@ class Carbon(commands.Bot):
         self.logger.info("Running setup.....")
         await self.setup_modules()
         await self.init_i18n()
-        await self.tree.sync()
         self.logger.info("Setup completed, starting bot")
 
     async def init_i18n(self) -> None:
@@ -69,3 +69,9 @@ class Carbon(commands.Bot):
                         self.logger.info(f"Loaded extension: {path}")
                     except Exception as e:
                         self.logger.error(f"Failed to load {path}: {e}")
+
+    async def init_guild(self):
+        async with session_maker() as session, session.begin():
+            for guild in self.guilds:
+                await Guild.get_or_create(session, guild.id)
+            self.logger.info("Initialized guilds")

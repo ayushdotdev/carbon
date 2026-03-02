@@ -14,7 +14,7 @@ class AppealLog(Base):
 
     appeal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     guild_id: Mapped[int] = mapped_column(
-        BigInteger, ForeignKey("guilds.id", ondelete="CASCADE")
+        BigInteger, ForeignKey("guild.id", ondelete="CASCADE")
     )
     user_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
     case_id: Mapped[int | None] = mapped_column(
