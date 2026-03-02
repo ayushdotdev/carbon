@@ -7,9 +7,9 @@ from discord.ext import commands
 from app.config import settings
 from app.db.session import engine
 from app.helpers.custom_tree import CustomCommandTree
+from app.helpers.embed_factory import EmbedFactory
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
-from app.helpers.embed_factory import EmbedFactory
 
 
 class Carbon(commands.Bot):

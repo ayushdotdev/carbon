@@ -2,10 +2,17 @@ from typing import Any
 
 import discord
 
-from app.helpers.constants import DEFAULT_CLR, ERROR_CLR, SUCCESS_CLR
+from app.helpers.constants import (
+    DEFAULT_CLR,
+    ERROR_CLR,
+    ERROR_EMOJI,
+    SUCCESS_CLR,
+    SUCCESS_EMOJI,
+)
 from app.helpers.embed import Embed
 from app.helpers.enums import LocaleType
 from app.i18n.manager import I18nManager
+from app.i18n.marker import _
 
 
 class EmbedFactory:
@@ -38,6 +45,8 @@ class EmbedFactory:
     ) -> Embed:
         embed = self._build(
             msgid, color=SUCCESS_CLR, local_type=locale_type, locale=locale, **params
+        ).set_title_i18n(
+            _("%(success_emoji)s Action Completed"), success_emoji=SUCCESS_EMOJI
         )
         return embed
 
@@ -51,4 +60,4 @@ class EmbedFactory:
     ) -> Embed:
         return self._build(
             msgid, color=ERROR_CLR, local_type=locale_type, locale=locale, **params
-        )
+        ).set_title_i18n(_("%(error_emoji)s Action Failed"), error_emoji=ERROR_EMOJI)
