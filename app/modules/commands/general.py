@@ -16,7 +16,7 @@ class General(commands.Cog):
     )
     async def ping(self, interaction: Interaction) -> None:
         embed = await self.service._ping(interaction)
-        await interaction.response.send_message(embed=embed, ephemeral=True)
+        await interaction.response.send_message(embed=embed)
 
 
 async def setup(bot: Carbon):

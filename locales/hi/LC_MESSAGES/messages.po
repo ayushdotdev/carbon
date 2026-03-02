@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-01 21:34+0530\n"
+"POT-Creation-Date: 2026-03-02 09:18+0530\n"
 "PO-Revision-Date: 2026-02-25 22:13+0530\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: hi\n"
@@ -22,8 +22,11 @@ msgstr ""
 msgid "Check the bot latency."
 msgstr "बॉट की लेटेंसी जानें |"
 
-#: app/services/commands/general.py:23
-#, python-format
-msgid "Latency: %(latency)s ms."
-msgstr "लेटेंसी: %(latency)s मिलीसेकंड।"
+#: app/services/commands/general.py:22
+msgid "Latency"
+msgstr "लेटेंसी"
 
+#: app/services/commands/general.py:22
+#, fuzzy, python-format
+msgid "%(latency)s ms"
+msgstr "%(latency)s मिलीसेकंड"
