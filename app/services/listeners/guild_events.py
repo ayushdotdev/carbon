@@ -11,3 +11,7 @@ class Service:
     async def _guild_join(self, guild: discord.Guild) -> None:
         async with session_maker() as session, session.begin():
             await Guild.get_or_create(session, guild.id)
+
+    async def _guild_leave(self, guild: discord.Guild) -> None:
+        async with session_maker() as session, session.begin():
+            await Guild.del_guild(session, guild.id)

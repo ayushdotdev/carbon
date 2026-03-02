@@ -1,7 +1,7 @@
+from __future__ import annotations
 from datetime import datetime
 
 import pendulum
-from __future__ import annotations
 
 from sqlalchemy import TIMESTAMP, BigInteger, Boolean, select
 from sqlalchemy.exc import IntegrityError
