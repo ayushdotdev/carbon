@@ -1,0 +1,23 @@
+name: Upload Source to Crowdin
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "locales/messages.pot"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Crowdin CLI
+        run: npm install -g @crowdin/cli
+
+      - name: Upload sources
+        env:
+          CROWDIN_API_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
+        run: crowdin upload sources
