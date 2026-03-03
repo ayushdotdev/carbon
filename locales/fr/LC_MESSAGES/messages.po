@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-02 09:18+0530\n"
-"PO-Revision-Date: 2026-03-03 12:24\n"
+"PO-Revision-Date: 2026-03-03 16:05\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -20,14 +20,14 @@ msgstr ""
 
 #: app/modules/commands/general.py:15
 msgid "Check the bot latency."
-msgstr ""
+msgstr "Vérifiez la latence du bot."
 
 #: app/services/commands/general.py:22
 msgid "Latency"
-msgstr ""
+msgstr "Latence"
 
 #: app/services/commands/general.py:22
 #, python-format
 msgid "%(latency)s ms"
-msgstr ""
+msgstr "%(latency)s milliseconde"
 
