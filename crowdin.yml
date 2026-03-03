@@ -1,6 +1,5 @@
 project_id: 876622
 api_token_env: CROWDIN_PERSONAL_TOKEN
-
 files:
   - source: locales/messages.pot
-    translation: locales/%two_letters_code%/LC_MESSAGES/messages.po
+    translation: /locales/%two_letters_code%/LC_MESSAGES/messages.po
