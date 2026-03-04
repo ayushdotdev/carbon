@@ -2,7 +2,7 @@ from typing import Any, Self
 
 import discord
 
-from app.helpers.enums import LocaleType
+from app.utils.confs.enums import LocaleType
 from app.i18n.manager import I18nManager
 
 
@@ -30,7 +30,7 @@ class Embed(discord.Embed):
         return self
 
     def set_description_i18n(self, msgid: str, **params: Any) -> Self:
-        self.description = self.i18n.gettext(
+        self.description = "> " + self.i18n.gettext(
             msgid,
             locale_type=self.locale_type,
             locale=self.locale,

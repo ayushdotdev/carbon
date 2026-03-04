@@ -1,7 +1,7 @@
 import discord
 
 from app.bot import Carbon
-from app.helpers.embed import Embed
+from app.utils.core.embed import Embed
 from app.i18n.context import ExecutionContext
 from app.i18n.marker import _
 
@@ -18,5 +18,14 @@ class GeneralService:
         embed = self.bot.embed_factory._build().add_field_i18n(
             _("Latency"), _("%(latency)s ms"), latency=latency
         )
+
+        return embed
+
+    async def _invite(self, interaction: discord.Interaction) -> Embed:
+        ExecutionContext.set_context(interaction)
+        embed = self.bot.embed_factory._build(
+            _("Click the button below to invite Carbon.")
+        )
+        embed.set_title_i18n(_("Thank you for taking interest in Carbon"))
 
         return embed

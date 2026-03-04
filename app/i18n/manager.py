@@ -3,7 +3,7 @@ from gettext import GNUTranslations, NullTranslations
 
 import discord
 
-from app.helpers.enums import LocaleType
+from app.utils.confs.enums import LocaleType
 from app.i18n.context import ExecutionContext
 
 

@@ -7,8 +7,9 @@ from discord.ext import commands
 from app.config import settings
 from app.db.models.guild import Guild
 from app.db.session import engine, session_maker
-from app.helpers.custom_tree import CustomCommandTree
-from app.helpers.embed_factory import EmbedFactory
+from app.utils.core.custom_tree import CustomCommandTree
+from app.utils.checks.not_bot import not_bot
+from app.utils.helpers.embed_factory import EmbedFactory
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
 
@@ -40,6 +41,7 @@ class Carbon(commands.Bot):
         self.logger.info("Running setup.....")
         await self.setup_modules()
         await self.init_i18n()
+        self.tree.add_check(not_bot)
         self.logger.info("Setup completed, starting bot")
 
     async def init_i18n(self) -> None:

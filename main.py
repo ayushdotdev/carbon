@@ -1,7 +1,7 @@
 import asyncio
 
 from app.bot import Carbon
-from app.helpers.logging import setup_logging
+from app.utils.confs.logging import setup_logging
 
 bot = Carbon()
 
