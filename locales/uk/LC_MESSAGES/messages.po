@@ -3,20 +3,20 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-04 15:08+0530\n"
-"PO-Revision-Date: 2026-03-04 09:52\n"
+"PO-Revision-Date: 2026-03-04 09:53\n"
 "Last-Translator: \n"
-"Language-Team: German\n"
+"Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
 "X-Crowdin-Project: carbon-bot\n"
 "X-Crowdin-Project-ID: 877148\n"
-"X-Crowdin-Language: de\n"
+"X-Crowdin-Language: uk\n"
 "X-Crowdin-File: /main/locales/messages.pot\n"
 "X-Crowdin-File-ID: 12\n"
-"Language: de_DE\n"
+"Language: uk_UA\n"
 
 #: app/helpers/embed_factory.py:49
 #, python-format
@@ -30,14 +30,14 @@ msgstr ""
 
 #: app/modules/commands/general.py:16
 msgid "Check the bot latency."
-msgstr "Überprüfe die Bot-Latenz."
+msgstr ""
 
 #: app/services/commands/general.py:24
 msgid "Latency"
-msgstr "Latenz"
+msgstr ""
 
 #: app/services/commands/general.py:24
 #, python-format
 msgid "%(latency)s ms"
-msgstr "%(latency)s Millisekunde"
+msgstr ""
 
