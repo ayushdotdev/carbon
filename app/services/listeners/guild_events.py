@@ -1,4 +1,5 @@
 import discord
+
 from app.bot import Carbon
 from app.db.models.guild import Guild
 from app.db.session import session_maker

@@ -1,8 +1,8 @@
 from __future__ import annotations
+
 from datetime import datetime
 
 import pendulum
-
 from sqlalchemy import TIMESTAMP, BigInteger, Boolean, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -92,7 +92,7 @@ class Guild(Base):
 
         if guild is None:
             return None
-        elif guild.is_premium:
+        if guild.is_premium:
             return guild
 
         await session.delete(guild)
