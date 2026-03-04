@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-04 16:12+0530\n"
-"PO-Revision-Date: 2026-03-04 11:00\n"
+"POT-Creation-Date: 2026-03-04 17:47+0530\n"
+"PO-Revision-Date: 2026-03-04 12:29\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -20,36 +20,64 @@ msgstr ""
 
 #: app/helpers/check_target.py:28
 msgid "This action cannot be performed."
-msgstr ""
+msgstr "Diese Aktion kann nicht ausgeführt werden."
 
 #: app/helpers/check_target.py:32
 msgid "The server owner cannot be targeted."
-msgstr ""
+msgstr "Der Serverbesitzer kann nicht als Ziel ausgewählt werden."
 
 #: app/helpers/check_target.py:36
 msgid "This action cannot be performed on yourself."
-msgstr ""
+msgstr "Diese Aktion kann nicht an dir selbst ausgeführt werden."
 
 #: app/helpers/check_target.py:40
 msgid "Bots cannot be targeted with this action."
-msgstr ""
+msgstr "Bots können mit dieser Aktion nicht als Ziel ausgewählt werden."
 
 #: app/helpers/check_target.py:49
 msgid "My role must be higher than the target's role."
-msgstr ""
+msgstr "Meine Rolle muss höher sein als die Rolle des Ziels."
 
 #: app/helpers/check_target.py:53
 msgid "Your role must be higher than the target's role."
-msgstr ""
+msgstr "Deine Rolle muss höher sein als die Rolle des Ziels."
 
 #: app/helpers/embed_factory.py:49
 #, python-format
 msgid "%(success_emoji)s Action Completed"
-msgstr ""
+msgstr "%(success_emoji)s Aktion abgeschlossen"
 
 #: app/helpers/embed_factory.py:63
 #, python-format
 msgid "%(error_emoji)s Action Failed"
+msgstr "%(error_emoji)sAktion fehlgeschlagen."
+
+#: app/helpers/consts/perm_label.py:4
+msgid "Manage Messages"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:5
+msgid "Ban Members"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:6
+msgid "Kick Members"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:7
+msgid "Timeout Members"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:8
+msgid "Manage Roles"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:9
+msgid "Manage Channels"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:10
+msgid "Administrator"
 msgstr ""
 
 #: app/modules/commands/general.py:16
@@ -64,4 +92,16 @@ msgstr "Latenz"
 #, python-format
 msgid "%(latency)s ms"
 msgstr "%(latency)s Millisekunde"
+
+#: app/services/listeners/on_error.py:26
+msgid "You don't have the required permissions to use this command."
+msgstr ""
+
+#: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
+msgid "Missing Permissions"
+msgstr ""
+
+#: app/services/listeners/on_error.py:38
+msgid "I don't have the required permissions to run this command."
+msgstr ""
 
