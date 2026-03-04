@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-04 15:08+0530\n"
+"POT-Creation-Date: 2026-03-04 16:12+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,30 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
+
+#: app/helpers/check_target.py:28
+msgid "This action cannot be performed."
+msgstr ""
+
+#: app/helpers/check_target.py:32
+msgid "The server owner cannot be targeted."
+msgstr ""
+
+#: app/helpers/check_target.py:36
+msgid "This action cannot be performed on yourself."
+msgstr ""
+
+#: app/helpers/check_target.py:40
+msgid "Bots cannot be targeted with this action."
+msgstr ""
+
+#: app/helpers/check_target.py:49
+msgid "My role must be higher than the target's role."
+msgstr ""
+
+#: app/helpers/check_target.py:53
+msgid "Your role must be higher than the target's role."
+msgstr ""
 
 #: app/helpers/embed_factory.py:49
 #, python-format
