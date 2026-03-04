@@ -6,7 +6,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
-from app.helpers.enums import AppealStatus
+from app.utils.confs.enums import AppealStatus
 
 
 class AppealLog(Base):

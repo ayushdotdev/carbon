@@ -7,8 +7,8 @@ from discord.ext import commands
 from app.config import settings
 from app.db.models.guild import Guild
 from app.db.session import engine, session_maker
-from app.helpers.custom_tree import CustomCommandTree
-from app.helpers.embed_factory import EmbedFactory
+from app.utils.core.custom_tree import CustomCommandTree
+from app.utils.helpers.embed_factory import EmbedFactory
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
 

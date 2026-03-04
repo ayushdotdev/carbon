@@ -1,7 +1,7 @@
 import discord
 
 from app.bot import Carbon
-from app.helpers.embed import Embed
+from app.utils.core.embed import Embed
 from app.i18n.context import ExecutionContext
 from app.i18n.marker import _
 
