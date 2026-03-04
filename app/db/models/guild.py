@@ -81,7 +81,7 @@ class Guild(Base):
 
         if guild is None:
             return None
-        elif guild.is_premium:
+        if guild.is_premium:
             return guild
 
         await session.delete(guild)
