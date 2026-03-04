@@ -12,18 +12,18 @@ class TargetChecker:
         self.bot = bot
         self.interaction = interaction
         self.guild = interaction.guild
-        assert self.guild is not None
         self.target = target
         self.author = interaction.user
-        self.bot_member = self.guild.me
-
-        assert isinstance(self.author, discord.Member)
 
     def _role_position(self, member: discord.Member) -> int:
         return member.top_role.position if member.top_role else -1
 
     def validate(self) -> Embed | None:
-        if self.target.id == self.interaction.client.user.id:
+        assert self.guild is not None
+        assert isinstance(self.author, discord.Member)
+        self.bot_member = self.guild.me
+
+        if self.target.id == self.bot_member.id:
             return self.bot.embed_factory.error_embed(
                 _("This action cannot be performed.")
             )
@@ -35,7 +35,7 @@ class TargetChecker:
             return self.bot.embed_factory.error_embed(
                 _("This action cannot be performed on yourself.")
             )
-        if target.bot:
+        if self.target.bot:
             return self.bot.embed_factory.error_embed(
                 _("Bots cannot be targeted with this action.")
             )
