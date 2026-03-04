@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  carbon-bot:
+    build: .
+    image: carbon-bot:latest
+    container_name: carbon-bot
+    env_file:
+        - .env
+    restart: unless-stopped
+
