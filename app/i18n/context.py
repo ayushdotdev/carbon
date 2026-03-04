@@ -25,3 +25,9 @@ class ExecutionContext:
             return _current_ctx.get()
         except LookupError:
             return None
+
+    @classmethod
+    def set_context(cls, interaction: discord.Interaction) -> None:
+        cls.set(
+            cls(user_locale=interaction.locale, guild_locale=interaction.guild_locale)
+        )
