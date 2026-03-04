@@ -15,6 +15,7 @@ class General(commands.Cog):
     @app_commands.command(
         name="ping", description=locale_str(_("Check the bot latency."))
     )
+    @app_commands.guild_only()
     async def ping(self, interaction: Interaction) -> None:
         embed = await self.service._ping(interaction)
         await interaction.response.send_message(embed=embed)
