@@ -57,6 +57,8 @@ class Guild(Base):
         guild = cls(id=guild_id, joined_at=pendulum.now("UTC"))
 
         session.add(guild)
+        session.add(ModSettings(guild_id=guild.id))
+        session.add(AppealSettings(guild_id=guild.id))
 
         try:
             await session.flush()
@@ -69,20 +71,7 @@ class Guild(Base):
         result = await session.execute(
             select(ModSettings).where(ModSettings.guild_id == guild.id)
         )
-        mod = result.scalar_one_or_none()
 
-        if mod is None:
-            session.add(ModSettings(guild_id=guild.id))
-
-        result = await session.execute(
-            select(AppealSettings).where(AppealSettings.guild_id == guild.id)
-        )
-        apl = result.scalar_one_or_none()
-
-        if apl is None:
-            session.add(AppealSettings(guild_id=guild.id))
-
-        await session.flush()
         return guild
 
     @classmethod
@@ -92,7 +81,7 @@ class Guild(Base):
 
         if guild is None:
             return None
-        if guild.is_premium:
+        elif guild.is_premium:
             return guild
 
         await session.delete(guild)
