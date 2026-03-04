@@ -30,4 +30,28 @@ RUN apk update \
     && find /carbon/.venv \
         -type f \( -name "*.pyc" -o -name "*.pyo" \) -delete
 
+# -- Final Stage --
+FROM base AS final
 
+ENV \
+  PATH="/carbon/.venv/bin:$PATH"
+
+RUN apk cache clean \
+  && rm -rf /var/cache/apk/* \
+  && addgroup -S app \
+  && adduser -S -D -H -G app carbon
+
+COPY --from=builder /carbon/.venv ./.venv
+
+COPY \
+  --from=builder \
+  --exclude="**/*.po" \
+  --exclude="**/*.pot" \
+  /carbon/locales ./locales
+
+COPY --from=builder /carbon/app ./app/
+COPY --from=builder /carbon/main.py ./
+
+USER carbon
+
+CMD ["python", "main.py"]
