@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-04 16:12+0530\n"
-"PO-Revision-Date: 2026-03-04 11:01\n"
+"POT-Creation-Date: 2026-03-04 17:47+0530\n"
+"PO-Revision-Date: 2026-03-04 12:29\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Traditional\n"
 "MIME-Version: 1.0\n"
@@ -52,6 +52,34 @@ msgstr "%(success_emoji)s 動作完成"
 msgid "%(error_emoji)s Action Failed"
 msgstr "%(error_emoji)s 操作失敗"
 
+#: app/helpers/consts/perm_label.py:4
+msgid "Manage Messages"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:5
+msgid "Ban Members"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:6
+msgid "Kick Members"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:7
+msgid "Timeout Members"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:8
+msgid "Manage Roles"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:9
+msgid "Manage Channels"
+msgstr ""
+
+#: app/helpers/consts/perm_label.py:10
+msgid "Administrator"
+msgstr ""
+
 #: app/modules/commands/general.py:16
 msgid "Check the bot latency."
 msgstr "檢查機器人延遲。"
@@ -64,4 +92,16 @@ msgstr "延遲"
 #, python-format
 msgid "%(latency)s ms"
 msgstr "%(latency)s 毫秒"
+
+#: app/services/listeners/on_error.py:26
+msgid "You don't have the required permissions to use this command."
+msgstr ""
+
+#: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
+msgid "Missing Permissions"
+msgstr ""
+
+#: app/services/listeners/on_error.py:38
+msgid "I don't have the required permissions to run this command."
+msgstr ""
 
