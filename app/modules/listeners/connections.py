@@ -13,6 +13,18 @@ class ConnectionCog(commands.Cog):
     async def on_ready(self):
         await self.service._on_ready()
 
+    @commands.Cog.listener()
+    async def on_connect(self):
+        self.bot.logger.info("Connected to discord")
+
+    @commands.Cog.listener()
+    async def on_disconnect(self):
+        self.bot.logger.info("Disconnected from discord")
+
+    @commands.Cog.listener()
+    async def on_resumed(self):
+        self.bot.logger.info("Discord session resumed")
+
 
 async def setup(bot: Carbon):
     await bot.add_cog(ConnectionCog(bot))
