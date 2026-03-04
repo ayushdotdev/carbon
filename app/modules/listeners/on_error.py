@@ -20,3 +20,6 @@ class ErrorCog(commands.Cog):
 
         if result is not None:
             await interaction.response.send_message(embed=result, ephemeral=True)
+
+async def setup(bot: Carbon) -> None:
+    await bot.add_cog(ErrorCog(bot))
