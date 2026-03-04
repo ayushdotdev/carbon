@@ -20,3 +20,12 @@ class GeneralService:
         )
 
         return embed
+
+    async def _invite(self, interaction: discord.Interaction) -> Embed:
+        ExecutionContext.set_context(interaction)
+        embed = self.bot.embed_factory._build(
+            _("Click the button below to invite Carbon.")
+        )
+        embed.set_title_i18n(_("Thank you for taking interest in Carbon"))
+
+        return embed
