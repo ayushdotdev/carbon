@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-02 09:18+0530\n"
-"PO-Revision-Date: 2026-03-03 14:23\n"
+"POT-Creation-Date: 2026-03-04 15:08+0530\n"
+"PO-Revision-Date: 2026-03-04 09:52\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
@@ -18,15 +18,25 @@ msgstr ""
 "X-Crowdin-File-ID: 12\n"
 "Language: hi_IN\n"
 
-#: app/modules/commands/general.py:15
+#: app/helpers/embed_factory.py:49
+#, python-format
+msgid "%(success_emoji)s Action Completed"
+msgstr ""
+
+#: app/helpers/embed_factory.py:63
+#, python-format
+msgid "%(error_emoji)s Action Failed"
+msgstr ""
+
+#: app/modules/commands/general.py:16
 msgid "Check the bot latency."
 msgstr "बॉट की लेटेंसी जानें |"
 
-#: app/services/commands/general.py:22
+#: app/services/commands/general.py:24
 msgid "Latency"
 msgstr "लेटेंसी"
 
-#: app/services/commands/general.py:22
+#: app/services/commands/general.py:24
 #, python-format
 msgid "%(latency)s ms"
 msgstr "%(latency)s मिलीसेकंड"
