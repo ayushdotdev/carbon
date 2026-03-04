@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-04 12:29\n"
+"PO-Revision-Date: 2026-03-04 18:05\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "MIME-Version: 1.0\n"
@@ -20,15 +20,15 @@ msgstr ""
 
 #: app/helpers/check_target.py:28
 msgid "This action cannot be performed."
-msgstr ""
+msgstr "„Tuto akci nelze provést.“."
 
 #: app/helpers/check_target.py:32
 msgid "The server owner cannot be targeted."
-msgstr ""
+msgstr "Vlastníka serveru nelze zvolit jako cíl.“."
 
 #: app/helpers/check_target.py:36
 msgid "This action cannot be performed on yourself."
-msgstr ""
+msgstr "Tuto akci nelze provést na sobě.“."
 
 #: app/helpers/check_target.py:40
 msgid "Bots cannot be targeted with this action."
@@ -36,11 +36,11 @@ msgstr ""
 
 #: app/helpers/check_target.py:49
 msgid "My role must be higher than the target's role."
-msgstr ""
+msgstr "„Moje role musí být vyšší než role cíle.“."
 
 #: app/helpers/check_target.py:53
 msgid "Your role must be higher than the target's role."
-msgstr ""
+msgstr "Moje role musí být vyšší než role cíle.“."
 
 #: app/helpers/embed_factory.py:49
 #, python-format
@@ -54,31 +54,31 @@ msgstr "%(error_emoji)s Akce selhala"
 
 #: app/helpers/consts/perm_label.py:4
 msgid "Manage Messages"
-msgstr ""
+msgstr "„Správa zpráv“"
 
 #: app/helpers/consts/perm_label.py:5
 msgid "Ban Members"
-msgstr ""
+msgstr "„Zákaz členů“"
 
 #: app/helpers/consts/perm_label.py:6
 msgid "Kick Members"
-msgstr ""
+msgstr "„Vyloučení členů“"
 
 #: app/helpers/consts/perm_label.py:7
 msgid "Timeout Members"
-msgstr ""
+msgstr "„Dočasné ztlumení členů“"
 
 #: app/helpers/consts/perm_label.py:8
 msgid "Manage Roles"
-msgstr ""
+msgstr "„Správa rolí“"
 
 #: app/helpers/consts/perm_label.py:9
 msgid "Manage Channels"
-msgstr ""
+msgstr "„Správa kanálů“"
 
 #: app/helpers/consts/perm_label.py:10
 msgid "Administrator"
-msgstr ""
+msgstr "„Administrátor“"
 
 #: app/modules/commands/general.py:16
 msgid "Check the bot latency."
@@ -86,7 +86,7 @@ msgstr "Zkontrolujte latenci bota."
 
 #: app/services/commands/general.py:24
 msgid "Latency"
-msgstr "latence."
+msgstr "Latence"
 
 #: app/services/commands/general.py:24
 #, python-format
@@ -95,11 +95,11 @@ msgstr "%(latency)s milisekunda"
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
-msgstr ""
+msgstr "„Nemáte potřebná oprávnění k použití tohoto příkazu.“."
 
 #: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
 msgid "Missing Permissions"
-msgstr ""
+msgstr "„Chybějící oprávnění“"
 
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
