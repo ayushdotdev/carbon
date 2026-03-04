@@ -2,6 +2,7 @@ import discord
 
 from app.bot import Carbon
 from app.helpers.embed import Embed
+from app.i18n.context import ExecutionContext
 from app.i18n.marker import _
 
 
@@ -19,6 +20,7 @@ class TargetChecker:
         return member.top_role.position if member.top_role else -1
 
     def validate(self) -> Embed | None:
+        ExecutionContext.set_context(self.interaction)
         assert self.guild is not None
         assert isinstance(self.author, discord.Member)
         self.bot_member = self.guild.me

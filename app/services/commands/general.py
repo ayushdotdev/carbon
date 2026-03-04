@@ -11,12 +11,7 @@ class GeneralService:
         self.bot = bot
 
     async def _ping(self, interaction: discord.Interaction) -> Embed:
-        ExecutionContext.set(
-            ExecutionContext(
-                user_locale=interaction.locale,
-                guild_locale=interaction.guild_locale,
-            )
-        )
+        ExecutionContext.set_context(interaction)
 
         latency = round(self.bot.latency * 1000)
 
