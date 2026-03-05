@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-04 12:29\n"
+"PO-Revision-Date: 2026-03-05 08:52\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -20,78 +20,78 @@ msgstr ""
 
 #: app/helpers/check_target.py:28
 msgid "This action cannot be performed."
-msgstr ""
+msgstr "« Questa azione non può essere eseguita. »."
 
 #: app/helpers/check_target.py:32
 msgid "The server owner cannot be targeted."
-msgstr ""
+msgstr "« Il proprietario del server non può essere preso di mira. »."
 
 #: app/helpers/check_target.py:36
 msgid "This action cannot be performed on yourself."
-msgstr ""
+msgstr "« Questa azione non può essere eseguita su te stesso. »."
 
 #: app/helpers/check_target.py:40
 msgid "Bots cannot be targeted with this action."
-msgstr ""
+msgstr "« I bot non possono essere presi di mira con questa azione. »."
 
 #: app/helpers/check_target.py:49
 msgid "My role must be higher than the target's role."
-msgstr ""
+msgstr "« Il mio ruolo deve essere superiore a quello del bersaglio. »."
 
 #: app/helpers/check_target.py:53
 msgid "Your role must be higher than the target's role."
-msgstr ""
+msgstr "« Il tuo ruolo deve essere superiore a quello del bersaglio. »."
 
 #: app/helpers/embed_factory.py:49
 #, python-format
 msgid "%(success_emoji)s Action Completed"
-msgstr ""
+msgstr "%(success_emoji)s« Azione completata »"
 
 #: app/helpers/embed_factory.py:63
 #, python-format
 msgid "%(error_emoji)s Action Failed"
-msgstr ""
+msgstr "%(error_emoji)s« Azione completata »"
 
 #: app/helpers/consts/perm_label.py:4
 msgid "Manage Messages"
-msgstr ""
+msgstr "« Gestisci messaggi »"
 
 #: app/helpers/consts/perm_label.py:5
 msgid "Ban Members"
-msgstr ""
+msgstr "« Bannare membri »"
 
 #: app/helpers/consts/perm_label.py:6
 msgid "Kick Members"
-msgstr ""
+msgstr "« Espelli membri »"
 
 #: app/helpers/consts/perm_label.py:7
 msgid "Timeout Members"
-msgstr ""
+msgstr "« Metti i membri in timeout »"
 
 #: app/helpers/consts/perm_label.py:8
 msgid "Manage Roles"
-msgstr ""
+msgstr "« Gestisci ruoli »"
 
 #: app/helpers/consts/perm_label.py:9
 msgid "Manage Channels"
-msgstr ""
+msgstr "« Gestisci canali »"
 
 #: app/helpers/consts/perm_label.py:10
 msgid "Administrator"
-msgstr ""
+msgstr "« Amministratore »"
 
 #: app/modules/commands/general.py:16
 msgid "Check the bot latency."
-msgstr ""
+msgstr "« Controlla la latenza del bot »."
 
 #: app/services/commands/general.py:24
 msgid "Latency"
-msgstr ""
+msgstr "« Latenza »"
 
 #: app/services/commands/general.py:24
 #, python-format
 msgid "%(latency)s ms"
-msgstr ""
+msgstr "%(latency)s« Millisecondo »"
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
@@ -99,9 +99,9 @@ msgstr ""
 
 #: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
 msgid "Missing Permissions"
-msgstr ""
+msgstr "« Permessi mancanti »"
 
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
-msgstr ""
+msgstr "« Non ho le autorizzazioni necessarie per eseguire questo comando. »."
 
