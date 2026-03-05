@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-04 12:29\n"
+"PO-Revision-Date: 2026-03-05 08:52\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian\n"
 "MIME-Version: 1.0\n"
@@ -20,88 +20,88 @@ msgstr ""
 
 #: app/helpers/check_target.py:28
 msgid "This action cannot be performed."
-msgstr ""
+msgstr "«Denne handlingen kan ikke utføres.»"
 
 #: app/helpers/check_target.py:32
 msgid "The server owner cannot be targeted."
-msgstr ""
+msgstr "«Servereieren kan ikke bli målrettet.»"
 
 #: app/helpers/check_target.py:36
 msgid "This action cannot be performed on yourself."
-msgstr ""
+msgstr "«Du kan ikke utføre denne handlingen på deg selv.»"
 
 #: app/helpers/check_target.py:40
 msgid "Bots cannot be targeted with this action."
-msgstr ""
+msgstr "«Boter kan ikke bli målrettet med denne handlingen.»"
 
 #: app/helpers/check_target.py:49
 msgid "My role must be higher than the target's role."
-msgstr ""
+msgstr "«Min rolle må være høyere enn målets rolle.»"
 
 #: app/helpers/check_target.py:53
 msgid "Your role must be higher than the target's role."
-msgstr ""
+msgstr "«Din rolle må være høyere enn målets rolle.»"
 
 #: app/helpers/embed_factory.py:49
 #, python-format
 msgid "%(success_emoji)s Action Completed"
-msgstr ""
+msgstr "%(success_emoji)s«Handling fullført»"
 
 #: app/helpers/embed_factory.py:63
 #, python-format
 msgid "%(error_emoji)s Action Failed"
-msgstr ""
+msgstr "«Handling mislyktes»%(error_emoji)s"
 
 #: app/helpers/consts/perm_label.py:4
 msgid "Manage Messages"
-msgstr ""
+msgstr "«Administrer meldinger»"
 
 #: app/helpers/consts/perm_label.py:5
 msgid "Ban Members"
-msgstr ""
+msgstr "«Utesteng medlemmer»"
 
 #: app/helpers/consts/perm_label.py:6
 msgid "Kick Members"
-msgstr ""
+msgstr "«Spark medlemmer»"
 
 #: app/helpers/consts/perm_label.py:7
 msgid "Timeout Members"
-msgstr ""
+msgstr "«Sett medlemmer i midlertidig vent»"
 
 #: app/helpers/consts/perm_label.py:8
 msgid "Manage Roles"
-msgstr ""
+msgstr "«Administrer roller»"
 
 #: app/helpers/consts/perm_label.py:9
 msgid "Manage Channels"
-msgstr ""
+msgstr "«Administrer kanaler»"
 
 #: app/helpers/consts/perm_label.py:10
 msgid "Administrator"
-msgstr ""
+msgstr "«Administrer kanaler»"
 
 #: app/modules/commands/general.py:16
 msgid "Check the bot latency."
-msgstr ""
+msgstr "«Sjekk botens forsinkelse»."
 
 #: app/services/commands/general.py:24
 msgid "Latency"
-msgstr ""
+msgstr "«Forsinkelse»"
 
 #: app/services/commands/general.py:24
 #, python-format
 msgid "%(latency)s ms"
-msgstr ""
+msgstr "%(latency)s«Millisekund»"
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
-msgstr ""
+msgstr "«Du har ikke de nødvendige tillatelsene for å bruke denne kommandoen.»"
 
 #: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
 msgid "Missing Permissions"
-msgstr ""
+msgstr "«Manglende tillatelser»"
 
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
-msgstr ""
+msgstr "«Jeg har ikke de nødvendige tillatelsene for å kjøre denne kommandoen.»"
 
