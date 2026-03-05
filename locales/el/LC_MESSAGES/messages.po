@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-04 12:29\n"
+"PO-Revision-Date: 2026-03-05 06:56\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "MIME-Version: 1.0\n"
@@ -24,84 +24,84 @@ msgstr ""
 
 #: app/helpers/check_target.py:32
 msgid "The server owner cannot be targeted."
-msgstr ""
+msgstr "« Ο ιδιοκτήτης του διακομιστή δεν μπορεί να αποτελέσει στόχο. »."
 
 #: app/helpers/check_target.py:36
 msgid "This action cannot be performed on yourself."
-msgstr ""
+msgstr "« Δεν μπορείτε να εκτελέσετε αυτή την ενέργεια στον εαυτό σας. »."
 
 #: app/helpers/check_target.py:40
 msgid "Bots cannot be targeted with this action."
-msgstr ""
+msgstr "« Τα bots δεν μπορούν να αποτελέσουν στόχο αυτής της ενέργειας. »."
 
 #: app/helpers/check_target.py:49
 msgid "My role must be higher than the target's role."
-msgstr ""
+msgstr "« Ο ρόλος μου πρέπει να είναι υψηλότερος από τον ρόλο του στόχου. »."
 
 #: app/helpers/check_target.py:53
 msgid "Your role must be higher than the target's role."
-msgstr ""
+msgstr "« Ο ρόλος σας πρέπει να είναι υψηλότερος από τον ρόλο του στόχου. »."
 
 #: app/helpers/embed_factory.py:49
 #, python-format
 msgid "%(success_emoji)s Action Completed"
-msgstr ""
+msgstr "%(success_emoji)s«Η ενέργεια ολοκληρώθηκε»"
 
 #: app/helpers/embed_factory.py:63
 #, python-format
 msgid "%(error_emoji)s Action Failed"
-msgstr ""
+msgstr "%(error_emoji)s« Η ενέργεια απέτυχε »"
 
 #: app/helpers/consts/perm_label.py:4
 msgid "Manage Messages"
-msgstr ""
+msgstr "« Διαχείριση μηνυμάτων »"
 
 #: app/helpers/consts/perm_label.py:5
 msgid "Ban Members"
-msgstr ""
+msgstr "« Αποκλεισμός μελών »"
 
 #: app/helpers/consts/perm_label.py:6
 msgid "Kick Members"
-msgstr ""
+msgstr "« Απομάκρυνση μελών »"
 
 #: app/helpers/consts/perm_label.py:7
 msgid "Timeout Members"
-msgstr ""
+msgstr "« Απομάκρυνση μελών »"
 
 #: app/helpers/consts/perm_label.py:8
 msgid "Manage Roles"
-msgstr ""
+msgstr "« Διαχείριση ρόλων »"
 
 #: app/helpers/consts/perm_label.py:9
 msgid "Manage Channels"
-msgstr ""
+msgstr "« Διαχείριση καναλιών »"
 
 #: app/helpers/consts/perm_label.py:10
 msgid "Administrator"
-msgstr ""
+msgstr "« Διαχειριστής »"
 
 #: app/modules/commands/general.py:16
 msgid "Check the bot latency."
-msgstr ""
+msgstr "« Έλεγχος καθυστέρησης του bot »."
 
 #: app/services/commands/general.py:24
 msgid "Latency"
-msgstr ""
+msgstr "«Καθυστέρηση»"
 
 #: app/services/commands/general.py:24
 #, python-format
 msgid "%(latency)s ms"
-msgstr ""
+msgstr "%(latency)s« Χιλιοστό του δευτερολέπτου »"
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
-msgstr ""
+msgstr "« Δεν έχετε τα απαραίτητα δικαιώματα για να χρησιμοποιήσετε αυτή την εντολή. »."
 
 #: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
 msgid "Missing Permissions"
-msgstr ""
+msgstr "« Λείπουν δικαιώματα »"
 
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
-msgstr ""
+msgstr "« Δεν έχω τα απαραίτητα δικαιώματα για να εκτελέσω αυτή την εντολή. »."
 
