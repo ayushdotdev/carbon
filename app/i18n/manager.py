@@ -31,9 +31,9 @@ class I18nManager:
 
         ctx = ExecutionContext.get()
         if ctx:
-            if locale_type == LocaleType.user and ctx.user_locale:
+            if locale_type == LocaleType.USER and ctx.user_locale:
                 return ctx.user_locale.value
-            if locale_type == LocaleType.guild and ctx.guild_locale:
+            if locale_type == LocaleType.GUILD and ctx.guild_locale:
                 return ctx.guild_locale.value
 
         return "en"
@@ -47,7 +47,7 @@ class I18nManager:
         self,
         msgid: str,
         *,
-        locale_type: LocaleType = LocaleType.user,
+        locale_type: LocaleType = LocaleType.USER,
         locale: discord.Locale | None = None,
         **kwargs,
     ) -> str:
@@ -61,7 +61,7 @@ class I18nManager:
         plural: str,
         n: int,
         *,
-        locale_type: LocaleType = LocaleType.user,
+        locale_type: LocaleType = LocaleType.USER,
         locale: discord.Locale | None = None,
         **kwargs,
     ) -> str:

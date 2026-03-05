@@ -10,5 +10,5 @@ class InviteView(ui.View):
         super().__init__(timeout=timeout)
 
         self.add_item(
-            ui.Button(label="Invite", style=ButtonStyle.link, url=INVITE_LINK)
+            ui.Button(label="Invite Bot", style=ButtonStyle.link, url=INVITE_LINK)
         )
