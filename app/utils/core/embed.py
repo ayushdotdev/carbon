@@ -12,7 +12,7 @@ class Embed(discord.Embed):
         *,
         i18n: I18nManager,
         locale: discord.Locale | None = None,
-        locale_type: LocaleType = LocaleType.user,
+        locale_type: LocaleType = LocaleType.USER,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)

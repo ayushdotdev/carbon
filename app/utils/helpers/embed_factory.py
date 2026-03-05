@@ -24,7 +24,7 @@ class EmbedFactory:
         msgid: str | None = None,
         *,
         color: int = DEFAULT_CLR,
-        local_type: LocaleType = LocaleType.user,
+        local_type: LocaleType = LocaleType.USER,
         locale: discord.Locale | None = None,
         **params: Any,
     ) -> Embed:
@@ -39,7 +39,7 @@ class EmbedFactory:
         self,
         msgid: str,
         *,
-        locale_type: LocaleType = LocaleType.user,
+        locale_type: LocaleType = LocaleType.USER,
         locale: discord.Locale | None = None,
         **params: Any,
     ) -> Embed:
@@ -54,7 +54,7 @@ class EmbedFactory:
         self,
         msgid: str,
         *,
-        locale_type: LocaleType = LocaleType.user,
+        locale_type: LocaleType = LocaleType.USER,
         locale: discord.Locale | None = None,
         **params: Any,
     ) -> Embed:
