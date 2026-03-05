@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-04 12:40\n"
+"POT-Creation-Date: 2026-03-05 15:55+0530\n"
+"PO-Revision-Date: 2026-03-05 11:18\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "MIME-Version: 1.0\n"
@@ -18,80 +18,30 @@ msgstr ""
 "X-Crowdin-File-ID: 12\n"
 "Language: en_US\n"
 
-#: app/helpers/check_target.py:28
-msgid "This action cannot be performed."
-msgstr "This action cannot be performed."
-
-#: app/helpers/check_target.py:32
-msgid "The server owner cannot be targeted."
-msgstr "The server owner cannot be targeted."
-
-#: app/helpers/check_target.py:36
-msgid "This action cannot be performed on yourself."
-msgstr "This action cannot be performed on yourself."
-
-#: app/helpers/check_target.py:40
-msgid "Bots cannot be targeted with this action."
-msgstr "Bots cannot be targeted with this action."
-
-#: app/helpers/check_target.py:49
-msgid "My role must be higher than the target's role."
-msgstr "My role must be higher than the target's role."
-
-#: app/helpers/check_target.py:53
-msgid "Your role must be higher than the target's role."
-msgstr "Your role must be higher than the target's role."
-
-#: app/helpers/embed_factory.py:49
-#, python-format
-msgid "%(success_emoji)s Action Completed"
-msgstr "%(success_emoji)s Action Completed"
-
-#: app/helpers/embed_factory.py:63
-#, python-format
-msgid "%(error_emoji)s Action Failed"
-msgstr "%(error_emoji)s Action Failed"
-
-#: app/helpers/consts/perm_label.py:4
-msgid "Manage Messages"
-msgstr "Manage Messages"
-
-#: app/helpers/consts/perm_label.py:5
-msgid "Ban Members"
-msgstr "Ban Members"
-
-#: app/helpers/consts/perm_label.py:6
-msgid "Kick Members"
-msgstr "Kick Members"
-
-#: app/helpers/consts/perm_label.py:7
-msgid "Timeout Members"
-msgstr "Timeout Members"
-
-#: app/helpers/consts/perm_label.py:8
-msgid "Manage Roles"
-msgstr "Manage Roles"
-
-#: app/helpers/consts/perm_label.py:9
-msgid "Manage Channels"
-msgstr "Manage Channels"
-
-#: app/helpers/consts/perm_label.py:10
-msgid "Administrator"
-msgstr "Administrator"
-
-#: app/modules/commands/general.py:16
+#: app/modules/commands/general.py:20
 msgid "Check the bot latency."
 msgstr "Check the bot latency."
 
-#: app/services/commands/general.py:24
+#: app/modules/commands/general.py:30
+msgid "Get an invite link for Carbon."
+msgstr ""
+
+#: app/services/commands/general.py:19
 msgid "Latency"
 msgstr "Latency"
 
-#: app/services/commands/general.py:24
+#: app/services/commands/general.py:19
 #, python-format
 msgid "%(latency)s ms"
 msgstr "%(latency)s ms"
+
+#: app/services/commands/general.py:27
+msgid "Click the button below to invite the bot to your server."
+msgstr ""
+
+#: app/services/commands/general.py:29
+msgid "Thank you for taking interest in Carbon"
+msgstr ""
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
@@ -104,4 +54,66 @@ msgstr "Missing Permissions"
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
 msgstr "I don't have the required permissions to run this command."
+
+#: app/utils/consts/perm_label.py:4
+msgid "Manage Messages"
+msgstr "Manage Messages"
+
+#: app/utils/consts/perm_label.py:5
+msgid "Ban Members"
+msgstr "Ban Members"
+
+#: app/utils/consts/perm_label.py:6
+msgid "Kick Members"
+msgstr "Kick Members"
+
+#: app/utils/consts/perm_label.py:7
+msgid "Timeout Members"
+msgstr "Timeout Members"
+
+#: app/utils/consts/perm_label.py:8
+msgid "Manage Roles"
+msgstr "Manage Roles"
+
+#: app/utils/consts/perm_label.py:9
+msgid "Manage Channels"
+msgstr "Manage Channels"
+
+#: app/utils/consts/perm_label.py:10
+msgid "Administrator"
+msgstr "Administrator"
+
+#: app/utils/helpers/check_target.py:30
+msgid "This action cannot be performed."
+msgstr "This action cannot be performed."
+
+#: app/utils/helpers/check_target.py:34
+msgid "The server owner cannot be targeted."
+msgstr "The server owner cannot be targeted."
+
+#: app/utils/helpers/check_target.py:38
+msgid "This action cannot be performed on yourself."
+msgstr "This action cannot be performed on yourself."
+
+#: app/utils/helpers/check_target.py:42
+msgid "Bots cannot be targeted with this action."
+msgstr "Bots cannot be targeted with this action."
+
+#: app/utils/helpers/check_target.py:51
+msgid "My role must be higher than the target's role."
+msgstr "My role must be higher than the target's role."
+
+#: app/utils/helpers/check_target.py:55
+msgid "Your role must be higher than the target's role."
+msgstr "Your role must be higher than the target's role."
+
+#: app/utils/helpers/embed_factory.py:49
+#, python-format
+msgid "%(success_emoji)s Action Completed"
+msgstr "%(success_emoji)s Action Completed"
+
+#: app/utils/helpers/embed_factory.py:63
+#, python-format
+msgid "%(error_emoji)s Action Failed"
+msgstr "%(error_emoji)s Action Failed"
 

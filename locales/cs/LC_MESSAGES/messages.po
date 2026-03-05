@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-04 12:29\n"
+"POT-Creation-Date: 2026-03-05 15:55+0530\n"
+"PO-Revision-Date: 2026-03-05 11:18\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "MIME-Version: 1.0\n"
@@ -18,90 +18,102 @@ msgstr ""
 "X-Crowdin-File-ID: 12\n"
 "Language: cs_CZ\n"
 
-#: app/helpers/check_target.py:28
-msgid "This action cannot be performed."
-msgstr ""
-
-#: app/helpers/check_target.py:32
-msgid "The server owner cannot be targeted."
-msgstr ""
-
-#: app/helpers/check_target.py:36
-msgid "This action cannot be performed on yourself."
-msgstr ""
-
-#: app/helpers/check_target.py:40
-msgid "Bots cannot be targeted with this action."
-msgstr ""
-
-#: app/helpers/check_target.py:49
-msgid "My role must be higher than the target's role."
-msgstr ""
-
-#: app/helpers/check_target.py:53
-msgid "Your role must be higher than the target's role."
-msgstr ""
-
-#: app/helpers/embed_factory.py:49
-#, python-format
-msgid "%(success_emoji)s Action Completed"
-msgstr "%(success_emoji)s Akce dokončena"
-
-#: app/helpers/embed_factory.py:63
-#, python-format
-msgid "%(error_emoji)s Action Failed"
-msgstr "%(error_emoji)s Akce selhala"
-
-#: app/helpers/consts/perm_label.py:4
-msgid "Manage Messages"
-msgstr ""
-
-#: app/helpers/consts/perm_label.py:5
-msgid "Ban Members"
-msgstr ""
-
-#: app/helpers/consts/perm_label.py:6
-msgid "Kick Members"
-msgstr ""
-
-#: app/helpers/consts/perm_label.py:7
-msgid "Timeout Members"
-msgstr ""
-
-#: app/helpers/consts/perm_label.py:8
-msgid "Manage Roles"
-msgstr ""
-
-#: app/helpers/consts/perm_label.py:9
-msgid "Manage Channels"
-msgstr ""
-
-#: app/helpers/consts/perm_label.py:10
-msgid "Administrator"
-msgstr ""
-
-#: app/modules/commands/general.py:16
+#: app/modules/commands/general.py:20
 msgid "Check the bot latency."
 msgstr "Zkontrolujte latenci bota."
 
-#: app/services/commands/general.py:24
-msgid "Latency"
-msgstr "latence."
+#: app/modules/commands/general.py:30
+msgid "Get an invite link for Carbon."
+msgstr ""
 
-#: app/services/commands/general.py:24
+#: app/services/commands/general.py:19
+msgid "Latency"
+msgstr "Latence"
+
+#: app/services/commands/general.py:19
 #, python-format
 msgid "%(latency)s ms"
 msgstr "%(latency)s milisekunda"
 
+#: app/services/commands/general.py:27
+msgid "Click the button below to invite the bot to your server."
+msgstr ""
+
+#: app/services/commands/general.py:29
+msgid "Thank you for taking interest in Carbon"
+msgstr ""
+
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
-msgstr ""
+msgstr "„Nemáte potřebná oprávnění k použití tohoto příkazu.“."
 
 #: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
 msgid "Missing Permissions"
-msgstr ""
+msgstr "„Chybějící oprávnění“"
 
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
 msgstr ""
+
+#: app/utils/consts/perm_label.py:4
+msgid "Manage Messages"
+msgstr "„Správa zpráv“"
+
+#: app/utils/consts/perm_label.py:5
+msgid "Ban Members"
+msgstr "„Zákaz členů“"
+
+#: app/utils/consts/perm_label.py:6
+msgid "Kick Members"
+msgstr "„Vyloučení členů“"
+
+#: app/utils/consts/perm_label.py:7
+msgid "Timeout Members"
+msgstr "„Dočasné ztlumení členů“"
+
+#: app/utils/consts/perm_label.py:8
+msgid "Manage Roles"
+msgstr "„Správa rolí“"
+
+#: app/utils/consts/perm_label.py:9
+msgid "Manage Channels"
+msgstr "„Správa kanálů“"
+
+#: app/utils/consts/perm_label.py:10
+msgid "Administrator"
+msgstr "„Administrátor“"
+
+#: app/utils/helpers/check_target.py:30
+msgid "This action cannot be performed."
+msgstr "„Tuto akci nelze provést.“."
+
+#: app/utils/helpers/check_target.py:34
+msgid "The server owner cannot be targeted."
+msgstr "Vlastníka serveru nelze zvolit jako cíl.“."
+
+#: app/utils/helpers/check_target.py:38
+msgid "This action cannot be performed on yourself."
+msgstr "Tuto akci nelze provést na sobě.“."
+
+#: app/utils/helpers/check_target.py:42
+msgid "Bots cannot be targeted with this action."
+msgstr ""
+
+#: app/utils/helpers/check_target.py:51
+msgid "My role must be higher than the target's role."
+msgstr "„Moje role musí být vyšší než role cíle.“."
+
+#: app/utils/helpers/check_target.py:55
+msgid "Your role must be higher than the target's role."
+msgstr "Moje role musí být vyšší než role cíle.“."
+
+#: app/utils/helpers/embed_factory.py:49
+#, python-format
+msgid "%(success_emoji)s Action Completed"
+msgstr "%(success_emoji)s Akce dokončena"
+
+#: app/utils/helpers/embed_factory.py:63
+#, python-format
+msgid "%(error_emoji)s Action Failed"
+msgstr "%(error_emoji)s Akce selhala"
 
