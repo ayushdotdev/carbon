@@ -51,5 +51,24 @@ class CaseLog(Base):
     )
 
     @classmethod
-    async def add_log(cls, session: AsyncSession,guild_id: int, target_id: int, moderator_id: int, action_type: ActionType, reason: str, duration: int = 0):
-        case_log = cls()
+    async def add_log(
+        cls,
+        session: AsyncSession,
+        guild_id: int,
+        target_id: int,
+        moderator_id: int,
+        action_type: ActionType,
+        reason: str,
+        duration: int = 0,
+    ) -> int:
+        case_log = cls(
+            guild_id=guild_id,
+            target_id=target_id,
+            moderator_id=moderator_id,
+            action_type=action_type,
+            reason=reason,
+            duration=duration,
+        )
+        session.add(case_log)
+        await session.flush()
+        return case_log.case_id
