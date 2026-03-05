@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-05 10:41\n"
+"POT-Creation-Date: 2026-03-05 15:55+0530\n"
+"PO-Revision-Date: 2026-03-05 11:18\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Traditional\n"
 "MIME-Version: 1.0\n"
@@ -18,80 +18,30 @@ msgstr ""
 "X-Crowdin-File-ID: 12\n"
 "Language: zh_TW\n"
 
-#: app/helpers/check_target.py:28
-msgid "This action cannot be performed."
-msgstr "「此操作無法執行。」。"
-
-#: app/helpers/check_target.py:32
-msgid "The server owner cannot be targeted."
-msgstr "「無法將伺服器擁有者設為目標。」。"
-
-#: app/helpers/check_target.py:36
-msgid "This action cannot be performed on yourself."
-msgstr "「無法對自己執行此操作。」。"
-
-#: app/helpers/check_target.py:40
-msgid "Bots cannot be targeted with this action."
-msgstr "「無法將機器人設為此操作的目標。」。"
-
-#: app/helpers/check_target.py:49
-msgid "My role must be higher than the target's role."
-msgstr "「我的身分組必須高於目標的身分組。」。"
-
-#: app/helpers/check_target.py:53
-msgid "Your role must be higher than the target's role."
-msgstr "「你的身分組必須高於目標的身分組。」。"
-
-#: app/helpers/embed_factory.py:49
-#, python-format
-msgid "%(success_emoji)s Action Completed"
-msgstr "%(success_emoji)s 動作完成"
-
-#: app/helpers/embed_factory.py:63
-#, python-format
-msgid "%(error_emoji)s Action Failed"
-msgstr "%(error_emoji)s 操作失敗"
-
-#: app/helpers/consts/perm_label.py:4
-msgid "Manage Messages"
-msgstr "「管理訊息」"
-
-#: app/helpers/consts/perm_label.py:5
-msgid "Ban Members"
-msgstr "禁止會員"
-
-#: app/helpers/consts/perm_label.py:6
-msgid "Kick Members"
-msgstr "踢除成員"
-
-#: app/helpers/consts/perm_label.py:7
-msgid "Timeout Members"
-msgstr "禁言成員"
-
-#: app/helpers/consts/perm_label.py:8
-msgid "Manage Roles"
-msgstr "管理身分組"
-
-#: app/helpers/consts/perm_label.py:9
-msgid "Manage Channels"
-msgstr "管理頻道"
-
-#: app/helpers/consts/perm_label.py:10
-msgid "Administrator"
-msgstr "管理員"
-
-#: app/modules/commands/general.py:16
+#: app/modules/commands/general.py:20
 msgid "Check the bot latency."
 msgstr "檢查機器人延遲。"
 
-#: app/services/commands/general.py:24
+#: app/modules/commands/general.py:30
+msgid "Get an invite link for Carbon."
+msgstr ""
+
+#: app/services/commands/general.py:19
 msgid "Latency"
 msgstr "延遲"
 
-#: app/services/commands/general.py:24
+#: app/services/commands/general.py:19
 #, python-format
 msgid "%(latency)s ms"
 msgstr "%(latency)s 毫秒"
+
+#: app/services/commands/general.py:27
+msgid "Click the button below to invite the bot to your server."
+msgstr ""
+
+#: app/services/commands/general.py:29
+msgid "Thank you for taking interest in Carbon"
+msgstr ""
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
@@ -104,4 +54,66 @@ msgstr "缺少提醒權限"
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
 msgstr "我沒有運行此命令所需的權限。"
+
+#: app/utils/consts/perm_label.py:4
+msgid "Manage Messages"
+msgstr "「管理訊息」"
+
+#: app/utils/consts/perm_label.py:5
+msgid "Ban Members"
+msgstr "禁止會員"
+
+#: app/utils/consts/perm_label.py:6
+msgid "Kick Members"
+msgstr "踢除成員"
+
+#: app/utils/consts/perm_label.py:7
+msgid "Timeout Members"
+msgstr "禁言成員"
+
+#: app/utils/consts/perm_label.py:8
+msgid "Manage Roles"
+msgstr "管理身分組"
+
+#: app/utils/consts/perm_label.py:9
+msgid "Manage Channels"
+msgstr "管理頻道"
+
+#: app/utils/consts/perm_label.py:10
+msgid "Administrator"
+msgstr "管理員"
+
+#: app/utils/helpers/check_target.py:30
+msgid "This action cannot be performed."
+msgstr "「此操作無法執行。」。"
+
+#: app/utils/helpers/check_target.py:34
+msgid "The server owner cannot be targeted."
+msgstr "「無法將伺服器擁有者設為目標。」。"
+
+#: app/utils/helpers/check_target.py:38
+msgid "This action cannot be performed on yourself."
+msgstr "「無法對自己執行此操作。」。"
+
+#: app/utils/helpers/check_target.py:42
+msgid "Bots cannot be targeted with this action."
+msgstr "「無法將機器人設為此操作的目標。」。"
+
+#: app/utils/helpers/check_target.py:51
+msgid "My role must be higher than the target's role."
+msgstr "「我的身分組必須高於目標的身分組。」。"
+
+#: app/utils/helpers/check_target.py:55
+msgid "Your role must be higher than the target's role."
+msgstr "「你的身分組必須高於目標的身分組。」。"
+
+#: app/utils/helpers/embed_factory.py:49
+#, python-format
+msgid "%(success_emoji)s Action Completed"
+msgstr "%(success_emoji)s 動作完成"
+
+#: app/utils/helpers/embed_factory.py:63
+#, python-format
+msgid "%(error_emoji)s Action Failed"
+msgstr "%(error_emoji)s 操作失敗"
 
