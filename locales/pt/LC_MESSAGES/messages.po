@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-05 08:52\n"
+"PO-Revision-Date: 2026-03-05 10:41\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "MIME-Version: 1.0\n"
@@ -20,88 +20,88 @@ msgstr ""
 
 #: app/helpers/check_target.py:28
 msgid "This action cannot be performed."
-msgstr "“Esta ação não pode ser realizada.”"
+msgstr "Esta ação não pode ser realizada."
 
 #: app/helpers/check_target.py:32
 msgid "The server owner cannot be targeted."
-msgstr "“Esta ação não pode ser realizada.”"
+msgstr "Esta ação não pode ser realizada."
 
 #: app/helpers/check_target.py:36
 msgid "This action cannot be performed on yourself."
-msgstr "“Você não pode realizar esta ação em si mesmo.”"
+msgstr "Você não pode realizar esta ação em si mesmo."
 
 #: app/helpers/check_target.py:40
 msgid "Bots cannot be targeted with this action."
-msgstr "“Bots não podem ser alvo desta ação.”"
+msgstr "Bots não podem ser alvo desta ação."
 
 #: app/helpers/check_target.py:49
 msgid "My role must be higher than the target's role."
-msgstr "“Meu cargo deve ser mais alto que o cargo do alvo.”"
+msgstr "Meu cargo deve ser mais alto que o cargo do alvo."
 
 #: app/helpers/check_target.py:53
 msgid "Your role must be higher than the target's role."
-msgstr "“Seu cargo deve ser mais alto que o cargo do alvo.”"
+msgstr "Seu cargo deve ser mais alto que o cargo do alvo."
 
 #: app/helpers/embed_factory.py:49
 #, python-format
 msgid "%(success_emoji)s Action Completed"
-msgstr "%(success_emoji)s“Ação concluída”"
+msgstr "%(success_emoji)sAção concluída"
 
 #: app/helpers/embed_factory.py:63
 #, python-format
 msgid "%(error_emoji)s Action Failed"
-msgstr "%(error_emoji)s“Ação falhou”"
+msgstr "%(error_emoji)s Ação falhou"
 
 #: app/helpers/consts/perm_label.py:4
 msgid "Manage Messages"
-msgstr "“Gerenciar mensagens”"
+msgstr "Gerenciar mensagens"
 
 #: app/helpers/consts/perm_label.py:5
 msgid "Ban Members"
-msgstr "“Banir membros”"
+msgstr "Banir membros"
 
 #: app/helpers/consts/perm_label.py:6
 msgid "Kick Members"
-msgstr "“Expulsar membros”"
+msgstr "Expulsar membros"
 
 #: app/helpers/consts/perm_label.py:7
 msgid "Timeout Members"
-msgstr "“Colocar membros em tempo limite”"
+msgstr "Colocar membros em tempo limite"
 
 #: app/helpers/consts/perm_label.py:8
 msgid "Manage Roles"
-msgstr "“Gerenciar cargos”"
+msgstr "Gerenciar cargos"
 
 #: app/helpers/consts/perm_label.py:9
 msgid "Manage Channels"
-msgstr "“Gerenciar canais”"
+msgstr "Gerenciar Canais"
 
 #: app/helpers/consts/perm_label.py:10
 msgid "Administrator"
-msgstr "“Administrador”"
+msgstr "Administrador"
 
 #: app/modules/commands/general.py:16
 msgid "Check the bot latency."
-msgstr "“Verificar a latência do bot”."
+msgstr "Verificar a latência do bot."
 
 #: app/services/commands/general.py:24
 msgid "Latency"
-msgstr "“Latência”"
+msgstr "Latência"
 
 #: app/services/commands/general.py:24
 #, python-format
 msgid "%(latency)s ms"
-msgstr "%(latency)s“Milissegundo”"
+msgstr "%(latency)s ms"
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
-msgstr "“Você não tem as permissões necessárias para usar este comando.”"
+msgstr "Você não tem as permissões necessárias para executar este comando."
 
 #: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
 msgid "Missing Permissions"
-msgstr "“Permissões ausentes”"
+msgstr "Permissões Ausentes"
 
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
-msgstr "“Não tenho as permissões necessárias para executar este comando.”"
+msgstr "Eu não tenho as permissões necessárias para executar esse comando."
 
