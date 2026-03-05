@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-05 15:55+0530\n"
-"PO-Revision-Date: 2026-03-05 11:18\n"
+"PO-Revision-Date: 2026-03-05 14:32\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
@@ -85,11 +85,11 @@ msgstr ""
 
 #: app/utils/helpers/check_target.py:30
 msgid "This action cannot be performed."
-msgstr "“इस क्रिया को निष्पादित नहीं किया जा सकता।”"
+msgstr "इस क्रिया को निष्पादित नहीं किया जा सकता।"
 
 #: app/utils/helpers/check_target.py:34
 msgid "The server owner cannot be targeted."
-msgstr "“सर्वर के मालिक को लक्षित नहीं किया जा सकता।”"
+msgstr "सर्वर के मालिक को लक्षित नहीं किया जा सकता।"
 
 #: app/utils/helpers/check_target.py:38
 msgid "This action cannot be performed on yourself."
