@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-04 17:47+0530\n"
-"PO-Revision-Date: 2026-03-05 08:52\n"
+"POT-Creation-Date: 2026-03-05 15:55+0530\n"
+"PO-Revision-Date: 2026-03-05 11:18\n"
 "Last-Translator: \n"
 "Language-Team: Lithuanian\n"
 "MIME-Version: 1.0\n"
@@ -18,80 +18,30 @@ msgstr ""
 "X-Crowdin-File-ID: 12\n"
 "Language: lt_LT\n"
 
-#: app/helpers/check_target.py:28
-msgid "This action cannot be performed."
-msgstr "„Šios veiksmų negalima atlikti.“."
-
-#: app/helpers/check_target.py:32
-msgid "The server owner cannot be targeted."
-msgstr "„Serverio savininko negalima taikyti kaip tikslo.“."
-
-#: app/helpers/check_target.py:36
-msgid "This action cannot be performed on yourself."
-msgstr "„Šios veiksmų negalima atlikti sau.“."
-
-#: app/helpers/check_target.py:40
-msgid "Bots cannot be targeted with this action."
-msgstr "„Botams negalima taikyti šios veiksmų.“."
-
-#: app/helpers/check_target.py:49
-msgid "My role must be higher than the target's role."
-msgstr "„Botams negalima taikyti šios veiksmų.“."
-
-#: app/helpers/check_target.py:53
-msgid "Your role must be higher than the target's role."
-msgstr "„Jūsų vaidmuo turi būti aukštesnis už tikslo vaidmenį.“."
-
-#: app/helpers/embed_factory.py:49
-#, python-format
-msgid "%(success_emoji)s Action Completed"
-msgstr "%(success_emoji)s„Veiksmas įvykdytas“"
-
-#: app/helpers/embed_factory.py:63
-#, python-format
-msgid "%(error_emoji)s Action Failed"
-msgstr "%(error_emoji)s„Veiksmas nepavyko“"
-
-#: app/helpers/consts/perm_label.py:4
-msgid "Manage Messages"
-msgstr "„Valdyti žinutes“"
-
-#: app/helpers/consts/perm_label.py:5
-msgid "Ban Members"
-msgstr "„Uždrausti narius“"
-
-#: app/helpers/consts/perm_label.py:6
-msgid "Kick Members"
-msgstr "„Pašalinti narius“"
-
-#: app/helpers/consts/perm_label.py:7
-msgid "Timeout Members"
-msgstr "„Pašalinti narius“"
-
-#: app/helpers/consts/perm_label.py:8
-msgid "Manage Roles"
-msgstr "„Valdyti vaidmenis“"
-
-#: app/helpers/consts/perm_label.py:9
-msgid "Manage Channels"
-msgstr "„Valdyti kanalus“"
-
-#: app/helpers/consts/perm_label.py:10
-msgid "Administrator"
-msgstr "„Administratorius“"
-
-#: app/modules/commands/general.py:16
+#: app/modules/commands/general.py:20
 msgid "Check the bot latency."
 msgstr "„Patikrinkite bot'o delsą“."
 
-#: app/services/commands/general.py:24
+#: app/modules/commands/general.py:30
+msgid "Get an invite link for Carbon."
+msgstr ""
+
+#: app/services/commands/general.py:19
 msgid "Latency"
 msgstr "„Delsa“"
 
-#: app/services/commands/general.py:24
+#: app/services/commands/general.py:19
 #, python-format
 msgid "%(latency)s ms"
 msgstr "%(latency)s„Milisekundė“"
+
+#: app/services/commands/general.py:27
+msgid "Click the button below to invite the bot to your server."
+msgstr ""
+
+#: app/services/commands/general.py:29
+msgid "Thank you for taking interest in Carbon"
+msgstr ""
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
@@ -104,4 +54,66 @@ msgstr "„Trūksta leidimų“"
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
 msgstr "„Neturiu reikiamų leidimų vykdyti šią komandą.“."
+
+#: app/utils/consts/perm_label.py:4
+msgid "Manage Messages"
+msgstr "„Valdyti žinutes“"
+
+#: app/utils/consts/perm_label.py:5
+msgid "Ban Members"
+msgstr "„Uždrausti narius“"
+
+#: app/utils/consts/perm_label.py:6
+msgid "Kick Members"
+msgstr "„Pašalinti narius“"
+
+#: app/utils/consts/perm_label.py:7
+msgid "Timeout Members"
+msgstr "„Pašalinti narius“"
+
+#: app/utils/consts/perm_label.py:8
+msgid "Manage Roles"
+msgstr "„Valdyti vaidmenis“"
+
+#: app/utils/consts/perm_label.py:9
+msgid "Manage Channels"
+msgstr "„Valdyti kanalus“"
+
+#: app/utils/consts/perm_label.py:10
+msgid "Administrator"
+msgstr "„Administratorius“"
+
+#: app/utils/helpers/check_target.py:30
+msgid "This action cannot be performed."
+msgstr "„Šios veiksmų negalima atlikti.“."
+
+#: app/utils/helpers/check_target.py:34
+msgid "The server owner cannot be targeted."
+msgstr "„Serverio savininko negalima taikyti kaip tikslo.“."
+
+#: app/utils/helpers/check_target.py:38
+msgid "This action cannot be performed on yourself."
+msgstr "„Šios veiksmų negalima atlikti sau.“."
+
+#: app/utils/helpers/check_target.py:42
+msgid "Bots cannot be targeted with this action."
+msgstr "„Botams negalima taikyti šios veiksmų.“."
+
+#: app/utils/helpers/check_target.py:51
+msgid "My role must be higher than the target's role."
+msgstr "„Botams negalima taikyti šios veiksmų.“."
+
+#: app/utils/helpers/check_target.py:55
+msgid "Your role must be higher than the target's role."
+msgstr "„Jūsų vaidmuo turi būti aukštesnis už tikslo vaidmenį.“."
+
+#: app/utils/helpers/embed_factory.py:49
+#, python-format
+msgid "%(success_emoji)s Action Completed"
+msgstr "%(success_emoji)s„Veiksmas įvykdytas“"
+
+#: app/utils/helpers/embed_factory.py:63
+#, python-format
+msgid "%(error_emoji)s Action Failed"
+msgstr "%(error_emoji)s„Veiksmas nepavyko“"
 
