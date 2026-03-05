@@ -14,6 +14,7 @@ class General(commands.Cog):
         self.bot = bot
         self.service = GeneralService(self.bot)
 
+    # -- ping command --
     @app_commands.command(
         name="ping", description=locale_str(_("Check the bot latency."))
     )
@@ -22,6 +23,7 @@ class General(commands.Cog):
         embed = await self.service._ping(interaction)
         await interaction.response.send_message(embed=embed)
 
+    # -- invite command --
     @app_commands.command(
         name="invite", description=locale_str(_("Get an invite link for Carbon."))
     )
