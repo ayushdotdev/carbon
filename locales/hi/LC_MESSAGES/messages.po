@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-05 15:55+0530\n"
-"PO-Revision-Date: 2026-03-05 11:18\n"
+"PO-Revision-Date: 2026-03-06 15:10\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "बॉट की लेटेंसी जानें |"
 
 #: app/modules/commands/general.py:30
 msgid "Get an invite link for Carbon."
-msgstr ""
+msgstr "कार्बन के लिए आमंत्रण लिंक प्राप्त करें।"
 
 #: app/services/commands/general.py:19
 msgid "Latency"
@@ -37,23 +37,23 @@ msgstr "%(latency)s मिलीसेकंड"
 
 #: app/services/commands/general.py:27
 msgid "Click the button below to invite the bot to your server."
-msgstr ""
+msgstr "बॉट को अपने सर्वर पर आमंत्रित करने के लिए नीचे दिए गए बटन पर क्लिक करें।"
 
 #: app/services/commands/general.py:29
 msgid "Thank you for taking interest in Carbon"
-msgstr ""
+msgstr "कार्बन में रुचि दिखाने के लिए धन्यवाद"
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
-msgstr ""
+msgstr "इस कमांड का उपयोग करने के लिए आपके पास आवश्यक अनुमतियाँ नहीं हैं।"
 
 #: app/services/listeners/on_error.py:28 app/services/listeners/on_error.py:40
 msgid "Missing Permissions"
-msgstr ""
+msgstr "आपको इन अनुमतियों की आवश्यकता है"
 
 #: app/services/listeners/on_error.py:38
 msgid "I don't have the required permissions to run this command."
-msgstr ""
+msgstr "इस कमांड को चलाने के लिए मेरे पास आवश्यक अनुमतियाँ नहीं हैं।"
 
 #: app/utils/consts/perm_label.py:4
 msgid "Manage Messages"
@@ -85,11 +85,11 @@ msgstr ""
 
 #: app/utils/helpers/check_target.py:30
 msgid "This action cannot be performed."
-msgstr "“इस क्रिया को निष्पादित नहीं किया जा सकता।”"
+msgstr "इस क्रिया को निष्पादित नहीं किया जा सकता।"
 
 #: app/utils/helpers/check_target.py:34
 msgid "The server owner cannot be targeted."
-msgstr "“सर्वर के मालिक को लक्षित नहीं किया जा सकता।”"
+msgstr "सर्वर के मालिक को लक्षित नहीं किया जा सकता।"
 
 #: app/utils/helpers/check_target.py:38
 msgid "This action cannot be performed on yourself."

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-05 15:55+0530\n"
-"PO-Revision-Date: 2026-03-05 11:18\n"
+"PO-Revision-Date: 2026-03-05 14:32\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "Check the bot latency."
 
 #: app/modules/commands/general.py:30
 msgid "Get an invite link for Carbon."
-msgstr ""
+msgstr "Get an invite link for Carbon."
 
 #: app/services/commands/general.py:19
 msgid "Latency"
@@ -37,11 +37,11 @@ msgstr "%(latency)s ms"
 
 #: app/services/commands/general.py:27
 msgid "Click the button below to invite the bot to your server."
-msgstr ""
+msgstr "Click the button below to invite the bot to your server."
 
 #: app/services/commands/general.py:29
 msgid "Thank you for taking interest in Carbon"
-msgstr ""
+msgstr "Thank you for taking interest in Carbon"
 
 #: app/services/listeners/on_error.py:26
 msgid "You don't have the required permissions to use this command."
