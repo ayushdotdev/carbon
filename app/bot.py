@@ -72,7 +72,7 @@ class Carbon(commands.Bot):
                     except Exception as e:
                         self.logger.error(f"Failed to load {path}: {e}")
 
-    async def init_guild(self):
+    async def init_guild(self) -> None:
         async with session_maker() as session, session.begin():
             for guild in self.guilds:
                 await Guild.get_or_create(session, guild.id)
