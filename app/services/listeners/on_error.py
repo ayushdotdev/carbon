@@ -2,10 +2,10 @@ import discord
 from discord import app_commands
 
 from app.bot import Carbon
-from app.utils.consts.perm_label import PERMISSION_LABELS
-from app.utils.core.embed import Embed
 from app.i18n.context import ExecutionContext
 from app.i18n.marker import _
+from app.utils.consts.perm_label import PERMISSION_LABELS
+from app.utils.core.embed import Embed
 
 
 class ErrorService:
