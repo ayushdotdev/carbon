@@ -1,5 +1,5 @@
-from discord import Interaction, app_commands
 import discord
+from discord import Interaction, app_commands
 from discord.app_commands import locale_str
 from discord.ext import commands
 

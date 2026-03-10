@@ -7,11 +7,12 @@ from discord.ext import commands
 from app.config import settings
 from app.db.models.guild import Guild
 from app.db.session import engine, session_maker
-from app.utils.core.custom_tree import CustomCommandTree
-from app.utils.checks.not_bot import not_bot
-from app.utils.helpers.embed_factory import EmbedFactory
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
+from app.utils.checks.not_bot import not_bot
+from app.utils.core.custom_tree import CustomCommandTree
+from app.utils.core.redis import redis_client
+from app.utils.helpers.embed_factory import EmbedFactory
 
 
 class Carbon(commands.Bot):
@@ -22,6 +23,7 @@ class Carbon(commands.Bot):
 
         self.debug = debug
         self.logger = structlog.get_logger().bind(component="bot")
+        self.redis = redis_client
 
         intents = discord.Intents.default()
         intents.guilds = True

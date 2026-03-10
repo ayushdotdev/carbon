@@ -2,8 +2,8 @@ from typing import Any, Self
 
 import discord
 
-from app.utils.confs.enums import LocaleType
 from app.i18n.manager import I18nManager
+from app.utils.confs.enums import LocaleType
 
 
 class Embed(discord.Embed):

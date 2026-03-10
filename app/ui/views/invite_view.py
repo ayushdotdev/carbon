@@ -1,4 +1,5 @@
-from discord import ButtonStyle, ui, Interaction
+from discord import ButtonStyle, Interaction, ui
+
 from app.i18n.context import ExecutionContext
 from app.utils.consts.branding import INVITE_LINK
 

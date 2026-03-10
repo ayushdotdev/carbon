@@ -3,8 +3,8 @@ from gettext import GNUTranslations, NullTranslations
 
 import discord
 
-from app.utils.confs.enums import LocaleType
 from app.i18n.context import ExecutionContext
+from app.utils.confs.enums import LocaleType
 
 
 class I18nManager:
