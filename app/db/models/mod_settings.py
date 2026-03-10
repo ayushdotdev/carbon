@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from sqlalchemy import TIMESTAMP, BigInteger, Boolean, ForeignKey
+from sqlalchemy import TIMESTAMP, BigInteger, Boolean, ForeignKey, select
 from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
@@ -30,3 +31,12 @@ class ModSettings(Base):
     )
 
     guild = relationship("Guild", back_populates="mod_settings")
+
+    @classmethod
+    async def get_log_channel_id(
+        cls, session: AsyncSession, guild_id: int
+    ) -> int | None:
+        result = await session.execute(
+            select(cls.log_channel_id).where(cls.guild_id == guild_id)
+        )
+        return result.scalar_one_or_none()
