@@ -3,7 +3,7 @@ from discord import app_commands
 
 from app.bot import Carbon
 from app.i18n.context import ExecutionContext
-from app.i18n.marker import _
+from app.ui.embeds.error_embed import ErrorEmbed
 from app.utils.consts.perm_label import PERMISSION_LABELS
 from app.utils.core.embed import Embed
 
@@ -11,6 +11,7 @@ from app.utils.core.embed import Embed
 class ErrorService:
     def __init__(self, bot: Carbon) -> None:
         self.bot = bot
+        self.embeds = ErrorEmbed(self.bot.i18n)
 
     async def _on_error(
         self, interaction: discord.Interaction, error: app_commands.AppCommandError
@@ -22,11 +23,8 @@ class ErrorService:
                 PERMISSION_LABELS.get(p, p.replace("_", " "))
                 for p in error.missing_permissions
             )
-            embed = self.bot.embed_factory.error_embed(
-                _("You don't have the required permissions to use this command.")
-            )
-            embed.add_field_i18n(_("Missing Permissions"), perms)
 
+            embed = self.embeds.missing_perms_embed(perms)
             return embed
 
         if isinstance(error, app_commands.BotMissingPermissions):
@@ -34,11 +32,8 @@ class ErrorService:
                 PERMISSION_LABELS.get(p, p.replace("_", " "))
                 for p in error.missing_permissions
             )
-            embed = self.bot.embed_factory.error_embed(
-                _("I don't have the required permissions to run this command.")
-            )
-            embed.add_field_i18n(_("Missing Permissions"), perms)
 
+            embed = self.embeds.bot_missing_perms_embed(perms)
             return embed
 
         return None

@@ -1,4 +1,5 @@
 from typing import Any
+
 import discord
 
 from app.bot import Carbon
