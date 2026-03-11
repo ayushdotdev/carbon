@@ -8,9 +8,9 @@ class GuildCache:
     def __init__(self) -> None:
         pass
 
-    @classmethod
+    @staticmethod
     async def get_modlog_channel_id(
-        cls, bot: Carbon, session: AsyncSession, guild_id: int
+        bot: Carbon, session: AsyncSession, guild_id: int
     ) -> int | None:
         key = f"carbon:guild:{guild_id}:modlog_channel_id"
         cached = await bot.redis.get(key)

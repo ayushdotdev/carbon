@@ -1,17 +1,17 @@
 import discord
 from discord import app_commands
 
+from app.bot import Carbon
 from app.i18n.context import ExecutionContext
-from app.i18n.manager import I18nManager
 from app.ui.embeds.error_embed import ErrorEmbed
 from app.utils.consts.perm_label import PERMISSION_LABELS
 from app.utils.core.embed import Embed
 
 
 class ErrorService:
-    def __init__(self) -> None:
-        self.i18n = I18nManager()
-        self.embeds = ErrorEmbed(self.i18n)
+    def __init__(self, bot: Carbon) -> None:
+        self.bot = bot
+        self.embeds = ErrorEmbed(self.bot.i18n)
 
     async def _on_error(
         self, interaction: discord.Interaction, error: app_commands.AppCommandError
