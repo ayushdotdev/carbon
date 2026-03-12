@@ -1,5 +1,4 @@
 from enum import Enum
-from logging import WARN
 from app.i18n.marker import _
 from app.utils.consts.branding import RED, GREEN, YELLOW, ORANGE, GRAY
 
