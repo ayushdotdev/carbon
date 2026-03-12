@@ -18,10 +18,10 @@ class LogEmbed(EmbedFactory):
     def action_on_user(
         self,
         action: ModLogAction,
-        target: discord.Member,
-        moderator: discord.Member,
+        target: discord.abc.User,
+        moderator: discord.abc.User,
         reason: str,
-        duration: int | str = "Permanent",
+        duration: str = "Permanent",
     ) -> Embed:
         embed = self.base_log_embed(action).set_description_i18n(
             _(
