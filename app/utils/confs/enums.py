@@ -2,6 +2,7 @@ from enum import Enum
 from app.i18n.marker import _
 from app.utils.consts.branding import RED, GREEN, YELLOW, ORANGE, GRAY
 
+
 class ActionType(str, Enum):
     BAN = "ban"
     KICK = "kick"
@@ -18,6 +19,7 @@ class AppealStatus(str, Enum):
 class LocaleType(str, Enum):
     USER = "user"
     GUILD = "guild"
+
 
 class ModLogAction(Enum):
     KICK = (_("Member Kicked"), ORANGE)
