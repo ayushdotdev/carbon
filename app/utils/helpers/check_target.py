@@ -37,10 +37,6 @@ class TargetChecker:
             return self.bot.embed_factory.error_embed(
                 _("This action cannot be performed on yourself.")
             )
-        if self.target.bot:
-            return self.bot.embed_factory.error_embed(
-                _("Bots cannot be targeted with this action.")
-            )
 
         bot_top = self._role_position(self.bot_member)
         target_top = self._role_position(self.target)
