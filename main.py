@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 
 from app.bot import Carbon
 from app.utils.confs.logging import setup_logging
@@ -13,7 +14,5 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    try:
+    with contextlib.suppress(KeyboardInterrupt):
         asyncio.run(main())
-    except KeyboardInterrupt:
-        pass

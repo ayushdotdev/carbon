@@ -16,12 +16,8 @@ class ModCmdService:
         self.bot = bot
         self.log_embeds = LogEmbed(self.bot.i18n)
 
-    async def basic_mod_work(
-        self,
-        interaction: discord.Interaction,
-        target: discord.Member,
-        action: ActionType,
-        reason: str,
+    async def validate_my_guy(
+        self, interaction: discord.Interaction, target: discord.Member
     ) -> Embed | None:
         checker = TargetChecker(self.bot, interaction, target)
         assert interaction.guild is not None
@@ -29,16 +25,6 @@ class ModCmdService:
 
         if validate is not None:
             return validate
-
-        async with session_maker() as session, session.begin():
-            await CaseLog.add_log(
-                session,
-                interaction.guild.id,
-                target.id,
-                interaction.user.id,
-                action,
-                reason,
-            )
 
     async def get_log_channel(self, guild: discord.Guild) -> discord.TextChannel | None:
         async with session_maker() as session, session.begin():
@@ -56,7 +42,7 @@ class ModCmdService:
         self, interaction: discord.Interaction, target: discord.Member, reason: str
     ):
         assert interaction.guild is not None
-        result = await self.basic_mod_work(interaction, target, ActionType.KICK, reason)
+        result = await self.validate_my_guy(interaction, target)
 
         if result is not None:
             await interaction.response.send_message(embed=result)
