@@ -46,6 +46,7 @@ class ModCmdService:
 
         if result is not None:
             await interaction.response.send_message(embed=result)
+            return
 
         log_channel = await self.get_log_channel(interaction.guild)
 
@@ -62,4 +63,5 @@ class ModCmdService:
             )
             await interaction.response.send_message(embed=embed)
         except Exception:
-            return self.bot.embed_factory.error_embed(_("Something went wrong"))
+            embed = self.bot.embed_factory.error_embed(_("Something went wrong"))
+            await interaction.response.send_message(embed=embed)
