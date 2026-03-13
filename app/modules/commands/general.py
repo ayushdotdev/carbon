@@ -6,7 +6,6 @@ from discord.ext import commands
 from app.bot import Carbon
 from app.i18n.marker import _
 from app.services.commands.general import GeneralService
-from app.ui.views.invite_view import InviteView
 
 
 class General(commands.Cog):
@@ -20,8 +19,7 @@ class General(commands.Cog):
     )
     @app_commands.guild_only()
     async def ping(self, interaction: Interaction) -> None:
-        embed = await self.service._ping(interaction)
-        await interaction.response.send_message(embed=embed)
+        await self.service._ping(interaction)
 
     # -- invite command --
     @app_commands.command(
@@ -29,9 +27,7 @@ class General(commands.Cog):
     )
     @app_commands.guild_only()
     async def invite(self, interaction: discord.Interaction) -> None:
-        view = InviteView(interaction, timeout=60)
-        embed = await self.service._invite(interaction)
-        await interaction.response.send_message(embed=embed, view=view)
+        await self.service._invite(interaction)
 
 
 async def setup(bot: Carbon):
