@@ -62,7 +62,19 @@ class ModCmdService:
         if result is not None:
             return result
 
+        log_channel = await self.get_log_channel(interaction.guild)
+
+        if log_channel:
+            log_embed = self.log_embeds.action_on_user(
+                ModLogAction.KICK, target, interaction.user, reason
+            )
+            await log_channel.send(embed=log_embed)
+
         try:
             await target.kick(reason=f"{interaction.user.name}: {reason}")
+            embed = self.bot.embed_factory.success_embed(
+                _("%(user_mention) was kicked")
+            )
+            await interaction.response.send_message(embed=embed)
         except Exception:
             return self.bot.embed_factory.error_embed(_("Something went wrong"))

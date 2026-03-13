@@ -4,11 +4,13 @@ from discord.ext import commands
 
 from app.bot import Carbon
 from app.i18n.marker import _
+from app.services.commands.moderation import ModCmdService
 
 
 class ModerationCog(commands.Cog):
     def __init__(self, bot: Carbon) -> None:
         self.bot = bot
+        self.service = ModCmdService(self.bot)
 
     @app_commands.command(
         name="kick",
@@ -23,4 +25,4 @@ class ModerationCog(commands.Cog):
         target: discord.Member,
         reason: str = "No reason provided.",
     ):
-        pass
+        await self.service._kick(interaction, target, reason)
