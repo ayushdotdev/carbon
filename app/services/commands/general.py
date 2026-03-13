@@ -5,6 +5,7 @@ from app.i18n.context import ExecutionContext
 from app.i18n.marker import _
 from app.ui.views.invite_view import InviteView
 
+
 class GeneralService:
     def __init__(self, bot: Carbon) -> None:
         self.bot = bot
@@ -18,7 +19,7 @@ class GeneralService:
             _("Latency"), _("%(latency)s ms"), latency=latency
         )
 
-        await interaction.response.send_message(embed = embed)
+        await interaction.response.send_message(embed=embed)
 
     async def _invite(self, interaction: discord.Interaction) -> None:
         ExecutionContext.set_context(interaction)
@@ -28,4 +29,4 @@ class GeneralService:
         embed.set_title_i18n(_("Thank you for taking interest in Carbon"))
 
         view = InviteView(interaction)
-        await interaction.response.send_message(embed = embed, view=view)
+        await interaction.response.send_message(embed=embed, view=view)
