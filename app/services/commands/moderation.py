@@ -60,7 +60,7 @@ class ModCmdService:
         result = await self.basic_mod_work(interaction, target, ActionType.KICK, reason)
 
         if result is not None:
-            return result
+            await interaction.response.send_message(embed = result)
 
         log_channel = await self.get_log_channel(interaction.guild)
 
