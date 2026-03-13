@@ -26,3 +26,7 @@ class ModerationCog(commands.Cog):
         reason: str = "No reason provided.",
     ):
         await self.service._kick(interaction, target, reason)
+
+
+async def setup(bot: Carbon):
+    await bot.add_cog(ModerationCog(bot))
