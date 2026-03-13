@@ -41,27 +41,30 @@ class ModCmdService:
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
     ):
+        await interaction.response.defer()
         assert interaction.guild is not None
         result = await self.validate_my_guy(interaction, target)
 
         if result is not None:
-            await interaction.response.send_message(embed=result)
+            await interaction.followup.send(embed=result, ephemeral=True)
             return
+
+        try:
+            await target.kick(reason=f"{interaction.user.name}: {reason}")
+        except Exception as e:
+            embed = self.bot.embed_factory.error_embed(_("Something went wrong."))
+            self.bot.logger.error(f"Kick command failed : {e}")
+            await interaction.followup.send(embed=embed)
+            return
+        embed = self.bot.embed_factory.success_embed(
+            _("**%(user_mention)s** was kicked."), user_mention=target.global_name
+        )
+        await interaction.followup.send(embed=embed, ephemeral=True)
 
         log_channel = await self.get_log_channel(interaction.guild)
 
-        if log_channel:
+        if log_channel is not None:
             log_embed = self.log_embeds.action_on_user(
                 ModLogAction.KICK, target, interaction.user, reason
             )
             await log_channel.send(embed=log_embed)
-
-        try:
-            await target.kick(reason=f"{interaction.user.name}: {reason}")
-            embed = self.bot.embed_factory.success_embed(
-                _("**%(user_mention)** was kicked"), user_mention=target.global_name
-            )
-            await interaction.response.send_message(embed=embed)
-        except Exception:
-            embed = self.bot.embed_factory.error_embed(_("Something went wrong"))
-            await interaction.response.send_message(embed=embed)
