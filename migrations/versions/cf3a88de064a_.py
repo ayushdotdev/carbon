@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 25efa97431df
+Revision ID: cf3a88de064a
 Revises: 
-Create Date: 2026-03-02 17:39:30.832575
+Create Date: 2026-03-13 19:29:38.441151
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = '25efa97431df'
+revision: str = 'cf3a88de064a'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -37,16 +37,16 @@ def upgrade() -> None:
     sa.Column('schema_version', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.CheckConstraint('schema_version > 1', name='ck_schema_version_is_positive'),
+    sa.CheckConstraint('schema_version > 0', name='ck_schema_version_is_positive'),
     sa.ForeignKeyConstraint(['guild_id'], ['guild.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('guild_id')
     )
     op.create_table('case_logs',
-    sa.Column('case_id', sa.Integer(), nullable=False),
+    sa.Column('case_id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('guild_id', sa.BigInteger(), nullable=False),
     sa.Column('target_id', sa.BigInteger(), nullable=False),
     sa.Column('moderator_id', sa.BigInteger(), nullable=False),
-    sa.Column('action_type', sa.Enum('ban', 'kick', 'mute', 'warn', name='actiontype'), nullable=False),
+    sa.Column('action_type', sa.Enum('BAN', 'KICK', 'TIMEOUT', 'WARN', name='actiontype'), nullable=False),
     sa.Column('reason', sa.String(), nullable=True),
     sa.Column('updated_by', sa.BigInteger(), nullable=True),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),
@@ -74,7 +74,7 @@ def upgrade() -> None:
     sa.Column('guild_id', sa.BigInteger(), nullable=False),
     sa.Column('user_id', sa.BigInteger(), nullable=False),
     sa.Column('case_id', sa.Integer(), nullable=True),
-    sa.Column('status', sa.Enum('pending', 'approved', 'declined', name='appealstatus'), nullable=False),
+    sa.Column('status', sa.Enum('PENDING', 'APPROVED', 'DECLINED', name='appealstatus'), nullable=False),
     sa.Column('responses', postgresql.JSONB(astext_type=sa.Text()), nullable=False),
     sa.Column('reviewed_by', sa.BigInteger(), nullable=True),
     sa.Column('reviewed_at', sa.TIMESTAMP(timezone=True), nullable=True),
