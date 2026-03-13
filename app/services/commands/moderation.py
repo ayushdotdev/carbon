@@ -73,7 +73,7 @@ class ModCmdService:
         try:
             await target.kick(reason=f"{interaction.user.name}: {reason}")
             embed = self.bot.embed_factory.success_embed(
-                _("%(user_mention) was kicked")
+                _("**%(user_mention)** was kicked"), user_mention=target.global_name
             )
             await interaction.response.send_message(embed=embed)
         except Exception:

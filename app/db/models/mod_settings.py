@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import TIMESTAMP, BigInteger, Boolean, ForeignKey, select, update
+from sqlalchemy import TIMESTAMP, BigInteger, Boolean, ForeignKey, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -52,5 +52,4 @@ class ModSettings(Base):
             return
 
         guild_settings.log_channel_id = log_channel_id
-
         await session.flush()
