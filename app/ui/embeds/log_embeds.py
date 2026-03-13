@@ -35,3 +35,17 @@ class LogEmbed(EmbedFactory):
             duration=duration,
         )
         return embed
+
+    def purge_messages_embed(
+        self, message_count: int, moderator: discord.abc.User
+    ) -> Embed:
+        embed = self.base_log_embed(ModLogAction.PURGE)
+        embed.set_description_i18n(
+            _(
+                "**Message Count:** %(message_count)s\n> **Moderator:** %(mod_name)s ( %(mod_id)s )"
+            ),
+            message_count=message_count,
+            mod_id=moderator.id,
+            mod_name=moderator.mention,
+        )
+        return embed
