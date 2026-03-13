@@ -1,6 +1,7 @@
 from enum import Enum
+
 from app.i18n.marker import _
-from app.utils.consts.branding import RED, GREEN, YELLOW, ORANGE, GRAY
+from app.utils.consts.branding import GRAY, GREEN, ORANGE, RED, YELLOW
 
 
 class ActionType(str, Enum):

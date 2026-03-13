@@ -1,9 +1,10 @@
 import discord
+
+from app.i18n.manager import I18nManager
+from app.i18n.marker import _
 from app.utils.confs.enums import ModLogAction
 from app.utils.core.embed import Embed
 from app.utils.helpers.embed_factory import EmbedFactory
-from app.i18n.manager import I18nManager
-from app.i18n.marker import _
 
 
 class LogEmbed(EmbedFactory):
