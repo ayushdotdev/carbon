@@ -24,8 +24,7 @@ class ErrorService:
                 for p in error.missing_permissions
             )
 
-            embed = self.embeds.missing_perms_embed(perms)
-            return embed
+            return self.embeds.missing_perms_embed(perms)
 
         if isinstance(error, app_commands.BotMissingPermissions):
             perms = ", ".join(
@@ -33,7 +32,6 @@ class ErrorService:
                 for p in error.missing_permissions
             )
 
-            embed = self.embeds.bot_missing_perms_embed(perms)
-            return embed
+            return self.embeds.bot_missing_perms_embed(perms)
 
         return None

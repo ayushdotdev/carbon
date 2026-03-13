@@ -2,11 +2,10 @@ import discord
 
 from app.bot import Carbon
 from app.db.cache.guild_cache import GuildCache
-from app.db.models.case_logs import CaseLog
 from app.db.session import session_maker
 from app.i18n.marker import _
 from app.ui.embeds.log_embeds import LogEmbed
-from app.utils.confs.enums import ActionType, ModLogAction
+from app.utils.confs.enums import ModLogAction
 from app.utils.core.embed import Embed
 from app.utils.helpers.check_target import TargetChecker
 
@@ -25,6 +24,7 @@ class ModCmdService:
 
         if validate is not None:
             return validate
+        return None
 
     async def get_log_channel(self, guild: discord.Guild) -> discord.TextChannel | None:
         async with session_maker() as session, session.begin():

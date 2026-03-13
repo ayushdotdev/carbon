@@ -1,23 +1,23 @@
-from enum import Enum
+from enum import Enum, StrEnum
 
 from app.i18n.marker import _
 from app.utils.consts.branding import GRAY, GREEN, ORANGE, RED, YELLOW
 
 
-class ActionType(str, Enum):
+class ActionType(StrEnum):
     BAN = "ban"
     KICK = "kick"
     TIMEOUT = "timeout"
     WARN = "warning"
 
 
-class AppealStatus(str, Enum):
+class AppealStatus(StrEnum):
     PENDING = "pending"
     APPROVED = "approved"
     DECLINED = "declined"
 
 
-class LocaleType(str, Enum):
+class LocaleType(StrEnum):
     USER = "user"
     GUILD = "guild"
 

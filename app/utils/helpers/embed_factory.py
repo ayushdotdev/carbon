@@ -43,12 +43,11 @@ class EmbedFactory:
         locale: discord.Locale | None = None,
         **params: Any,
     ) -> Embed:
-        embed = self._build(
+        return self._build(
             msgid, color=SUCCESS_CLR, local_type=locale_type, locale=locale, **params
         ).set_title_i18n(
             _("%(success_emoji)s Action Completed"), success_emoji=SUCCESS_EMOJI
         )
-        return embed
 
     def error_embed(
         self,

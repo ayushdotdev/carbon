@@ -24,7 +24,7 @@ class LogEmbed(EmbedFactory):
         reason: str,
         duration: str = "Permanent",
     ) -> Embed:
-        embed = self.base_log_embed(action).set_description_i18n(
+        return self.base_log_embed(action).set_description_i18n(
             _(
                 "**User:** %(target_name)s ( %(target_id)s )\n> **Moderator:** %(mod_name)s ( %(mod_id)s )\n> **Reason:** %(reason)s\n> **Duration:** %(duration)s"
             ),
@@ -35,7 +35,6 @@ class LogEmbed(EmbedFactory):
             reason=reason,
             duration=duration,
         )
-        return embed
 
     def purge_messages_embed(
         self, message_count: int, moderator: discord.abc.User

@@ -65,8 +65,7 @@ class Guild(Base):
         except IntegrityError:
             await session.rollback()
             result = await session.execute(select(cls).where(cls.id == guild_id))
-            guild = result.scalar_one()
-            return guild
+            return result.scalar_one()
 
         result = await session.execute(
             select(ModSettings).where(ModSettings.guild_id == guild.id)

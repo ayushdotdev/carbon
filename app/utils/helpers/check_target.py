@@ -50,3 +50,4 @@ class TargetChecker:
             return self.bot.embed_factory.error_embed(
                 _("Your role must be higher than the target's role.")
             )
+        return None
