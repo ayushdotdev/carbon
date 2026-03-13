@@ -5,10 +5,10 @@ from app.db.cache.guild_cache import GuildCache
 from app.db.models.case_logs import CaseLog
 from app.db.session import session_maker
 from app.i18n.marker import _
+from app.ui.embeds.log_embeds import LogEmbed
 from app.utils.confs.enums import ActionType, ModLogAction
 from app.utils.core.embed import Embed
 from app.utils.helpers.check_target import TargetChecker
-from app.ui.embeds.log_embeds import LogEmbed
 
 
 class ModCmdService:
@@ -16,12 +16,8 @@ class ModCmdService:
         self.bot = bot
         self.log_embeds = LogEmbed(self.bot.i18n)
 
-    async def basic_mod_work(
-        self,
-        interaction: discord.Interaction,
-        target: discord.Member,
-        action: ActionType,
-        reason: str,
+    async def validate_my_guy(
+        self, interaction: discord.Interaction, target: discord.Member
     ) -> Embed | None:
         checker = TargetChecker(self.bot, interaction, target)
         assert interaction.guild is not None
@@ -29,16 +25,6 @@ class ModCmdService:
 
         if validate is not None:
             return validate
-
-        async with session_maker() as session, session.begin():
-            await CaseLog.add_log(
-                session,
-                interaction.guild.id,
-                target.id,
-                interaction.user.id,
-                action,
-                reason,
-            )
 
     async def get_log_channel(self, guild: discord.Guild) -> discord.TextChannel | None:
         async with session_maker() as session, session.begin():
@@ -50,17 +36,16 @@ class ModCmdService:
             log_channel = await guild.fetch_channel(log_channel_id)
             assert isinstance(log_channel, discord.TextChannel)
             return log_channel
-        else:
-            return
+        return None
 
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
     ):
         assert interaction.guild is not None
-        result = await self.basic_mod_work(interaction, target, ActionType.KICK, reason)
+        result = await self.validate_my_guy(interaction, target)
 
         if result is not None:
-            await interaction.response.send_message(embed = result)
+            await interaction.response.send_message(embed=result)
 
         log_channel = await self.get_log_channel(interaction.guild)
 
@@ -73,7 +58,7 @@ class ModCmdService:
         try:
             await target.kick(reason=f"{interaction.user.name}: {reason}")
             embed = self.bot.embed_factory.success_embed(
-                _("%(user_mention) was kicked")
+                _("**%(user_mention)** was kicked"), user_mention=target.global_name
             )
             await interaction.response.send_message(embed=embed)
         except Exception:

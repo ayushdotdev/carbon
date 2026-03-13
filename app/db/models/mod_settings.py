@@ -40,3 +40,16 @@ class ModSettings(Base):
             select(cls.log_channel_id).where(cls.guild_id == guild_id)
         )
         return result.scalar_one_or_none()
+
+    @classmethod
+    async def set_log_channel_id(
+        cls, session: AsyncSession, guild_id: int, log_channel_id: int
+    ) -> None:
+        result = await session.execute(select(cls).where(cls.guild_id == guild_id))
+        guild_settings = result.scalar_one_or_none()
+
+        if guild_settings is None:
+            return
+
+        guild_settings.log_channel_id = log_channel_id
+        await session.flush()
