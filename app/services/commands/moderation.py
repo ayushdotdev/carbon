@@ -41,7 +41,7 @@ class ModCmdService:
     async def send_dm(
         self,
         guild: discord.Guild,
-        target: discord.User,
+        target: discord.Member,
         action: ModLogAction,
         reason: str,
         duration: str = "Permanent",
@@ -78,6 +78,12 @@ class ModCmdService:
         embed = self.bot.embed_factory.success_embed(
             _("**%(user_mention)s** was kicked."), user_mention=target.global_name
         )
+
+        try:
+            await self.send_dm(interaction.guild, target, ModLogAction.KICK, reason)
+        except Exception as e:
+            embed.add_field_i18n(_("Error"), _("The user did not receive a dm."))
+
         await interaction.followup.send(embed=embed, ephemeral=True)
 
         log_channel = await self.get_log_channel(interaction.guild)
