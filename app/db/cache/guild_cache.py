@@ -33,7 +33,7 @@ class GuildCache:
         cache = await bot.redis.get(key)
 
         if cache is not None:
-            return True if cache == 1 else False
+            return cache == 1
 
         is_dm_enabled = await ModSettings.get_if_dm_enabled(session, guild_id)
 
