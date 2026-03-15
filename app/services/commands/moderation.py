@@ -52,7 +52,10 @@ class ModCmdService:
             )
 
             if is_dm_enabled:
-                pass
+                embed = self.log_embeds.dm_notification_embed(
+                    action, guild, reason, duration
+                )
+                await target.send(embed=embed)
 
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
