@@ -5,8 +5,7 @@ import structlog
 from discord.ext import commands
 
 from app.config import settings
-from app.db.models.guild import Guild
-from app.db.session import engine, session_maker
+from app.db.session import engine
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
 from app.utils.checks.not_bot import not_bot

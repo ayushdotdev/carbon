@@ -1,7 +1,6 @@
 import discord
 
 from app.bot import Carbon
-from app.i18n.context import ExecutionContext
 from app.i18n.marker import _
 from app.ui.views.invite_view import InviteView
 

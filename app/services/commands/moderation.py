@@ -81,7 +81,7 @@ class ModCmdService:
 
         try:
             await self.send_dm(interaction.guild, target, ModLogAction.KICK, reason)
-        except Exception as e:
+        except Exception:
             embed.add_field_i18n(_("Error"), _("The user did not receive a dm."))
 
         await interaction.followup.send(embed=embed, ephemeral=True)
