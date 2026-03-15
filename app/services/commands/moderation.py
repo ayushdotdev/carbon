@@ -38,9 +38,18 @@ class ModCmdService:
             return log_channel
         return None
 
-    async def send_dm(self, guild: discord.Guild, target: discord.User, action: ModLogAction, reason: str, duration: str = "Permanent") -> None:
+    async def send_dm(
+        self,
+        guild: discord.Guild,
+        target: discord.User,
+        action: ModLogAction,
+        reason: str,
+        duration: str = "Permanent",
+    ) -> None:
         async with session_maker() as session, session.begin():
-            is_dm_enabled = await GuildCache.get_if_dm_enabled(self.bot,session, guild.id)
+            is_dm_enabled = await GuildCache.get_if_dm_enabled(
+                self.bot, session, guild.id
+            )
 
             if is_dm_enabled:
                 pass
