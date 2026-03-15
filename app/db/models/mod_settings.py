@@ -53,3 +53,8 @@ class ModSettings(Base):
 
         guild_settings.log_channel_id = log_channel_id
         await session.flush()
+
+    @classmethod
+    async def get_if_dm_enabled(cls, session: AsyncSession, guild_id: int) -> bool | None:
+        result = await session.execute(select(cls.is_dm_enabled).where(cls.guild_id == guild_id))
+        return result.scalar_one_or_none()

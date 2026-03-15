@@ -49,3 +49,14 @@ class LogEmbed(EmbedFactory):
             mod_name=moderator.mention,
         )
         return embed
+
+    def dm_notification_embed(self, action: ModLogAction, guild: discord.Guild, reason: str, duration: str = "Permanent") -> Embed:
+        embed = self._build(color=action.color)
+        if action.dm_title:
+            embed.set_title_i18n(action.dm_title)
+        embed.add_field_i18n(_("Reason"), _("%(reason)s"), reason = reason)
+        embed.add_field_i18n(_("Duration"), _("%(duration)s"), duration = duration)
+        embed.set_footer_i18n(_("Sent from %(guild_name)s"), guild_name = guild.name)
+        embed.footer.icon_url = guild.icon.url if guild.icon else None
+
+        return embed

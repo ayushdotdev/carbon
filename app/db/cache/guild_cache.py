@@ -24,3 +24,18 @@ class GuildCache:
             await bot.redis.set(key, channel_id, 3600)
 
         return channel_id
+
+    @staticmethod
+    async def get_if_dm_enabled(bot: Carbon, session: AsyncSession, guild_id: int) -> bool | None:
+        key = f"carbon:guild:{guild_id}:is_dm_enabled"
+        cache = await bot.redis.get(key)
+
+        if cache is not None:
+            return cache
+
+        is_log_enabled = await ModSettings.get_if_dm_enabled(session, guild_id)
+
+        if is_log_enabled is not None:
+            await bot.redis.set(key, is_log_enabled, 3600)
+
+        return is_log_enabled
