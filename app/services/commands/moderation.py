@@ -41,11 +41,10 @@ class ModCmdService:
     async def send_dm(
         self,
         guild: discord.Guild,
-        target: discord.Member,
         action: ModLogAction,
         reason: str,
         duration: str = "Permanent",
-    ) -> None:
+    ) -> Embed | None:
         async with session_maker() as session, session.begin():
             is_dm_enabled = await GuildCache.get_if_dm_enabled(
                 self.bot, session, guild.id
@@ -55,7 +54,7 @@ class ModCmdService:
                 embed = self.log_embeds.dm_notification_embed(
                     action, guild, reason, duration
                 )
-                await target.send(embed=embed)
+                return embed
 
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
@@ -68,6 +67,9 @@ class ModCmdService:
             await interaction.followup.send(embed=result, ephemeral=True)
             return
 
+        target_name = target.name
+        dm = await target.create_dm()
+
         try:
             await target.kick(reason=f"{interaction.user.name}: {reason}")
         except Exception as e:
@@ -76,11 +78,13 @@ class ModCmdService:
             await interaction.followup.send(embed=embed)
             return
         embed = self.bot.embed_factory.success_embed(
-            _("**%(user_mention)s** was kicked."), user_mention=target.global_name
+            _("**%(user_mention)s** was kicked."), user_mention=target_name
         )
 
         try:
-            await self.send_dm(interaction.guild, target, ModLogAction.KICK, reason)
+            dm_embed = await self.send_dm(interaction.guild, ModLogAction.KICK, reason)
+            if dm_embed is not None:
+                await dm.send(embed=dm_embed)
         except Exception:
             embed.add_field_i18n(_("Error"), _("The user did not receive a dm."))
 
