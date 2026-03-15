@@ -16,7 +16,24 @@ from app.utils.helpers.embed_factory import EmbedFactory
 
 
 class Carbon(commands.Bot):
+    """The main bot class for Carbon.
+
+    Attributes:
+        i18n (I18nManager): Manager for internationalization.
+        embed_factory (EmbedFactory): Factory for creating localized embeds.
+        tree (CustomCommandTree): Custom command tree for slash commands.
+        debug (bool): Whether the bot is running in debug mode.
+        logger (structlog.BoundLogger): Logger instance for the bot.
+        redis (redis.Redis): Redis client instance.
+    """
+
     def __init__(self, *, debug: bool = False, **kwargs):
+        """Initializes the Carbon bot.
+
+        Args:
+            debug (bool): Whether to enable debug mode.
+            **kwargs: Additional keyword arguments for commands.Bot.
+        """
         self.i18n = I18nManager()
         self.embed_factory = EmbedFactory(self.i18n)
         self.tree: CustomCommandTree
@@ -40,6 +57,9 @@ class Carbon(commands.Bot):
         )
 
     async def setup_hook(self) -> None:
+        """Called by discord.py when the bot is setting up.
+        Loads modules and initializes i18n.
+        """
         self.logger.info("Running setup.....")
         await self.setup_modules()
         await self.init_i18n()
@@ -47,35 +67,39 @@ class Carbon(commands.Bot):
         self.logger.info("Setup completed, starting bot")
 
     async def init_i18n(self) -> None:
+        """Initializes the i18n manager and sets the translator for the command tree."""
         await self.tree.set_translator(Translator(self.i18n))
         self.logger.info("I18n Setup completed")
 
     async def start(self, token: str | None = None, *, reconnect: bool = True) -> None:
+        """Starts the bot with the configured token.
+
+        Args:
+            token (str | None): The bot token to use. Defaults to settings.bot_token.
+            reconnect (bool): Whether to automatically reconnect on failure.
+        """
         token = settings.bot_token
         self.logger.info("Launching Carbon")
         await super().start(token=token, reconnect=reconnect)
 
     async def close(self) -> None:
+        """Closes the bot and cleans up resources (e.g., database engine)."""
         await super().close()
         await engine.dispose()
 
     async def setup_modules(self) -> None:
+        """Recursively loads extensions from the predefined directories."""
         groups = ["app/modules/listeners", "app/modules/commands"]
 
         for group in groups:
-            for cog in os.listdir(group):
-                if cog.endswith(".py") and cog != "__init__.py":
-                    path = cog[:-3]
-                    extension = f"{group.replace('/', '.')}.{path}"
+            for root, _, files in os.walk(group):
+                for file in files:
+                    if file.endswith(".py") and file != "__init__.py":
+                        path = os.path.relpath(os.path.join(root, file), group)
+                        extension = f"{group.replace('/', '.')}.{path[:-3].replace(os.sep, '.')}"
 
-                    try:
-                        await self.load_extension(extension)
-                        self.logger.info(f"Loaded extension: {path}")
-                    except Exception as e:
-                        self.logger.error(f"Failed to load {path}: {e}")
-
-    async def init_guild(self) -> None:
-        async with session_maker() as session, session.begin():
-            for guild in self.guilds:
-                await Guild.get_or_create(session, guild.id)
-            self.logger.info("Initialized guilds")
+                        try:
+                            await self.load_extension(extension)
+                            self.logger.info(f"Loaded extension: {extension}")
+                        except Exception as e:
+                            self.logger.error(f"Failed to load {extension}: {e}")

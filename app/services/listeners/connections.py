@@ -8,8 +8,7 @@ class ConnectionService:
         self.bot = bot
 
     async def _on_ready(self):
-        await self.bot.init_guild()
-        await self.bot.tree.sync()
         await self.bot.change_presence(
             activity=discord.Activity(type=discord.ActivityType.watching, name="/help")
         )
+        self.bot.logger.info(f"Logged in as {self.bot.user}")

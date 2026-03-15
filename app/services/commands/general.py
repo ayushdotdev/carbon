@@ -11,8 +11,6 @@ class GeneralService:
         self.bot = bot
 
     async def _ping(self, interaction: discord.Interaction) -> None:
-        ExecutionContext.set_context(interaction)
-
         latency = round(self.bot.latency * 1000)
 
         embed = self.bot.embed_factory._build().add_field_i18n(
@@ -22,7 +20,6 @@ class GeneralService:
         await interaction.response.send_message(embed=embed)
 
     async def _invite(self, interaction: discord.Interaction) -> None:
-        ExecutionContext.set_context(interaction)
         embed = self.bot.embed_factory._build(
             _("Click the button below to invite the bot to your server.")
         )

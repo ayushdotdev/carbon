@@ -3,6 +3,8 @@ from collections.abc import Awaitable, Callable
 import discord
 from discord import app_commands
 
+from app.i18n.context import ExecutionContext
+
 
 class CustomCommandTree(app_commands.CommandTree):
     def __init__(self, client: discord.Client):
@@ -17,6 +19,8 @@ class CustomCommandTree(app_commands.CommandTree):
         self._global_checks.append(check)
 
     async def interaction_check(self, interaction: discord.Interaction) -> bool:
+        ExecutionContext.set_context(interaction)
+
         for check in self._global_checks:
             result = check(interaction)
 
