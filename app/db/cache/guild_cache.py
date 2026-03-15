@@ -16,7 +16,7 @@ class GuildCache:
         cached = await bot.redis.get(key)
 
         if cached is not None:
-            return cached
+            return int(cached)
 
         channel_id = await ModSettings.get_log_channel_id(session, guild_id)
 
@@ -33,11 +33,11 @@ class GuildCache:
         cache = await bot.redis.get(key)
 
         if cache is not None:
-            return cache
+            return True if cache == 1 else False
 
-        is_log_enabled = await ModSettings.get_if_dm_enabled(session, guild_id)
+        is_dm_enabled = await ModSettings.get_if_dm_enabled(session, guild_id)
 
-        if is_log_enabled is not None:
-            await bot.redis.set(key, is_log_enabled, 3600)
+        if is_dm_enabled is not None:
+            await bot.redis.set(key, 1 if is_dm_enabled else 0, 3600)
 
-        return is_log_enabled
+        return is_dm_enabled

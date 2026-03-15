@@ -38,7 +38,7 @@ class ModCmdService:
             return log_channel
         return None
 
-    async def send_dm(
+    async def build_dm_embed(
         self,
         guild: discord.Guild,
         action: ModLogAction,
@@ -82,11 +82,14 @@ class ModCmdService:
         )
 
         try:
-            dm_embed = await self.send_dm(interaction.guild, ModLogAction.KICK, reason)
+            dm_embed = await self.build_dm_embed(
+                interaction.guild, ModLogAction.KICK, reason
+            )
             if dm_embed is not None:
                 await dm.send(embed=dm_embed)
-        except Exception:
+        except Exception as e:
             embed.add_field_i18n(_("Error"), _("The user did not receive a dm."))
+            self.bot.logger.error(f"DM failed for kick: {e}")
 
         await interaction.followup.send(embed=embed, ephemeral=True)
 
