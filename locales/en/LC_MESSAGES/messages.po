@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-13 19:12+0530\n"
+"POT-Creation-Date: 2026-03-15 20:55+0530\n"
 "PO-Revision-Date: 2026-03-05 14:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: app/modules/commands/general.py:19
+#: app/modules/commands/general.py:18
 msgid "Check the bot latency."
 msgstr "Check the bot latency."
 
-#: app/modules/commands/general.py:28
+#: app/modules/commands/general.py:26
 msgid "Get an invite link for Carbon."
 msgstr "Get an invite link for Carbon."
 
@@ -43,13 +43,15 @@ msgstr "Click the button below to invite the bot to your server."
 msgid "Thank you for taking interest in Carbon"
 msgstr "Thank you for taking interest in Carbon"
 
-#: app/services/commands/moderation.py:76
-msgid "%(user_mention) was kicked"
-msgstr "%(user_mention) was kicked"
+#: app/services/commands/moderation.py:71
+#, fuzzy
+msgid "Something went wrong."
+msgstr "Something went wrong."
 
-#: app/services/commands/moderation.py:80
-msgid "Something went wrong"
-msgstr "Something went wrong"
+#: app/services/commands/moderation.py:76
+#, fuzzy, python-format
+msgid "**%(user_mention)s** was kicked."
+msgstr "**%(user_mention)s** was kicked."
 
 #: app/ui/embeds/error_embed.py:13
 msgid "You don't have the required permissions to use this command."
@@ -63,7 +65,7 @@ msgstr "Missing Permissions"
 msgid "I don't have the required permissions to run this command."
 msgstr "I don't have the required permissions to run this command."
 
-#: app/ui/embeds/log_embeds.py:28
+#: app/ui/embeds/log_embeds.py:29
 #, python-format
 msgid ""
 "**User:** %(target_name)s ( %(target_id)s )\n"
@@ -85,31 +87,74 @@ msgstr ""
 "**Message Count:** %(message_count)s\n"
 "> **Moderator:** %(mod_name)s ( %(mod_id)s )"
 
-#: app/utils/confs/enums.py:25
+#: app/ui/embeds/log_embeds.py:63
+msgid "Reason"
+msgstr "Reason"
+
+#: app/ui/embeds/log_embeds.py:63
+#, python-format
+msgid "%(reason)s"
+msgstr "%(reason)s"
+
+#: app/ui/embeds/log_embeds.py:64
+msgid "Duration"
+msgstr "Duration"
+
+#: app/ui/embeds/log_embeds.py:64
+#, python-format
+msgid "%(duration)s"
+msgstr "%(duration)s"
+
+#: app/ui/embeds/log_embeds.py:65
+#, python-format
+msgid "Sent from %(guild_name)s"
+msgstr "Sent from %(guild_name)s"
+
+#: app/utils/confs/enums.py:26
 msgid "Member Kicked"
 msgstr "Member Kicked"
 
 #: app/utils/confs/enums.py:26
+#, fuzzy
+msgid "You were kicked"
+msgstr "You were kicked"
+
+#: app/utils/confs/enums.py:27
 msgid "Member Banned"
 msgstr "Member Banned"
 
 #: app/utils/confs/enums.py:27
+#, fuzzy
+msgid "You were banned"
+msgstr "You were banned"
+
+#: app/utils/confs/enums.py:28
 msgid "Member Warned"
 msgstr "Member Warned"
 
 #: app/utils/confs/enums.py:28
+#, fuzzy
+msgid "You were warned."
+msgstr "You were warned."
+
+#: app/utils/confs/enums.py:29
 msgid "Member Timed Out"
 msgstr "Member Timed Out"
 
 #: app/utils/confs/enums.py:29
+#, fuzzy
+msgid "You were timed out."
+msgstr "You were timed out."
+
+#: app/utils/confs/enums.py:30
 msgid "Warning Removed"
 msgstr "Warning Removed"
 
-#: app/utils/confs/enums.py:30
+#: app/utils/confs/enums.py:31
 msgid "Messages Purged"
 msgstr "Messages Purged"
 
-#: app/utils/confs/enums.py:31
+#: app/utils/confs/enums.py:32
 msgid "Member Unbanned"
 msgstr "Member Unbanned"
 
@@ -153,15 +198,11 @@ msgstr "The server owner cannot be targeted."
 msgid "This action cannot be performed on yourself."
 msgstr "This action cannot be performed on yourself."
 
-#: app/utils/helpers/check_target.py:42
-msgid "Bots cannot be targeted with this action."
-msgstr "Bots cannot be targeted with this action."
-
-#: app/utils/helpers/check_target.py:51
+#: app/utils/helpers/check_target.py:47
 msgid "My role must be higher than the target's role."
 msgstr "My role must be higher than the target's role."
 
-#: app/utils/helpers/check_target.py:55
+#: app/utils/helpers/check_target.py:51
 msgid "Your role must be higher than the target's role."
 msgstr "Your role must be higher than the target's role."
 
@@ -170,7 +211,10 @@ msgstr "Your role must be higher than the target's role."
 msgid "%(success_emoji)s Action Completed"
 msgstr "%(success_emoji)s Action Completed"
 
-#: app/utils/helpers/embed_factory.py:63
+#: app/utils/helpers/embed_factory.py:62
 #, python-format
 msgid "%(error_emoji)s Action Failed"
 msgstr "%(error_emoji)s Action Failed"
+
+#~ msgid "Bots cannot be targeted with this action."
+#~ msgstr "Bots cannot be targeted with this action."
