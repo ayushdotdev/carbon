@@ -31,7 +31,7 @@ Carbon is a modern, high-performance Discord management bot designed to streamli
 1.  **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/yourusername/carbon.git
+    git clone https://github.com/sudoscrawl/carbon.git
     cd carbon
     ```
 
