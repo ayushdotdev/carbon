@@ -20,11 +20,7 @@ class ModCmdService:
     ) -> Embed | None:
         checker = TargetChecker(self.bot, interaction, target)
         assert interaction.guild is not None
-        validate = await checker.validate()
-
-        if validate is not None:
-            return validate
-        return None
+        return await checker.validate()
 
     async def get_log_channel(self, guild: discord.Guild) -> discord.TextChannel | None:
         async with session_maker() as session, session.begin():
@@ -68,7 +64,18 @@ class ModCmdService:
             return
 
         target_name = target.name
-        dm = await target.create_dm()
+        embed = self.bot.embed_factory.success_embed(
+            _("**%(user_mention)s** was kicked."), user_mention=target_name
+        )
+        try:
+            dm_embed = await self.build_dm_embed(
+                interaction.guild, ModLogAction.KICK, reason
+            )
+            if dm_embed is not None:
+                await target.send(embed=dm_embed)
+        except Exception as e:
+            embed.add_field_i18n(_("Error"), _("The user did not receive a dm."))
+            self.bot.logger.error(f"DM failed for kick: {e}")
 
         try:
             await target.kick(reason=f"{interaction.user.name}: {reason}")
@@ -77,19 +84,6 @@ class ModCmdService:
             self.bot.logger.error(f"Kick command failed : {e}")
             await interaction.followup.send(embed=embed)
             return
-        embed = self.bot.embed_factory.success_embed(
-            _("**%(user_mention)s** was kicked."), user_mention=target_name
-        )
-
-        try:
-            dm_embed = await self.build_dm_embed(
-                interaction.guild, ModLogAction.KICK, reason
-            )
-            if dm_embed is not None:
-                await dm.send(embed=dm_embed)
-        except Exception as e:
-            embed.add_field_i18n(_("Error"), _("The user did not receive a dm."))
-            self.bot.logger.error(f"DM failed for kick: {e}")
 
         await interaction.followup.send(embed=embed, ephemeral=True)
 
