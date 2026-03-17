@@ -1,8 +1,10 @@
-import pytest
 from unittest.mock import MagicMock
+
 import discord
-from app.i18n.manager import I18nManager
+import pytest
+
 from app.i18n.context import ExecutionContext
+from app.i18n.manager import I18nManager
 from app.utils.confs.enums import LocaleType
 
 
@@ -10,11 +12,12 @@ from app.utils.confs.enums import LocaleType
 def i18n_manager():
     return I18nManager()
 
+
 @pytest.fixture(autouse=True)
 def clear_execution_context():
-    ExecutionContext.set(None) # pyright: ignore[reportArgumentType]
+    ExecutionContext.set(None)  # pyright: ignore[reportArgumentType]
     yield
-    ExecutionContext.set(None) # pyright: ignore[reportArgumentType]
+    ExecutionContext.set(None)  # pyright: ignore[reportArgumentType]
 
 
 def test_resolve_locale_with_explicit_locale(i18n_manager):

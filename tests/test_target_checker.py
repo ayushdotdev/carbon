@@ -46,9 +46,7 @@ def test_validate_target_is_owner(mock_bot, mock_interaction, mock_target):
     assert result == "The server owner cannot be targeted."
 
 
-def test_validate_role_hierarchy_bot_lower(
-    mock_bot, mock_interaction, mock_target
-):
+def test_validate_role_hierarchy_bot_lower(mock_bot, mock_interaction, mock_target):
     mock_target.id = 1
     mock_interaction.user.id = 2
     mock_interaction.guild.me.id = 3
@@ -63,9 +61,7 @@ def test_validate_role_hierarchy_bot_lower(
     assert result == "My role must be higher than the target's role."
 
 
-def test_validate_role_hierarchy_author_lower(
-    mock_bot, mock_interaction, mock_target
-):
+def test_validate_role_hierarchy_author_lower(mock_bot, mock_interaction, mock_target):
     mock_target.id = 1
     mock_interaction.user.id = 2
     mock_interaction.guild.me.id = 3
