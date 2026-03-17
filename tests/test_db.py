@@ -1,9 +1,11 @@
-import pytest
 from unittest.mock import AsyncMock, MagicMock
+
+import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.db.models.appeal_settings import AppealSettings
 from app.db.models.guild import Guild
 from app.db.models.mod_settings import ModSettings
-from app.db.models.appeal_settings import AppealSettings
 
 
 @pytest.mark.asyncio
@@ -20,7 +22,7 @@ async def test_get_or_create_existing_guild():
     result = await Guild.get_or_create(session, 123)
 
     assert result == mock_guild
-    session.execute.assert_called()
+    session.execute.assert_called_once()
     session.add.assert_not_called()
 
 
