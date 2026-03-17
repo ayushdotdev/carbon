@@ -10,6 +10,12 @@ from app.utils.confs.enums import LocaleType
 def i18n_manager():
     return I18nManager()
 
+@pytest.fixture(autouse=True)
+def clear_execution_context():
+    ExecutionContext.set(None) # pyright: ignore[reportArgumentType]
+    yield
+    ExecutionContext.set(None) # pyright: ignore[reportArgumentType]
+
 
 def test_resolve_locale_with_explicit_locale(i18n_manager):
     locale = discord.Locale.british_english
@@ -33,7 +39,6 @@ def test_resolve_locale_with_context_guild(i18n_manager):
 
 
 def test_resolve_locale_default(i18n_manager):
-    ExecutionContext.set(None)
     assert i18n_manager._resolve_locale(None, LocaleType.USER) == "en"
 
 
@@ -50,9 +55,9 @@ def test_gettext_interpolation(i18n_manager):
 
 def test_ngettext_interpolation(i18n_manager):
     mock_tr = MagicMock()
-    mock_tr.ngettext.return_value = "%(n)d items"
+    mock_tr.ngettext.return_value = "%(num)d items"
     i18n_manager._get_translation = MagicMock(return_value=mock_tr)
 
-    result = i18n_manager.ngettext("%(n)d item", "%(n)d items", 5, n=5)
+    result = i18n_manager.ngettext("%(num)d item", "%(num)d items", 5, num=5)
     assert result == "5 items"
-    mock_tr.ngettext.assert_called_with("%(n)d item", "%(n)d items", 5)
+    mock_tr.ngettext.assert_called_with("%(num)d item", "%(num)d items", 5)
