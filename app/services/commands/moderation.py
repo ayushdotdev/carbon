@@ -20,7 +20,7 @@ class ModCmdService:
     ) -> Embed | None:
         checker = TargetChecker(self.bot, interaction, target)
         assert interaction.guild is not None
-        return await checker.validate()
+        return checker.validate()
 
     async def get_log_channel(self, guild: discord.Guild) -> discord.TextChannel | None:
         async with session_maker() as session, session.begin():
