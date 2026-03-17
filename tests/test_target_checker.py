@@ -1,6 +1,8 @@
-import pytest
-from unittest.mock import AsyncMock, Mock
+from unittest.mock import Mock
+
 import discord
+import pytest
+
 from app.utils.helpers.check_target import TargetChecker
 
 

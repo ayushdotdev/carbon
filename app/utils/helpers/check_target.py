@@ -18,7 +18,7 @@ class TargetChecker:
     def _role_position(self, member: discord.Member) -> int:
         return member.top_role.position if member.top_role else -1
 
-    async def validate(self) -> Embed | None:
+    def validate(self) -> Embed | None:
         assert self.guild is not None
         assert isinstance(self.author, discord.Member)
         self.bot_member = self.guild.me
