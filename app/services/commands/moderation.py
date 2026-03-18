@@ -2,10 +2,11 @@ import discord
 
 from app.bot import Carbon
 from app.db.cache.guild_cache import GuildCache
+from app.db.services.caselog_service import CaseLogService
 from app.db.session import session_maker
 from app.i18n.marker import _
 from app.ui.embeds.log_embeds import LogEmbed
-from app.utils.confs.enums import ModLogAction
+from app.utils.confs.enums import ActionType, ModLogAction
 from app.utils.core.embed import Embed
 from app.utils.helpers.check_target import TargetChecker
 
@@ -52,6 +53,27 @@ class ModCmdService:
                 )
         return None
 
+    async def create_case(
+        self,
+        interaction: discord.Interaction,
+        target_id: int,
+        action: ActionType,
+        reason: str,
+        *,
+        duration: int = 0,
+    ) -> int:
+        assert interaction.guild is not None
+        async with session_maker() as session, session.begin():
+            return await CaseLogService.create_new_case(
+                session,
+                interaction.guild.id,
+                target_id,
+                interaction.user.id,
+                action,
+                reason,
+                duration,
+            )
+
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
     ):
@@ -63,9 +85,8 @@ class ModCmdService:
             await interaction.followup.send(embed=result, ephemeral=True)
             return
 
-        target_name = target.name
         embed = self.bot.embed_factory.success_embed(
-            _("**%(user_mention)s** was kicked."), user_mention=target_name
+            _("**%(user_mention)s** was kicked."), user_mention=target.name
         )
         try:
             dm_embed = await self.build_dm_embed(
