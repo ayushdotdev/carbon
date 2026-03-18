@@ -40,17 +40,3 @@ class Guild(Base):
         cascade="all, delete-orphan",
         uselist=False,
     )
-
-    @classmethod
-    async def del_guild(cls, session: AsyncSession, guild_id: int) -> Guild | None:
-        result = await session.execute(select(cls).where(cls.id == guild_id))
-        guild = result.scalar_one_or_none()
-
-        if guild is None:
-            return None
-        if guild.is_premium:
-            return guild
-
-        await session.delete(guild)
-        await session.flush()
-        return guild

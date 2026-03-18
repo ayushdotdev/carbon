@@ -4,8 +4,6 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.guild import Guild
-from app.db.models.mod_settings import ModSettings
-from app.db.models.appeal_settings import AppealSettings
 
 
 class GuildService:
@@ -28,3 +26,18 @@ class GuildService:
             return result.scalar_one()
 
         return guild
+
+    @staticmethod
+    async def del_guild(session: AsyncSession, guild_id: int) -> None:
+        result = await session.execute(select(Guild).where(Guild.id == guild_id))
+        guild = result.scalar_one()
+
+        if guild.is_premium:
+            return
+
+        await session.delete(guild)
+
+        try:
+            await session.flush()
+        except IntegrityError:
+            await session.rollback()
