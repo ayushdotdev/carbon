@@ -1,4 +1,4 @@
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -62,3 +62,29 @@ async def test_get_existing_guild_mod_conf():
     assert result == mock_guild_conf
     session.execute.assert_called_once()
     session.add.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_get_new_guild_mod_conf():
+    session = AsyncMock(spec=AsyncSession)
+
+    # First execute returns None for ModSettings
+    mock_result_none = MagicMock()
+    mock_result_none.scalar_one_or_none.return_value = None
+    session.execute.return_value = mock_result_none
+
+    # Mock GuildService.get_or_create
+    mock_guild = MagicMock(spec=Guild)
+    mock_guild_conf = MagicMock(spec=ModSettings)
+    mock_guild.mod_settings = mock_guild_conf
+
+    with patch(
+        "app.db.services.modsettings_service.GuildService.get_or_create",
+        new_callable=AsyncMock,
+    ) as mock_get_or_create:
+        mock_get_or_create.return_value = mock_guild
+
+        result = await ModSettingsService.get_guild_config(session, 123)
+
+        assert result == mock_guild_conf
+        mock_get_or_create.assert_called_once_with(session, 123)
