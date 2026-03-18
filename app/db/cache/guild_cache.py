@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.bot import Carbon
-from app.db.models.mod_settings import ModSettings
+from app.db.services.modsettings_service import ModSettingsService
 
 
 class GuildCache:
@@ -18,7 +18,7 @@ class GuildCache:
         if cached is not None:
             return int(cached)
 
-        channel_id = await ModSettings.get_log_channel_id(session, guild_id)
+        channel_id = await ModSettingsService.get_log_channel_id(session, guild_id)
 
         if channel_id is not None:
             await bot.redis.set(key, channel_id, 3600)
@@ -35,7 +35,7 @@ class GuildCache:
         if cache is not None:
             return cache == 1
 
-        is_dm_enabled = await ModSettings.get_if_dm_enabled(session, guild_id)
+        is_dm_enabled = await ModSettingsService.is_mod_dm_enabled(session, guild_id)
 
         if is_dm_enabled is not None:
             await bot.redis.set(key, 1 if is_dm_enabled else 0, 3600)
