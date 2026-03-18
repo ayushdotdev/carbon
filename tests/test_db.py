@@ -53,3 +53,19 @@ async def test_get_or_create_new_guild():
     assert AppealSettings in added_types
 
     session.flush.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_get_existing_guild_mod_conf():
+    session = AsyncMock(spec=AsyncSession)
+
+    mock_guild_conf = MagicMock(spec=ModSettings)
+    mock_result = MagicMock()
+    mock_result.scalar_one_or_none.return_value = mock_guild_conf
+    session.execute.return_value = mock_result
+
+    result = await ModSettings.get_guild_mod_conf(session, 123)
+
+    assert result == mock_guild_conf
+    assert session.execute.assert_called_once()
+    assert session.add.assert_not_called()
