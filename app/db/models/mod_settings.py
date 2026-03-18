@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Self
 
 from sqlalchemy import TIMESTAMP, BigInteger, Boolean, ForeignKey, select
 from sqlalchemy.dialects.postgresql import JSONB
@@ -7,6 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 from app.db.base import Base
+from app.db.models.guild import Guild
 
 
 class ModSettings(Base):
@@ -31,6 +33,16 @@ class ModSettings(Base):
     )
 
     guild = relationship("Guild", back_populates="mod_settings")
+
+    @classmethod
+    async def get_guild_mod_conf(cls, session: AsyncSession, guild_id: int) -> Self:
+        result = await session.execute(select(cls).where(cls.guild_id == guild_id))
+        guild_conf = result.scalar_one_or_none()
+        if not guild_conf:
+            guild = await Guild.get_or_create(session, guild_id)
+            return guild.mod_settings
+
+        return guild_conf
 
     @classmethod
     async def get_log_channel_id(
