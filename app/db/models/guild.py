@@ -2,16 +2,11 @@ from __future__ import annotations
 
 from datetime import datetime
 
-import pendulum
-from sqlalchemy import TIMESTAMP, BigInteger, Boolean, select
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import TIMESTAMP, BigInteger, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 from app.db.base import Base
-from app.db.models.appeal_settings import AppealSettings
-from app.db.models.mod_settings import ModSettings
 
 
 class Guild(Base):
@@ -45,33 +40,6 @@ class Guild(Base):
         cascade="all, delete-orphan",
         uselist=False,
     )
-
-    @classmethod
-    async def get_or_create(cls, session: AsyncSession, guild_id: int) -> Guild:
-        result = await session.execute(select(cls).where(cls.id == guild_id))
-        guild = result.scalar_one_or_none()
-
-        if guild:
-            return guild
-
-        guild = cls(id=guild_id, joined_at=pendulum.now("UTC"))
-
-        session.add(guild)
-        session.add(ModSettings(guild_id=guild.id))
-        session.add(AppealSettings(guild_id=guild.id))
-
-        try:
-            await session.flush()
-        except IntegrityError:
-            await session.rollback()
-            result = await session.execute(select(cls).where(cls.id == guild_id))
-            return result.scalar_one()
-
-        result = await session.execute(
-            select(ModSettings).where(ModSettings.guild_id == guild.id)
-        )
-
-        return guild
 
     @classmethod
     async def del_guild(cls, session: AsyncSession, guild_id: int) -> Guild | None:
