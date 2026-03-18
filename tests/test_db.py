@@ -3,9 +3,9 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db.services.guild_service import GuildService
 from app.db.models.guild import Guild
 from app.db.models.mod_settings import ModSettings
+from app.db.services.guild_service import GuildService
 from app.db.services.modsettings_service import ModSettingsService
 
 

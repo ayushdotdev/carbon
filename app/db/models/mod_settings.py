@@ -1,8 +1,7 @@
 from datetime import datetime
 
-from sqlalchemy import TIMESTAMP, BigInteger, Boolean, ForeignKey, select
+from sqlalchemy import TIMESTAMP, BigInteger, Boolean, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
@@ -31,12 +30,3 @@ class ModSettings(Base):
     )
 
     guild = relationship("Guild", back_populates="mod_settings")
-
-    @classmethod
-    async def get_if_dm_enabled(
-        cls, session: AsyncSession, guild_id: int
-    ) -> bool | None:
-        result = await session.execute(
-            select(cls.is_dm_enabled).where(cls.guild_id == guild_id)
-        )
-        return result.scalar_one_or_none()

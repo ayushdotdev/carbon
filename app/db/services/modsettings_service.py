@@ -36,3 +36,8 @@ class ModSettingsService:
             await session.flush()
         except IntegrityError:
             await session.rollback()
+
+    @staticmethod
+    async def is_mod_dm_enabled(session: AsyncSession, guild_id: int) -> bool:
+        guild_config = await ModSettingsService.get_guild_config(session, guild_id)
+        return guild_config.is_dm_enabled
