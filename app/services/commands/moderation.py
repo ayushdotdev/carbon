@@ -76,7 +76,7 @@ class ModCmdService:
 
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
-    ):
+    ) -> None:
         await interaction.response.defer()
         assert interaction.guild is not None
         result = await self.validate_my_guy(interaction, target)
