@@ -1,4 +1,7 @@
+import asyncio
+
 import discord
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.bot import Carbon
 from app.db.cache.guild_cache import GuildCache
@@ -23,14 +26,26 @@ class ModCmdService:
         assert interaction.guild is not None
         return checker.validate()
 
-    async def get_log_channel(self, guild: discord.Guild) -> discord.TextChannel | None:
-        async with session_maker() as session, session.begin():
+    async def get_log_channel(
+        self, guild: discord.Guild, session: AsyncSession | None = None
+    ) -> discord.TextChannel | None:
+        if session is None:
+            async with session_maker() as session, session.begin():
+                log_channel_id: int | None = await GuildCache.get_modlog_channel_id(
+                    self.bot, session, guild.id
+                )
+        else:
             log_channel_id: int | None = await GuildCache.get_modlog_channel_id(
                 self.bot, session, guild.id
             )
 
         if log_channel_id is not None:
-            log_channel = await guild.fetch_channel(log_channel_id)
+            log_channel = guild.get_channel(log_channel_id)
+            if log_channel is None:
+                try:
+                    log_channel = await guild.fetch_channel(log_channel_id)
+                except (discord.NotFound, discord.Forbidden):
+                    return None
             assert isinstance(log_channel, discord.TextChannel)
             return log_channel
         return None
@@ -41,16 +56,22 @@ class ModCmdService:
         action: ModLogAction,
         reason: str,
         duration: str = "Permanent",
+        session: AsyncSession | None = None,
     ) -> Embed | None:
-        async with session_maker() as session, session.begin():
+        if session is None:
+            async with session_maker() as session, session.begin():
+                is_dm_enabled = await GuildCache.get_if_dm_enabled(
+                    self.bot, session, guild.id
+                )
+        else:
             is_dm_enabled = await GuildCache.get_if_dm_enabled(
                 self.bot, session, guild.id
             )
 
-            if is_dm_enabled:
-                return self.log_embeds.dm_notification_embed(
-                    action, guild, reason, duration
-                )
+        if is_dm_enabled:
+            return self.log_embeds.dm_notification_embed(
+                action, guild, reason, duration
+            )
         return None
 
     async def create_case(
@@ -61,9 +82,21 @@ class ModCmdService:
         reason: str,
         *,
         duration: int = 0,
+        session: AsyncSession | None = None,
     ) -> int:
         assert interaction.guild is not None
-        async with session_maker() as session, session.begin():
+        if session is None:
+            async with session_maker() as session, session.begin():
+                return await CaseLogService.create_new_case(
+                    session,
+                    interaction.guild.id,
+                    target_id,
+                    interaction.user.id,
+                    action,
+                    reason,
+                    duration,
+                )
+        else:
             return await CaseLogService.create_new_case(
                 session,
                 interaction.guild.id,
@@ -86,35 +119,62 @@ class ModCmdService:
             return
 
         target_id = target.id
-        embed = self.bot.embed_factory.success_embed(
-            _("**%(user_mention)s** was kicked."), user_mention=target.name
-        )
-        try:
-            dm_embed = await self.build_dm_embed(
-                interaction.guild, ModLogAction.KICK, reason
-            )
-            if dm_embed is not None:
-                await target.send(embed=dm_embed)
-        except Exception as e:
-            embed.add_field_i18n(_("Error"), _("The user did not receive a dm."))
-            self.bot.logger.error(f"DM failed for kick: {e}")
+        guild = interaction.guild
 
-        try:
-            await target.kick(reason=f"{interaction.user.name}: {reason}")
-        except Exception as e:
-            embed = self.bot.embed_factory.error_embed(_("Something went wrong."))
-            self.bot.logger.error(f"Kick command failed : {e}")
-            await interaction.followup.send(embed=embed)
+        # 1. Fetch settings first in a short session
+        async with session_maker() as session, session.begin():
+            dm_embed = await self.build_dm_embed(
+                guild, ModLogAction.KICK, reason, session=session
+            )
+            log_channel_id = await GuildCache.get_modlog_channel_id(
+                self.bot, session, guild.id
+            )
+
+        # 2. Perform DM and Kick concurrently for speed (No DB session open)
+        tasks = [target.kick(reason=f"{interaction.user.name}: {reason}")]
+        if dm_embed:
+            tasks.append(target.send(embed=dm_embed))
+
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        kick_result = results[0]
+        dm_result = results[1] if len(results) > 1 else None
+
+        if isinstance(kick_result, Exception):
+            error_embed = self.bot.embed_factory.error_embed(_("Something went wrong."))
+            self.bot.logger.error(f"Kick command failed : {kick_result}")
+            await interaction.followup.send(embed=error_embed)
             return
 
-        await interaction.followup.send(embed=embed, ephemeral=True)
-
-        log_channel = await self.get_log_channel(interaction.guild)
-
-        if log_channel is not None:
-            log_embed = self.log_embeds.action_on_user(
-                ModLogAction.KICK, target, interaction.user, reason
+        # 3. Inform the moderator ASAP
+        success_embed = self.bot.embed_factory.success_embed(
+            _("**%(user_mention)s** was kicked."), user_mention=target.name
+        )
+        if isinstance(dm_result, Exception):
+            success_embed.add_field_i18n(
+                _("Error"), _("The user did not receive a dm.")
             )
-            await log_channel.send(embed=log_embed)
+            self.bot.logger.error(f"DM failed for kick: {dm_result}")
 
-        await self.create_case(interaction, target_id, ActionType.KICK, reason)
+        await interaction.followup.send(embed=success_embed, ephemeral=True)
+
+        # 4. Perform logging and case creation (reusing another short session)
+        async with session_maker() as session, session.begin():
+            await self.create_case(
+                interaction, target_id, ActionType.KICK, reason, session=session
+            )
+
+            if log_channel_id:
+                # Use get_channel (fast) or fetch_channel (slow but rare here)
+                log_channel = guild.get_channel(log_channel_id)
+                if log_channel is None:
+                    try:
+                        log_channel = await guild.fetch_channel(log_channel_id)
+                    except (discord.NotFound, discord.Forbidden):
+                        log_channel = None
+
+                if log_channel and isinstance(log_channel, discord.TextChannel):
+                    log_embed = self.log_embeds.action_on_user(
+                        ModLogAction.KICK, target, interaction.user, reason
+                    )
+                    await log_channel.send(embed=log_embed)
