@@ -46,6 +46,7 @@ class Carbon(commands.Bot):
         intents.members = True
 
         discord.VoiceClient.warn_nacl = False
+        discord.VoiceClient.warn_dave = False
 
         super().__init__(
             command_prefix="!",

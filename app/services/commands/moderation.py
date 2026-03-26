@@ -85,6 +85,7 @@ class ModCmdService:
             await interaction.followup.send(embed=result, ephemeral=True)
             return
 
+        target_id = target.id
         embed = self.bot.embed_factory.success_embed(
             _("**%(user_mention)s** was kicked."), user_mention=target.name
         )
@@ -115,3 +116,5 @@ class ModCmdService:
                 ModLogAction.KICK, target, interaction.user, reason
             )
             await log_channel.send(embed=log_embed)
+
+        await self.create_case(interaction, target_id, ActionType.KICK, reason)
