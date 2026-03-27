@@ -1,3 +1,5 @@
+import asyncio
+
 import discord
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -103,15 +105,59 @@ class ModCmdService:
                 duration,
             )
 
+    async def post_action_chores(
+        self,
+        interaction: discord.Interaction,
+        target: discord.Member,
+        reason: str,
+        duration_str: str = "Permanent",
+        duration_int: int = 0,
+    ) -> None:
+        assert interaction.guild is not None
+        async with session_maker() as session, session.begin():
+            dm_embed = await self.build_dm_embed(
+                interaction.guild, ModLogAction.KICK, reason, session=session
+            )
+            log_channel_id = await GuildCache.get_modlog_channel_id(
+                self.bot, session, interaction.guild.id
+            )
+
+        async with session_maker() as session, session.begin():
+            await self.create_case(
+                interaction, target.id, ActionType.KICK, reason, session=session
+            )
+
+        if log_channel_id:
+            log_channel = interaction.guild.get_channel(log_channel_id)
+            if log_channel is None:
+                try:
+                    log_channel = await interaction.guild.fetch_channel(log_channel_id)
+                except (discord.NotFound, discord.Forbidden):
+                    log_channel = None
+
+            if log_channel and isinstance(log_channel, discord.TextChannel):
+                log_embed = self.bot.log_embeds.action_on_user(
+                    ModLogAction.KICK, target, interaction.user, reason
+                )
+                await log_channel.send(embed=log_embed)
+
+        if dm_embed:
+            try:
+                await target.send(embed=dm_embed)
+            except Exception:
+                self.bot.logger.error(f"DM failed for kick: {Exception}")
+
+    def fire_and_forget(self, coro):
+        task = asyncio.create_task(coro)
+        task.add_done_callback(
+            lambda t: print(t.exception()) if t.exception() else None
+        )
+        return task
+
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
     ) -> None:
         await interaction.response.defer(ephemeral=True)
-        assert interaction.guild is not None
-
-        target_id = target.id
-        guild = interaction.guild
-
         try:
             await target.kick(reason=f"{interaction.user.name} : {reason}")
         except discord.Forbidden:
@@ -129,36 +175,4 @@ class ModCmdService:
             _("**%(user_mention)s** was kicked."), user_mention=target.name
         )
         await interaction.followup.send(embed=success_embed, ephemeral=True)
-
-        async with session_maker() as session, session.begin():
-            dm_embed = await self.build_dm_embed(
-                guild, ModLogAction.KICK, reason, session=session
-            )
-            log_channel_id = await GuildCache.get_modlog_channel_id(
-                self.bot, session, guild.id
-            )
-
-        async with session_maker() as session, session.begin():
-            await self.create_case(
-                interaction, target_id, ActionType.KICK, reason, session=session
-            )
-
-        if log_channel_id:
-            log_channel = guild.get_channel(log_channel_id)
-            if log_channel is None:
-                try:
-                    log_channel = await guild.fetch_channel(log_channel_id)
-                except (discord.NotFound, discord.Forbidden):
-                    log_channel = None
-
-            if log_channel and isinstance(log_channel, discord.TextChannel):
-                log_embed = self.bot.log_embeds.action_on_user(
-                    ModLogAction.KICK, target, interaction.user, reason
-                )
-                await log_channel.send(embed=log_embed)
-
-        if dm_embed:
-            try:
-                await target.send(embed=dm_embed)
-            except Exception:
-                self.bot.logger.error(f"DM failed for kick: {Exception}")
+        self.fire_and_forget(self.post_action_chores(interaction, target, reason))
