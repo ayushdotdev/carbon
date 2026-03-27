@@ -15,17 +15,21 @@ def test_parsing():
     assert d1.hours == 5
 
     d2 = parse_duration_to_timedelta(mock_bot, "2h30m")
+    assert isinstance(d2, pendulum.Duration)
     assert d2.hours == 2
     assert d2.minutes == 30
 
     d3 = parse_duration_to_timedelta(mock_bot, "7days")
+    assert isinstance(d3, pendulum.Duration)
     assert d3.days == 7
 
     d4 = parse_duration_to_timedelta(mock_bot, "1d2h")
+    assert isinstance(d4, pendulum.Duration)
     assert d4.days == 1
     assert d4.hours == 2
 
     d5 = parse_duration_to_timedelta(mock_bot, "45m")
+    assert isinstance(d5, pendulum.Duration)
     assert d5.minutes == 45
 
     # Invalid cases
