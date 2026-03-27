@@ -1,5 +1,3 @@
-import asyncio
-
 import discord
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -110,7 +108,7 @@ class ModCmdService:
     async def _kick(
         self, interaction: discord.Interaction, target: discord.Member, reason: str
     ) -> None:
-        await interaction.response.defer()
+        await interaction.response.defer(ephemeral=True)
         assert interaction.guild is not None
         result = await self.validate_my_guy(interaction, target)
 
@@ -121,7 +119,19 @@ class ModCmdService:
         target_id = target.id
         guild = interaction.guild
 
-        # 1. Fetch settings first in a short session
+        try:
+            await target.kick(reason=f"{interaction.user.name} : {reason}")
+        except Exception as e:
+            error_embed = self.bot.embed_factory.error_embed(_("Something went wrong."))
+            self.bot.logger.error(f"Kick command failed : {e}")
+            await interaction.followup.send(embed=error_embed, ephemeral=True)
+            return
+
+        success_embed = self.bot.embed_factory.success_embed(
+            _("**%(user_mention)s** was kicked."), user_mention=target.name
+        )
+        await interaction.followup.send(embed=success_embed, ephemeral=True)
+
         async with session_maker() as session, session.begin():
             dm_embed = await self.build_dm_embed(
                 guild, ModLogAction.KICK, reason, session=session
@@ -130,42 +140,12 @@ class ModCmdService:
                 self.bot, session, guild.id
             )
 
-        # 2. Perform DM and Kick concurrently for speed (No DB session open)
-        tasks = [target.kick(reason=f"{interaction.user.name}: {reason}")]
-        if dm_embed:
-            tasks.append(target.send(embed=dm_embed))
-
-        results = await asyncio.gather(*tasks, return_exceptions=True)
-
-        kick_result = results[0]
-        dm_result = results[1] if len(results) > 1 else None
-
-        if isinstance(kick_result, Exception):
-            error_embed = self.bot.embed_factory.error_embed(_("Something went wrong."))
-            self.bot.logger.error(f"Kick command failed : {kick_result}")
-            await interaction.followup.send(embed=error_embed)
-            return
-
-        # 3. Inform the moderator ASAP
-        success_embed = self.bot.embed_factory.success_embed(
-            _("**%(user_mention)s** was kicked."), user_mention=target.name
-        )
-        if isinstance(dm_result, Exception):
-            success_embed.add_field_i18n(
-                _("Error"), _("The user did not receive a dm.")
-            )
-            self.bot.logger.error(f"DM failed for kick: {dm_result}")
-
-        await interaction.followup.send(embed=success_embed, ephemeral=True)
-
-        # 4. Perform logging and case creation (reusing another short session)
         async with session_maker() as session, session.begin():
             await self.create_case(
                 interaction, target_id, ActionType.KICK, reason, session=session
             )
 
             if log_channel_id:
-                # Use get_channel (fast) or fetch_channel (slow but rare here)
                 log_channel = guild.get_channel(log_channel_id)
                 if log_channel is None:
                     try:
@@ -178,3 +158,9 @@ class ModCmdService:
                         ModLogAction.KICK, target, interaction.user, reason
                     )
                     await log_channel.send(embed=log_embed)
+
+        if dm_embed:
+            try:
+                await target.send(embed=dm_embed)
+            except Exception:
+                self.bot.logger.error(f"DM failed for kick: {Exception}")
