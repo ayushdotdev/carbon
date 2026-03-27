@@ -3,11 +3,12 @@ from collections.abc import Awaitable, Callable
 import discord
 from discord import app_commands
 
+from app.bot import Carbon
 from app.i18n.context import ExecutionContext
 
 
 class CustomCommandTree(app_commands.CommandTree):
-    def __init__(self, client: discord.Client):
+    def __init__(self, client: Carbon):
         super().__init__(client)
         self._global_checks: list[
             Callable[[discord.Interaction], bool | Awaitable[bool]]

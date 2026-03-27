@@ -8,6 +8,8 @@ from app.config import settings
 from app.db.session import engine
 from app.i18n.manager import I18nManager
 from app.i18n.translator import Translator
+from app.ui.embeds.error_embed import ErrorEmbed
+from app.ui.embeds.log_embeds import LogEmbed
 from app.utils.checks.not_bot import not_bot
 from app.utils.core.custom_tree import CustomCommandTree
 from app.utils.core.redis import redis_client
@@ -35,6 +37,8 @@ class Carbon(commands.Bot):
         """
         self.i18n = I18nManager()
         self.embed_factory = EmbedFactory(self.i18n)
+        self.error_embeds = ErrorEmbed(self.i18n)
+        self.log_embeds = LogEmbed(self.i18n)
         self.tree: CustomCommandTree
 
         self.debug = debug

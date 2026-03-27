@@ -3,7 +3,6 @@ from discord import app_commands
 
 from app.bot import Carbon
 from app.i18n.context import ExecutionContext
-from app.ui.embeds.error_embed import ErrorEmbed
 from app.utils.consts.perm_label import PERMISSION_LABELS
 from app.utils.core.embed import Embed
 
@@ -11,7 +10,6 @@ from app.utils.core.embed import Embed
 class ErrorService:
     def __init__(self, bot: Carbon) -> None:
         self.bot = bot
-        self.embeds = ErrorEmbed(self.bot.i18n)
 
     async def _on_error(
         self, interaction: discord.Interaction, error: app_commands.AppCommandError
@@ -24,7 +22,7 @@ class ErrorService:
                 for p in error.missing_permissions
             )
 
-            return self.embeds.missing_perms_embed(perms)
+            return self.bot.error_embeds.missing_perms_embed(perms)
 
         if isinstance(error, app_commands.BotMissingPermissions):
             perms = ", ".join(
@@ -32,6 +30,6 @@ class ErrorService:
                 for p in error.missing_permissions
             )
 
-            return self.embeds.bot_missing_perms_embed(perms)
+            return self.bot.error_embeds.bot_missing_perms_embed(perms)
 
         return None

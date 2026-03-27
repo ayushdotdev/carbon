@@ -6,7 +6,6 @@ from app.db.cache.guild_cache import GuildCache
 from app.db.services.caselog_service import CaseLogService
 from app.db.session import session_maker
 from app.i18n.marker import _
-from app.ui.embeds.log_embeds import LogEmbed
 from app.utils.confs.enums import ActionType, ModLogAction
 from app.utils.core.embed import Embed
 from app.utils.helpers.check_target import TargetChecker
@@ -15,7 +14,6 @@ from app.utils.helpers.check_target import TargetChecker
 class ModCmdService:
     def __init__(self, bot: Carbon) -> None:
         self.bot = bot
-        self.log_embeds = LogEmbed(self.bot.i18n)
 
     async def validate_my_guy(
         self, interaction: discord.Interaction, target: discord.Member
@@ -67,7 +65,7 @@ class ModCmdService:
             )
 
         if is_dm_enabled:
-            return self.log_embeds.dm_notification_embed(
+            return self.bot.log_embeds.dm_notification_embed(
                 action, guild, reason, duration
             )
         return None
@@ -110,17 +108,17 @@ class ModCmdService:
     ) -> None:
         await interaction.response.defer(ephemeral=True)
         assert interaction.guild is not None
-        result = await self.validate_my_guy(interaction, target)
-
-        if result is not None:
-            await interaction.followup.send(embed=result, ephemeral=True)
-            return
 
         target_id = target.id
         guild = interaction.guild
 
         try:
             await target.kick(reason=f"{interaction.user.name} : {reason}")
+        except discord.Forbidden:
+            result = await self.validate_my_guy(interaction, target)
+            if result is not None:
+                await interaction.followup.send(embed=result, ephemeral=True)
+                return
         except Exception as e:
             error_embed = self.bot.embed_factory.error_embed(_("Something went wrong."))
             self.bot.logger.error(f"Kick command failed : {e}")
@@ -145,19 +143,19 @@ class ModCmdService:
                 interaction, target_id, ActionType.KICK, reason, session=session
             )
 
-            if log_channel_id:
-                log_channel = guild.get_channel(log_channel_id)
-                if log_channel is None:
-                    try:
-                        log_channel = await guild.fetch_channel(log_channel_id)
-                    except (discord.NotFound, discord.Forbidden):
-                        log_channel = None
+        if log_channel_id:
+            log_channel = guild.get_channel(log_channel_id)
+            if log_channel is None:
+                try:
+                    log_channel = await guild.fetch_channel(log_channel_id)
+                except (discord.NotFound, discord.Forbidden):
+                    log_channel = None
 
-                if log_channel and isinstance(log_channel, discord.TextChannel):
-                    log_embed = self.log_embeds.action_on_user(
-                        ModLogAction.KICK, target, interaction.user, reason
-                    )
-                    await log_channel.send(embed=log_embed)
+            if log_channel and isinstance(log_channel, discord.TextChannel):
+                log_embed = self.bot.log_embeds.action_on_user(
+                    ModLogAction.KICK, target, interaction.user, reason
+                )
+                await log_channel.send(embed=log_embed)
 
         if dm_embed:
             try:
