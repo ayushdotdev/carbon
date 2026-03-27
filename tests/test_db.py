@@ -75,8 +75,6 @@ async def test_get_new_guild_mod_conf():
 
     # Mock GuildService.get_or_create
     mock_guild = MagicMock(spec=Guild)
-    mock_guild_conf = MagicMock(spec=ModSettings)
-    mock_guild.mod_settings = mock_guild_conf
 
     with patch(
         "app.db.services.modsettings_service.GuildService.get_or_create",
@@ -86,5 +84,9 @@ async def test_get_new_guild_mod_conf():
 
         result = await ModSettingsService.get_guild_config(session, 123)
 
-        assert result == mock_guild_conf
+        assert isinstance(result, ModSettings)
+        assert result.guild_id == 123
         mock_get_or_create.assert_called_once_with(session, 123)
+        session.add.assert_called_once()
+        assert isinstance(session.add.call_args[0][0], ModSettings)
+        session.flush.assert_called_once()

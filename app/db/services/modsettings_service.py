@@ -15,8 +15,17 @@ class ModSettingsService:
         guild_config = result.scalar_one_or_none()
 
         if not guild_config:
-            guild = await GuildService.get_or_create(session, guild_id)
-            return guild.mod_settings
+            await GuildService.get_or_create(session, guild_id)
+            guild_config = ModSettings(guild_id=guild_id)
+            session.add(guild_config)
+            try:
+                await session.flush()
+            except IntegrityError:
+                await session.rollback()
+                result = await session.execute(
+                    select(ModSettings).where(ModSettings.guild_id == guild_id)
+                )
+                return result.scalar_one()
 
         return guild_config
 

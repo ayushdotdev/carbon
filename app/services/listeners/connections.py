@@ -11,4 +11,5 @@ class ConnectionService:
         await self.bot.change_presence(
             activity=discord.Activity(type=discord.ActivityType.watching, name="/help")
         )
+        await self.bot.tree.sync()
         self.bot.logger.info(f"Logged in as {self.bot.user}")
