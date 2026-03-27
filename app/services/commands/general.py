@@ -2,7 +2,9 @@ import discord
 
 from app.bot import Carbon
 from app.i18n.marker import _
+from app.ui.views.help_view import HelpView
 from app.ui.views.invite_view import InviteView
+from app.utils.consts.branding import JUNGLE_GREEN
 
 
 class GeneralService:
@@ -26,3 +28,83 @@ class GeneralService:
 
         view = InviteView(interaction)
         await interaction.response.send_message(embed=embed, view=view)
+
+    async def _help(
+        self, interaction: discord.Interaction, command: str | None = None
+    ) -> None:
+        if command:
+            # Handle specific command help
+            cmd_obj = None
+
+            # Check for regular commands first
+            cmd_obj = self.bot.get_command(command)
+
+            # If not found, check for app commands
+            if not cmd_obj:
+                for app_cmd in self.bot.tree.get_commands():
+                    if app_cmd.name == command:
+                        cmd_obj = app_cmd
+                        break
+
+            if not cmd_obj:
+                return await interaction.response.send_message(
+                    _("Command not found."), ephemeral=True
+                )
+
+            embed = self.bot.embed_factory._build(color=JUNGLE_GREEN)
+            embed.set_title_i18n(_("Command Information"))
+
+            description = ""
+            if isinstance(cmd_obj, discord.app_commands.Command):
+                description = cmd_obj.description
+            else:
+                description = cmd_obj.help
+
+            embed.add_field_i18n(
+                _("Description"),
+                _("> %(description)s"),
+                description=description or _("No description."),
+            )
+
+            # Aliases (for traditional commands only)
+            if hasattr(cmd_obj, "aliases") and cmd_obj.aliases:
+                aliases = [f"`!{command}`"] + [
+                    f"`!{alias}`" for alias in cmd_obj.aliases
+                ]
+                embed.add_field_i18n(
+                    _("Aliases"), _("> %(aliases)s"), aliases=", ".join(aliases)
+                )
+
+            # Usage
+            usage = ""
+            if isinstance(cmd_obj, discord.app_commands.Command):
+                params = []
+                for param in cmd_obj.parameters:
+                    if param.required:
+                        params.append(f"<{param.name}>")
+                    else:
+                        params.append(f"[{param.name}]")
+                usage = f"> `/{cmd_obj.name} {' '.join(params)}`"
+            else:
+                params = []
+                for name, param in cmd_obj.clean_params.items():
+                    if param.default is param.empty:
+                        params.append(f"<{name}>")
+                    else:
+                        params.append(f"[{name}]")
+                usage = f"> `!{cmd_obj.name} {' '.join(params)}`"
+
+            embed.add_field_i18n(_("Usage"), usage)
+            return await interaction.response.send_message(embed=embed)
+
+        # Handle main help menu
+        embed = self.bot.embed_factory._build(
+            _("Use `/help <command>` to show information about a command."),
+            color=JUNGLE_GREEN,
+        )
+        embed.set_title_i18n(_("📚 Help Menu"))
+        embed.set_footer_i18n(_("Pick a category to browse available commands"))
+
+        view = HelpView(self.bot, interaction)
+        await interaction.response.send_message(embed=embed, view=view)
+        return None

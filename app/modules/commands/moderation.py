@@ -7,7 +7,7 @@ from app.i18n.marker import _
 from app.services.commands.moderation import ModCmdService
 
 
-class ModerationCog(commands.Cog):
+class Moderation(commands.Cog):
     def __init__(self, bot: Carbon) -> None:
         self.bot = bot
         self.service = ModCmdService(self.bot)
@@ -89,4 +89,4 @@ class ModerationCog(commands.Cog):
 
 
 async def setup(bot: Carbon):
-    await bot.add_cog(ModerationCog(bot))
+    await bot.add_cog(Moderation(bot))

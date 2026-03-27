@@ -29,6 +29,17 @@ class General(commands.Cog):
     async def invite(self, interaction: discord.Interaction) -> None:
         await self.service._invite(interaction)
 
+    # -- help command --
+    @app_commands.command(
+        name="help", description=locale_str(_("Get a list of all my commands."))
+    )
+    @app_commands.guild_only()
+    @app_commands.describe(command="The command to get help for.")
+    async def help(
+        self, interaction: discord.Interaction, command: str | None = None
+    ) -> None:
+        await self.service._help(interaction, command)
+
 
 async def setup(bot: Carbon):
     await bot.add_cog(General(bot))

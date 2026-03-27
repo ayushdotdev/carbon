@@ -1,0 +1,164 @@
+--- HELP COMMAND EXAMPLE ---
+@commands.hybrid_command(name="help", help="Get a list of all my commands.")
+    @commands.guild_only()
+    async def help_command(self, ctx, command: str | None = None) -> None:
+        prefix = self.bot.prefix_cache[ctx.guild.id]
+        if command:
+            cmd = self.bot.get_command(command)
+            if not cmd:
+                return await ctx.reply("Command not found.")
+
+            embed = discord.Embed(title="Command Information", color=BLUE)
+            embed.add_field(
+                name="Description",
+                value=f"> {cmd.help}" or "No description.",
+                inline=False,
+            )
+            aliases = []
+            aliases.append(f"{prefix}{command}")
+            for alias in cmd.aliases:
+                aliases.append(f"{prefix}{alias}")
+            if aliases:
+                others = f"> `{', '.join(aliases)}`"
+                embed.add_field(name="Aliases", value=others)
+            params = []
+            for name, param in cmd.clean_params.items():
+                if param.default is param.empty:
+                    params.append(f"<{name}>")
+                else:
+                    params.append(f"[{name}]")
+
+            usage = f"> `{prefix}{command} {' '.join(params)}`"
+            embed.add_field(name="Usage", value=usage)
+            return await ctx.reply(embed=embed)
+        view = HelpView(self.bot, prefix)
+        embed = discord.Embed(
+            title="📚 Help Menu",
+            description=f"Use `{prefix}help <command>` to show information about a command.",
+            color=BLUE,
+        )
+        embed.set_footer(text="Pick a category to browse available commands")
+        await ctx.send(embed=embed, view=view)
+
+
+
+--- HELP VIEW EXAMPLE ---
+
+import discord
+from discord import ui
+from app.helpers.constants import HAMMER, BOX, STAR, SHIELD, GEAR
+from app.helpers.constants import BLUE
+from app.helpers.constants import INVITE_LINK
+
+EMOJIS = {
+    "Moderation": "🛡️",
+    "Misc": "📦",
+    "General": "⭐",
+    "Management": "🔨",
+    "Admin": "⚙️",
+}
+
+DESCRIPTIONS = {
+    "Moderation": "Commands for managing members and server behavior.",
+    "Misc": "Commands that don’t belong to any specific category.",
+    "General": "Commands for basic utility.",
+    "Management": "Server management and utilities.",
+    "Admin": "Commands for managing server settings and high-level controls.",
+}
+
+
+class HelpView(ui.View):
+    def __init__(self, bot, prefix):
+        super().__init__(timeout=120)
+        self.bot = bot
+        self.prefix = prefix
+        self.add_item(HelpSelect(bot, prefix))
+        self.add_item(
+            ui.Button(
+                label="Invite",
+                style=discord.ButtonStyle.link,
+                url=INVITE_LINK,
+            )
+        )
+        self.add_item(
+            ui.Button(
+                label="Support Server",
+                style=discord.ButtonStyle.link,
+                url="https://discord.gg/K6EDkaVERk",
+            )
+        )
+
+
+class HelpSelect(ui.Select):
+    def __init__(self, bot, prefix):
+        self.bot = bot
+        self.prefix = prefix
+        options = [
+            discord.SelectOption(
+                label="Home",
+                description="Return to the main help menu.",
+                emoji="🏠",
+            )
+        ]
+
+        for cog_name, cog in bot.cogs.items():
+            if cog_name.lower() in [
+                "connection",
+                "join",
+                "leave",
+                "error",
+                "load",
+                "hi",
+                "topgg",
+                "mention",
+            ]:
+                continue
+
+            options.append(
+                discord.SelectOption(
+                    label=cog_name,
+                    emoji=EMOJIS.get(cog_name, "📁"),
+                    description=DESCRIPTIONS.get(cog_name, f"Commands for {cog_name}."),
+                )
+            )
+
+        super().__init__(
+            placeholder="Select a category",
+            min_values=1,
+            max_values=1,
+            options=options,
+        )
+
+    async def callback(self, interaction: discord.Interaction):
+        selection = self.values[0]
+
+        if selection == "Home":
+            embed = discord.Embed(
+                title="📚 Help Menu",
+                description=f"> Use `{self.prefix}help <command>` to show information about a command.",
+                color=BLUE,
+            )
+            embed.set_footer(text="Pick a category to browse available commands")
+            return await interaction.response.edit_message(
+                embed=embed, view=HelpView(self.bot, self.prefix)
+            )
+
+        cog = self.bot.get_cog(selection)
+
+        embed = discord.Embed(
+            title=f"{EMOJIS.get(selection)} {selection} Commands",
+            description=f"-# {DESCRIPTIONS.get(selection)}",
+            color=BLUE,
+        )
+
+        for cmd in cog.get_commands():
+            if not cmd.hidden:
+                embed.add_field(
+                    name=f"`{self.prefix}{cmd.name}`",
+                    value=cmd.help or "No description provided.",
+                    inline=False,
+                )
+
+        await interaction.response.edit_message(
+            embed=embed, view=HelpView(self.bot, self.prefix)
+        )
