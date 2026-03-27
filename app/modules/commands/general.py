@@ -29,6 +29,14 @@ class General(commands.Cog):
     async def invite(self, interaction: discord.Interaction) -> None:
         await self.service._invite(interaction)
 
+    # -- about command --
+    @app_commands.command(
+        name="about", description=locale_str(_("Get information about Carbon."))
+    )
+    @app_commands.guild_only()
+    async def about(self, interaction: discord.Interaction) -> None:
+        await self.service._about(interaction)
+
     # -- help command --
     @app_commands.command(
         name="help", description=locale_str(_("Get a list of all my commands."))

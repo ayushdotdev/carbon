@@ -1,6 +1,7 @@
 import os
 
 import discord
+import pendulum
 import structlog
 from discord import app_commands
 from discord.ext import commands
@@ -42,6 +43,7 @@ class Carbon(commands.Bot):
         self.error_embeds = ErrorEmbed(self.i18n)
         self.log_embeds = LogEmbed(self.i18n)
         self.tree: CustomCommandTree
+        self.start_time = pendulum.now("UTC")
 
         self.debug = debug
         self.logger = structlog.get_logger().bind(component="bot")
