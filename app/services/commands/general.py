@@ -1,4 +1,6 @@
 import discord
+from typing import Any
+from discord.ext import commands
 
 from app.bot import Carbon
 from app.i18n.marker import _
@@ -34,7 +36,13 @@ class GeneralService:
     ) -> None:
         if command:
             # Handle specific command help
-            cmd_obj = None
+            cmd_obj: (
+                commands.Command[Any, Any, Any]
+                | discord.app_commands.Command[Any, ..., Any]
+                | discord.app_commands.Group
+                | discord.app_commands.ContextMenu
+                | None
+            ) = None
 
             # Check for regular commands first
             cmd_obj = self.bot.get_command(command)
@@ -47,9 +55,10 @@ class GeneralService:
                         break
 
             if not cmd_obj:
-                return await interaction.response.send_message(
+                await interaction.response.send_message(
                     _("Command not found."), ephemeral=True
                 )
+                return
 
             embed = self.bot.embed_factory._build(color=JUNGLE_GREEN)
             embed.set_title_i18n(_("Command Information"))
@@ -57,8 +66,12 @@ class GeneralService:
             description = ""
             if isinstance(cmd_obj, discord.app_commands.Command):
                 description = cmd_obj.description
-            else:
-                description = cmd_obj.help
+            elif isinstance(cmd_obj, commands.Command):
+                description = str(cmd_obj.help)
+            elif isinstance(cmd_obj, discord.app_commands.Group):
+                description = cmd_obj.description
+            elif isinstance(cmd_obj, discord.app_commands.ContextMenu):
+                description = ""  # Context menus don't have a description property in the same way
 
             embed.add_field_i18n(
                 _("Description"),
@@ -67,7 +80,7 @@ class GeneralService:
             )
 
             # Aliases (for traditional commands only)
-            if hasattr(cmd_obj, "aliases") and cmd_obj.aliases:
+            if isinstance(cmd_obj, commands.Command) and cmd_obj.aliases:
                 aliases = [f"`!{command}`"] + [
                     f"`!{alias}`" for alias in cmd_obj.aliases
                 ]
@@ -85,7 +98,7 @@ class GeneralService:
                     else:
                         params.append(f"[{param.name}]")
                 usage = f"> `/{cmd_obj.name} {' '.join(params)}`"
-            else:
+            elif isinstance(cmd_obj, commands.Command):
                 params = []
                 for name, param in cmd_obj.clean_params.items():
                     if param.default is param.empty:
@@ -94,8 +107,11 @@ class GeneralService:
                         params.append(f"[{name}]")
                 usage = f"> `!{cmd_obj.name} {' '.join(params)}`"
 
-            embed.add_field_i18n(_("Usage"), usage)
-            return await interaction.response.send_message(embed=embed)
+            if usage:
+                embed.add_field_i18n(_("Usage"), usage)
+
+            await interaction.response.send_message(embed=embed)
+            return
 
         # Handle main help menu
         embed = self.bot.embed_factory._build(
@@ -107,4 +123,4 @@ class GeneralService:
 
         view = HelpView(self.bot, interaction)
         await interaction.response.send_message(embed=embed, view=view)
-        return None
+        return
