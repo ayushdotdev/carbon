@@ -1,15 +1,18 @@
 from collections.abc import Awaitable, Callable
+from typing import TYPE_CHECKING
 
 import discord
 from discord import app_commands
 
-from app.bot import Carbon
 from app.i18n.context import ExecutionContext
+
+if TYPE_CHECKING:
+    from app.bot import Carbon
 
 
 class CustomCommandTree(app_commands.CommandTree):
-    def __init__(self, client: Carbon):
-        super().__init__(client)
+    def __init__(self, bot: "Carbon"):
+        super().__init__(bot)
         self._global_checks: list[
             Callable[[discord.Interaction], bool | Awaitable[bool]]
         ] = []

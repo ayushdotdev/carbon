@@ -2,6 +2,7 @@ import os
 
 import discord
 import structlog
+from discord import app_commands
 from discord.ext import commands
 
 from app.config import settings
@@ -11,6 +12,7 @@ from app.i18n.translator import Translator
 from app.ui.embeds.error_embed import ErrorEmbed
 from app.ui.embeds.log_embeds import LogEmbed
 from app.utils.checks.not_bot import not_bot
+from app.utils.consts.perm_label import PERMISSION_LABELS
 from app.utils.core.custom_tree import CustomCommandTree
 from app.utils.core.redis import redis_client
 from app.utils.helpers.embed_factory import EmbedFactory
@@ -68,6 +70,7 @@ class Carbon(commands.Bot):
         await self.setup_modules()
         await self.init_i18n()
         self.tree.add_check(not_bot)
+        self.tree.on_error = self.app_command_error
         self.logger.info("Setup completed, starting bot")
 
     async def init_i18n(self) -> None:
@@ -107,3 +110,23 @@ class Carbon(commands.Bot):
                             self.logger.info(f"Loaded extension: {extension}")
                         except Exception as e:
                             self.logger.error(f"Failed to load {extension}: {e}")
+
+    async def app_command_error(
+        self, interaction: discord.Interaction, error: app_commands.AppCommandError
+    ) -> None:
+        if isinstance(error, app_commands.MissingPermissions):
+            perms = ", ".join(
+                PERMISSION_LABELS.get(p, p.replace("_", " "))
+                for p in error.missing_permissions
+            )
+
+            embed = self.error_embeds.missing_perms_embed(perms)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
+
+        if isinstance(error, app_commands.BotMissingPermissions):
+            perms = ", ".join(
+                PERMISSION_LABELS.get(p, p.replace("_", " "))
+                for p in error.missing_permissions
+            )
+            embed = self.error_embeds.bot_missing_perms_embed(perms)
+            await interaction.response.send_message(embed=embed, ephemeral=True)
