@@ -11,12 +11,14 @@ if TYPE_CHECKING:
     from app.bot import Carbon
 
 EMOJIS = {
-    "ModerationCog": "🛡️",
+    "Moderation": "🛡️",
+    "Misc": "📦",
     "General": "⭐",
+    "Management": "🔨",
 }
 
 DESCRIPTIONS = {
-    "ModerationCog": _("Commands for managing members and server behavior."),
+    "Moderation": _("Commands for managing members and server behavior."),
     "General": _("Commands for basic utility."),
 }
 
@@ -62,16 +64,9 @@ class HelpSelect(ui.Select):
             )
         ]
 
-        # Filter out cogs that shouldn't be shown
         ignored_cogs = [
-            "connection",
-            "join",
-            "leave",
-            "error",
-            "load",
-            "hi",
-            "topgg",
-            "mention",
+            "guildeventcog",
+            "connectioncog",
         ]
 
         for cog_name, _cog in bot.cogs.items():
@@ -131,16 +126,6 @@ class HelpSelect(ui.Select):
         embed.description = f"-# {description}"
 
         found_any = False
-        # Regular commands
-        for cmd in cog.get_commands():
-            if not cmd.hidden:
-                embed.add_field(
-                    name=f"`!{cmd.name}`",
-                    value=cmd.help or _("No description provided."),
-                    inline=False,
-                )
-                found_any = True
-
         # Slash commands
         for cmd in cog.get_app_commands():
             embed.add_field(
