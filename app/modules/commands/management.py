@@ -4,11 +4,13 @@ from discord.ext import commands
 
 from app.bot import Carbon
 from app.i18n.marker import _
+from app.services.commands.management import ManagementService
 
 
 class Management(commands.Cog):
     def __init__(self, bot: Carbon):
         self.bot = bot
+        self.service = ManagementService(self.bot)
 
     @app_commands.command(
         name="purge", description=app_commands.locale_str(_("Delete messages in bulk."))
@@ -19,7 +21,7 @@ class Management(commands.Cog):
         count=app_commands.locale_str(_("The max number of messages to get deleted."))
     )
     async def purge(self, interaction: discord.Interaction, count: int) -> None:
-        pass
+        await self.service._purge(interaction, count)
 
 
 async def setup(bot: Carbon):
