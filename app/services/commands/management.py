@@ -1,4 +1,5 @@
 import discord
+
 from app.bot import Carbon
 from app.i18n.marker import _
 
@@ -9,9 +10,10 @@ class ManagementService:
 
     async def _purge(self, interaction: discord.Interaction, count: int) -> None:
         assert isinstance(interaction.channel, discord.TextChannel)
+        await interaction.response.defer(ephemeral=True)
         deleted = await interaction.channel.purge(limit=count)
 
         embed = self.bot.embed_factory.success_embed(
-            _("Deleted %(count)s messages."), count=deleted
+            _("Deleted %(count)s messages."), count=len(deleted)
         )
-        await interaction.response.send_message(embed=embed, ephemeral=True)
+        await interaction.followup.send(embed=embed, ephemeral=True)

@@ -1,17 +1,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  carbon-bot\n"
+"Project-Id-Version: carbon-bot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-28 02:04+0530\n"
+"POT-Creation-Date: 2026-03-29 03:14+0530\n"
 "PO-Revision-Date: 2026-03-05 14:32+0000\n"
 "Last-Translator: \n"
-"Language: en_US\n"
 "Language-Team: English\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: app/modules/commands/general.py:18
@@ -24,11 +24,19 @@ msgstr "Get an invite link for Carbon."
 
 #: app/modules/commands/general.py:34
 msgid "Get information about Carbon."
-msgstr ""
+msgstr "Get information about Carbon."
 
 #: app/modules/commands/general.py:42
 msgid "Get a list of all my commands."
-msgstr ""
+msgstr "Get a list of all my commands."
+
+#: app/modules/commands/management.py:16
+msgid "Delete messages in bulk."
+msgstr "Delete messages in bulk."
+
+#: app/modules/commands/management.py:21
+msgid "The max number of messages to get deleted."
+msgstr "The max number of messages to get deleted."
 
 #: app/modules/commands/moderation.py:17
 msgid "Kick someone from this server."
@@ -37,22 +45,22 @@ msgstr "Kick someone from this server."
 #: app/modules/commands/moderation.py:32
 #, fuzzy
 msgid "Ban someone from this server."
-msgstr "Kick someone from this server."
+msgstr "Ban someone from this server."
 
 #: app/modules/commands/moderation.py:47
 #, fuzzy
 msgid "Unban someone from this server."
-msgstr "Kick someone from this server."
+msgstr "Unban someone from this server."
 
 #: app/modules/commands/moderation.py:62
 #, fuzzy
 msgid "Timeout someone in this server."
-msgstr "Kick someone from this server."
+msgstr "Timeout someone in this server."
 
 #: app/modules/commands/moderation.py:78
 #, fuzzy
 msgid "Warn a member of this server."
-msgstr "Kick someone from this server."
+msgstr "Warn a member of this server."
 
 #: app/services/commands/general.py:21
 msgid "Latency"
@@ -74,66 +82,71 @@ msgstr "Thank you for taking interest in Carbon"
 #: app/services/commands/general.py:41
 #, python-format
 msgid "%(emoji)s About Carbon"
-msgstr ""
+msgstr "%(emoji)s About Carbon"
 
 #: app/services/commands/general.py:43
 msgid "Servers"
-msgstr ""
+msgstr "Servers"
 
 #: app/services/commands/general.py:44
 msgid "Users"
-msgstr ""
+msgstr "Users"
 
 #: app/services/commands/general.py:45
 msgid "Uptime"
-msgstr ""
+msgstr "Uptime"
 
 #: app/services/commands/general.py:75
 msgid "Command not found."
-msgstr ""
+msgstr "Command not found."
 
 #: app/services/commands/general.py:80
 msgid "Command Information"
-msgstr ""
+msgstr "Command Information"
 
 #: app/services/commands/general.py:93
 #, fuzzy
 msgid "Description"
-msgstr "Duration"
+msgstr "Description"
 
 #: app/services/commands/general.py:94
 #, fuzzy, python-format
 msgid "> %(description)s"
-msgstr "%(duration)s"
+msgstr "> %(description)s"
 
 #: app/services/commands/general.py:95
 msgid "No description."
-msgstr ""
+msgstr "No description."
 
 #: app/services/commands/general.py:104
 msgid "Aliases"
-msgstr ""
+msgstr "Aliases"
 
 #: app/services/commands/general.py:104
 #, python-format
 msgid "> %(aliases)s"
-msgstr ""
+msgstr "> %(aliases)s"
 
 #: app/services/commands/general.py:127
 msgid "Usage"
-msgstr ""
+msgstr "Usage"
 
 #: app/services/commands/general.py:134 app/ui/views/help_view.py:99
 msgid "Use `/help <command>` to show information about a command."
-msgstr ""
+msgstr "Use `/help <command>` to show information about a command."
 
 #: app/services/commands/general.py:137 app/ui/views/help_view.py:102
 msgid "📚 Help Menu"
-msgstr ""
+msgstr "📚 Help Menu"
 
 #: app/services/commands/general.py:138 app/ui/views/help_view.py:103
 msgid "Pick a category to browse available commands"
-msgstr ""
+msgstr "Pick a category to browse available commands"
+
+#: app/services/commands/management.py:16
+#, python-format
+msgid "Deleted %(count)s messages."
+msgstr "Deleted %(count)s messages."
 
 #: app/services/commands/moderation.py:183
 #: app/services/commands/moderation.py:210
@@ -151,31 +164,31 @@ msgstr "**%(user_mention)s** was kicked."
 #: app/services/commands/moderation.py:216
 #, fuzzy, python-format
 msgid "**%(user_mention)s** was banned."
-msgstr "**%(user_mention)s** was kicked."
+msgstr "**%(user_mention)s** was banned."
 
 #: app/services/commands/moderation.py:236
 msgid "User not found."
-msgstr ""
+msgstr "User not found."
 
 #: app/services/commands/moderation.py:241
 #, fuzzy
 msgid "I don't have permission to unban this user."
-msgstr "I don't have the required permissions to run this command."
+msgstr "I don't have permission to unban this user."
 
 #: app/services/commands/moderation.py:252
 #, fuzzy, python-format
 msgid "**%(user_name)s** was unbanned."
-msgstr "**%(user_mention)s** was kicked."
+msgstr "**%(user_name)s** was unbanned."
 
 #: app/services/commands/moderation.py:300
 #, fuzzy, python-format
 msgid "**%(user_mention)s** was timed out for %(duration)s."
-msgstr "**%(user_mention)s** was kicked."
+msgstr "**%(user_mention)s** was timed out for %(duration)s."
 
 #: app/services/commands/moderation.py:328
 #, fuzzy, python-format
 msgid "**%(user_mention)s** was warned."
-msgstr "**%(user_mention)s** was kicked."
+msgstr "**%(user_mention)s** was warned."
 
 #: app/ui/embeds/error_embed.py:13
 msgid "You don't have the required permissions to use this command."
@@ -236,44 +249,44 @@ msgstr "Sent from %(guild_name)s"
 
 #: app/ui/views/help_view.py:21
 msgid "Commands for managing members and server behavior."
-msgstr ""
+msgstr "Commands for managing members and server behavior."
 
 #: app/ui/views/help_view.py:22
 msgid "Commands for basic utility."
-msgstr ""
+msgstr "Commands for basic utility."
 
 #: app/ui/views/help_view.py:34
 msgid "Invite"
-msgstr ""
+msgstr "Invite"
 
 #: app/ui/views/help_view.py:41
 msgid "Support Server"
-msgstr ""
+msgstr "Support Server"
 
 #: app/ui/views/help_view.py:61
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: app/ui/views/help_view.py:62
 msgid "Return to the main help menu."
-msgstr ""
+msgstr "Return to the main help menu."
 
 #: app/ui/views/help_view.py:88
 msgid "Select a category"
-msgstr ""
+msgstr "Select a category"
 
 #: app/ui/views/help_view.py:112
 msgid "Cog not found."
-msgstr ""
+msgstr "Cog not found."
 
 #: app/ui/views/help_view.py:117
 #, fuzzy, python-format
 msgid "%(emoji)s %(selection)s Commands"
-msgstr "%(success_emoji)s Action Completed"
+msgstr "%(emoji)s %(selection)s Commands"
 
 #: app/ui/views/help_view.py:133
 msgid "No description provided."
-msgstr ""
+msgstr "No description provided."
 
 #: app/ui/views/help_view.py:139
 msgid ""
@@ -281,6 +294,9 @@ msgid ""
 "\n"
 "No commands available in this category."
 msgstr ""
+"\n"
+"\n"
+"No commands available in this category."
 
 #: app/utils/confs/enums.py:26
 msgid "Member Kicked"
@@ -391,12 +407,12 @@ msgstr "%(error_emoji)s Action Failed"
 #: app/utils/helpers/parse_time.py:52 app/utils/helpers/parse_time.py:59
 #: app/utils/helpers/parse_time.py:65
 msgid "Invalid duration format"
-msgstr ""
+msgstr "Invalid duration format"
 
 #: tests/test_i18n.py:54
 #, python-format
 msgid "Hello %(name)s"
-msgstr ""
+msgstr "Hello %(name)s"
 
 #: tests/test_i18n.py:64
 #, python-format
@@ -407,4 +423,3 @@ msgstr[1] ""
 
 #~ msgid "Bots cannot be targeted with this action."
 #~ msgstr "Bots cannot be targeted with this action."
-

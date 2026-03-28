@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-28 02:04+0530\n"
+"POT-Creation-Date: 2026-03-29 03:14+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,14 @@ msgstr ""
 
 #: app/modules/commands/general.py:42
 msgid "Get a list of all my commands."
+msgstr ""
+
+#: app/modules/commands/management.py:16
+msgid "Delete messages in bulk."
+msgstr ""
+
+#: app/modules/commands/management.py:21
+msgid "The max number of messages to get deleted."
 msgstr ""
 
 #: app/modules/commands/moderation.py:17
@@ -131,6 +139,11 @@ msgstr ""
 
 #: app/services/commands/general.py:138 app/ui/views/help_view.py:103
 msgid "Pick a category to browse available commands"
+msgstr ""
+
+#: app/services/commands/management.py:16
+#, python-format
+msgid "Deleted %(count)s messages."
 msgstr ""
 
 #: app/services/commands/moderation.py:183
