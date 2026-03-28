@@ -5,7 +5,7 @@ import discord
 from discord import ui
 
 from app.i18n.marker import _
-from app.utils.consts.branding import INVITE_LINK, JUNGLE_GREEN
+from app.utils.consts.branding import INVITE_LINK, JUNGLE_GREEN, SUPPORT_SERVER
 
 if TYPE_CHECKING:
     from app.bot import Carbon
@@ -40,7 +40,7 @@ class HelpView(ui.View):
             ui.Button(
                 label=_("Support Server"),
                 style=discord.ButtonStyle.link,
-                url="https://discord.gg/K6EDkaVERk",
+                url=SUPPORT_SERVER,
             )
         )
 

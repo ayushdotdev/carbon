@@ -22,4 +22,5 @@ INFO_EMOJI = "<:warn:1476528764790898698>"
 CARBON_LOGO = "<:carbon:1487186963302977537>"
 
 # LINKS
-INVITE_LINK = "https://google.com"
+INVITE_LINK = "https://discord.com/oauth2/authorize?client_id=1475153283319599276&permissions=470215935&integration_type=0&scope=bot"
+SUPPORT_SERVER = "https://discord.gg/y5HRSfATwA"
