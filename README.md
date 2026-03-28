@@ -1,20 +1,20 @@
-| ![](assets/bnnr.jpg) |
-| -------------------- |
+| ![Banner](assets/bnnr.jpg) |
+| -------------------------- |
 
 # Carbon [WIP]
 
 > **Handle your discord server. Effortlessly.**
 
-Carbon is a modern, high-performance Discord management bot designed to streamline moderation and enhance server management. Built with `discord.py`, `SQLAlchemy`, and `Redis`, it offers a robust and scalable solution for communities of all sizes.
+Carbon is a modern, high-performance Discord management bot designed to streamline moderation. Built with `discord.py`, `SQLAlchemy`, and `Redis`, it offers a robust and scalable solution for communities of all sizes.
 
 ## ✨ Features
 
-- **Automated Moderation:** Streamline ban and warn processes.
-- **Appeal System:** Integrated ban and warn appeal logs and settings.
-- **Internationalization (i18n):** Multi-language support out of the box.
-- **Reason Aliases:** Save time with shortcuts for common moderation reasons.
-- **Clean Defaults:** Sensible default configurations for a hassle-free setup.
-- **Developer-Friendly:** Clean service-oriented architecture for easy extensibility.
+- **Kick:** Kick someone from the server.
+- **Ban:** Ban someone from the server.
+- **Unban:** Unban someone from the server.
+- **Timeout:** Timeout someone in the server.
+- **Warn:** Warn a member of the server.
+- **Purge:** Delete messages in bulk.
 
 ## 🚀 Getting Started
 
