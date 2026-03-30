@@ -23,6 +23,23 @@ class Management(commands.Cog):
     async def purge(self, interaction: discord.Interaction, count: int) -> None:
         await self.service._purge(interaction, count)
 
+    @app_commands.command(
+        name="set-modlog-channel",
+        description=app_commands.locale_str(
+            _("Set a channel to receive moderation logs.")
+        ),
+    )
+    @app_commands.checks.has_permissions(manage_guild=True)
+    @app_commands.describe(
+        channel=app_commands.locale_str(_("The channel to receive logs."))
+    )
+    async def set_modlog_channel(
+        self, interaction: discord.Interaction, channel: discord.TextChannel | None
+    ) -> None:
+        assert isinstance(interaction.channel, discord.TextChannel)
+        channel = channel or interaction.channel
+        await self.service._set_modlog_channel(interaction, channel)
+
 
 async def setup(bot: Carbon):
     await bot.add_cog(Management(bot))

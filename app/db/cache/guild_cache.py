@@ -26,6 +26,14 @@ class GuildCache:
         return channel_id
 
     @staticmethod
+    async def set_modlog_channel_id(
+        bot: Carbon, session: AsyncSession, guild_id: int, channel_id: int
+    ) -> None:
+        key = f"carbon:guild:{guild_id}:modlog_channel_id"
+        await ModSettingsService.set_log_channel_id(session, guild_id, channel_id)
+        await bot.redis.set(key, channel_id, 3600)
+
+    @staticmethod
     async def get_if_dm_enabled(
         bot: Carbon, session: AsyncSession, guild_id: int
     ) -> bool | None:
